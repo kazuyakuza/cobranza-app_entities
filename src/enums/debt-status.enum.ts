@@ -1,3 +1,6 @@
+/**
+ * Status of an individual debt.
+ */
 export enum DebtStatus {
   PENDING = 'PENDING',
   OVERDUE = 'OVERDUE',

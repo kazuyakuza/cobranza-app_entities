@@ -1,3 +1,6 @@
+/**
+ * Status of a payment proof upload attempt.
+ */
 export enum PaymentAttemptStatus {
   UPLOADED = 'UPLOADED',
   PARSE_FAILED = 'PARSE_FAILED',

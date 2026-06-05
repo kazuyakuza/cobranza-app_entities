@@ -1,3 +1,6 @@
+/**
+ * Status of an invoice or promissory note.
+ */
 export enum InvoiceStatus {
   PENDING = 'PENDING',
   PAID = 'PAID',
