@@ -67,9 +67,12 @@ src/
 │   ├── receipt/                    # Receipt entity group
 │   │   ├── receipt.entity.ts
 │   │   └── receipt-template.entity.ts
-│   └── notification/               # Notification entity group
-│       ├── notification.entity.ts
-│       └── notification-template.entity.ts
+│   ├── notification/               # Notification entity group
+│   │   ├── notification.entity.ts
+│   │   └── notification-template.entity.ts
+│   └── summary/                     # Summary entity group
+│       ├── client-debt-summary.entity.ts
+│       └── company-monthly-summary.entity.ts
 ├── enums/
 │   ├── index.ts                    # Barrel export for enums
 │   ├── debt-status.enum.ts
@@ -141,6 +144,7 @@ Entities are organized by domain concern into subdirectories under `src/entities
 | Invoicing | `invoice/` | `Invoice`, `InvoiceTemplate` |
 | Receipts | `receipt/` | `Receipt`, `ReceiptTemplate` |
 | Notifications | `notification/` | `Notification`, `NotificationTemplate` |
+| Summaries | `summary/` | `ClientDebtSummary`, `CompanyMonthlySummary` |
 
 ### Enum Pattern
 
