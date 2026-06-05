@@ -2,5 +2,34 @@
   "name": "@conciliador/entities",
   "version": "0.0.1",
   "private": true,
-  "description": "Central data model definitions for the Conciliador de Pagos system"
+  "description": "Central data model definitions for the Conciliador de Pagos system",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
+  "keywords": [
+    "typescript",
+    "entities",
+    "conciliador",
+    "types",
+    "interfaces",
+    "enums"
+  ],
+  "license": "Unlicense"
 }
