@@ -39,17 +39,19 @@ The library provides shared type aliases and base interfaces used across all dom
 | `BaseEntity` | Base interface with `id`, `createdAt`, `updatedAt`, `createdBy?`, `updatedBy?` |
 | `SoftDeletable` | Mixin interface with `deletedAt?`, `deletedBy?` for soft-delete support |
 
-## Key Entities
+## Available Entities
 
-Entities are organized by domain concern:
+Entities are organized into 9 domain modules:
 
-| Group | Entities |
-|-------|----------|
-| **Core & Multi-Tenancy** | `Company`, `CompanyPlan`, `User`, `Role`, `CompanyUser` |
-| **Clients & Debts** | `Client`, `Debt`, `DebtSchedule` |
-| **Invoicing & Templates** | `Invoice`, `InvoiceTemplate`, `Receipt`, `ReceiptTemplate` |
-| **Payments & Reconciliation** | `PaymentProof`, `PaymentAttempt`, `Payment`, `BankStatement`, `BankTransaction`, `PaymentMatch` |
-| **Communication & Summaries** | `Notification`, `NotificationTemplate`, `ClientDebtSummary`, `CompanyMonthlySummary` |
+- **company** — `Company`, `CompanyPlan`, `CompanyUser`, `Role`, `User`
+- **client** — `Client`
+- **debt** — `Debt`, `DebtSchedule`
+- **payment** — `Payment`, `PaymentAttempt`, `PaymentProof`
+- **bank** — `BankStatement`, `BankTransaction`, `PaymentMatch`
+- **invoice** — `Invoice`, `InvoiceTemplate`
+- **receipt** — `Receipt`, `ReceiptTemplate`
+- **notification** — `Notification`, `NotificationTemplate`
+- **summary** — `ClientDebtSummary`, `CompanyMonthlySummary`
 
 For full property definitions, see [`entities-definition.csv`](.agent/project-info/entities-definition.csv). For relationship diagrams, see [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md).
 
