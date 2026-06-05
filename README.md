@@ -46,6 +46,10 @@ For full property definitions, see [`entities-definition.csv`](.agent/project-in
 
 Zero runtime dependencies. The library exports only TypeScript interfaces, types, and enums — no services, no side effects, no network calls.
 
+## Code Quality
+
+This project uses ESLint and Prettier for code consistency. Run `npm run lint` to check for issues and `npm run format` to auto-format code.
+
 ## Project Structure
 
 ```text
