@@ -53,6 +53,8 @@ Entities are organized into 9 domain modules:
 - **notification** — `Notification`, `NotificationTemplate`
 - **summary** — `ClientDebtSummary`, `CompanyMonthlySummary`
 
+All entities are plain TypeScript interfaces. They contain no decorators or runtime logic, making them safe to import into any framework.
+
 For full property definitions, see [`entities-definition.csv`](.agent/project-info/entities-definition.csv). For relationship diagrams, see [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md).
 
 ## Tech Stack
@@ -104,6 +106,95 @@ import { Client, Debt, DebtStatus, Currency } from '@cobranza-app/entities';
 ```
 
 The library exports only TypeScript interfaces, types, and enums — no runtime code, no side effects.
+
+### Basic Import
+
+```typescript
+import { Client, Debt, DebtStatus, Currency } from '@cobranza-app/entities';
+```
+
+### Extending an Entity in NestJS
+
+Because the library exports plain interfaces, you can extend them with NestJS decorators in your consuming project without modifying the library:
+
+```typescript
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Debt as DebtBase } from '@cobranza-app/entities';
+
+@Entity()
+export class Debt implements DebtBase {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
+  companyId: string;
+
+  @Column()
+  clientId: string;
+
+  @Column()
+  description: string;
+
+  @Column('decimal')
+  totalAmount: string;
+
+  @Column()
+  currency: string;
+
+  @Column()
+  dueDate: Date;
+
+  @Column()
+  issueDate: Date;
+
+  @Column()
+  status: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
+}
+```
+
+### Using Types in an Angular Service
+
+```typescript
+import { Injectable } from '@angular/core';
+import { Client, Debt } from '@cobranza-app/entities';
+
+@Injectable({ providedIn: 'root' })
+export class DebtService {
+  async getClientDebts(clientId: string): Promise<Debt[]> {
+    const response = await fetch(`/api/clients/${clientId}/debts`);
+    return response.json();
+  }
+
+  async createClient(payload: Omit<Client, 'id' | 'createdAt' | 'updatedAt'>): Promise<Client> {
+    const response = await fetch('/api/clients', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    return response.json();
+  }
+}
+```
+
+### Working with Enums
+
+```typescript
+import { DebtStatus, PaymentStatus, Currency } from '@cobranza-app/entities';
+
+function canCancelDebt(status: DebtStatus): boolean {
+  return status === DebtStatus.PENDING || status === DebtStatus.OVERDUE;
+}
+
+function isPaymentCompleted(status: PaymentStatus): boolean {
+  return status === PaymentStatus.COMPLETED;
+}
+```
 
 ## Related Documentation
 
