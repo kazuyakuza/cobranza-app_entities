@@ -1,27 +1,103 @@
-# Project Brief
+# Conciliador de Pagos – Entities Library
 
-## Overview
+## Project Overview
 
-This is a base project designed to serve as a foundational template for future AI-agent driven development. It is pre-configured with essential rules, workflows, and structures optimized for collaboration between human developers and AI agents (specifically Kilo Code).
+This repository contains the **central data model definition** (entities, enums, and types) for the **Conciliador de Pagos** system — a multi-tenant SaaS for debt management and payment reconciliation.
 
-## Core Requirements
+**Purpose**:  
+Serve as the **Single Source of Truth (SSOT)** for all data models across the entire ecosystem:
 
-- **Foundation**: Provide a clean, structured starting point for new projects.
-- **AI-Readiness**: Include necessary configurations (like `.kilo` and `.ai-agent` directories) to enable immediate and effective AI agent participation. The `.kilocodeignore` file controls which files the codebase indexing feature skips.
-- **Standardization**: Establish a baseline for coding standards, workflows (e.g., Git Flow, Task Handling), and documentation practices.
-- **Project Info**: Integrate a Project Info system to ensure persistent context and knowledge management across sessions.
+- NestJS Backend Microservices
+- Angular Frontend applications
+- Future services (mobile apps, scripts, etc.)
 
-## Goals
+By maintaining models in one place, we ensure consistency, reduce duplication, and simplify synchronization when models evolve.
 
-- Reduce setup time for new projects.
-- Ensure consistency across different projects started from this base.
-- Demonstrate best practices for "AI-Agent Driven" development.
+## Project Goals
 
-## Project Scope
+- Define all core business entities with their complete properties.
+- Define all custom enums and shared types.
+- Provide clean TypeScript interfaces ready to be imported.
+- Allow easy extension (via inheritance or composition) in consuming projects.
+- Be highly readable and well-documented for both humans and AI coding agents.
 
-- This repository is a **base project to use later**. It is not a functional application itself but a scaffolding tool.
-- It contains configuration files, rule definitions, and workflow documentation.
-- It does not contain specific business logic or application code.
+## Core Principles
+
+- **TypeScript First**: All definitions are in modern TypeScript.
+- **Multi-Tenancy Ready**: Every major entity includes `companyId`.
+- **Audit & Soft Delete**: Standard fields (`createdAt`, `updatedAt`, `deletedAt`, `createdBy`, `updatedBy`).
+- **Extensibility**: Entities are designed to be extended in specific microservices.
+- **Consistency**: Clear naming conventions, detailed JSDoc comments, and organized structure.
+
+## Entity List
+
+### 1. Core & Multi-Tenancy
+
+- `Company`
+- `CompanyPlan`
+- `User`
+- `Role`
+- `CompanyUser`
+
+### 2. Clients & Debts
+
+- `Client`
+- `Debt`
+- `DebtSchedule`
+
+### 3. Invoicing & Templates
+
+- `Invoice`
+- `InvoiceTemplate`
+- `Receipt`
+- `ReceiptTemplate`
+
+### 4. Payments & Reconciliation
+
+- `PaymentProof`
+- `PaymentAttempt`
+- `Payment`
+- `BankStatement`
+- `BankTransaction`
+- `PaymentMatch`
+
+### 5. Communication & Summaries
+
+- `Notification`
+- `NotificationTemplate`
+- `ClientDebtSummary`
+- `CompanyMonthlySummary`
+
+## Folder Structure (Recommended)
+
+```bash
+src/
+├── entities/
+│   ├── index.ts                    # Main barrel export
+│   ├── company/
+│   ├── client/
+│   ├── debt/
+│   ├── payment/
+│   ├── bank/
+│   └── notification/
+├── enums/
+│   ├── index.ts
+│   ├── debt-status.enum.ts
+│   ├── payment-status.enum.ts
+│   └── ... (all enums)
+├── types/
+│   ├── common.ts                   # Shared types (UUID, Money, etc.)
+│   └── index.ts
+├── interfaces/
+│   └── base-entity.interface.ts
+└── index.ts                        # Root barrel
+```
+
+## Definitions
+
+- [Data Model Brief](./data-model-brief.md)
+- [Entities Properties Definition](./entities-definition.csv)
+- [Entities Relationship Diagram Overview](./entities-relationship-diagram-overview.md)
 
 <!-- DO NOT DELETE NEXT SECTION -->
 
