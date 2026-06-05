@@ -1,0 +1,6 @@
+{
+  "name": "@conciliador/entities",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Central data model definitions for the Conciliador de Pagos system"
+}

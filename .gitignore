@@ -26,6 +26,9 @@ logs/
 .vscode/
 .idea/
 
+# Dependencies
+node_modules/
+
 # Build artifacts (generic)
 build/
 dist/
