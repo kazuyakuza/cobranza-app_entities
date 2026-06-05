@@ -1,8 +1,8 @@
-# Conciliador de Pagos – Entities Library
+# Cobranza App – Entities Library
 
 ## Project Overview
 
-This repository contains the **central data model definition** (entities, enums, and types) for the **Conciliador de Pagos** system — a multi-tenant SaaS for debt management and payment reconciliation.
+This repository contains the **central data model definition** (entities, enums, and types) for the **Cobranza App** system — a multi-tenant SaaS for debt management and payment reconciliation.
 
 **Purpose**:  
 Serve as the **Single Source of Truth (SSOT)** for all data models across the entire ecosystem:

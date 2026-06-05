@@ -2,7 +2,7 @@
 
 ## Objective
 
-Rewrite `README.md` to replace base-template content with project-specific documentation for the **Conciliador de Pagos – Entities Library** (`@conciliador/entities`).
+Rewrite `README.md` to replace base-template content with project-specific documentation for the **Cobranza App – Entities Library** (`@cobranza-app/entities`).
 
 ## Source Material
 
@@ -13,13 +13,13 @@ Rewrite `README.md` to replace base-template content with project-specific docum
 | `.agent/project-info/product.md` | Problem statement, vision, target users, core goals, entity groups, key flows |
 | `.agent/project-info/tech.md` | Stack, package details, dev setup, build commands, consumption pattern |
 | `.agent/project-info/architecture.md` | Package structure, design patterns, naming conventions, critical paths |
-| `package.json` | Package name (`@conciliador/entities`), version (`0.0.1`), description |
+| `package.json` | Package name (`@cobranza-app/entities`), version (`0.0.1`), description |
 
 ## Keep / Remove / Add Matrix
 
 | Section | Action | Notes |
 |---------|--------|-------|
-| Title + description | **Replace** | Change from "Base Project for AI Agent Driven Development" to "@conciliador/entities — Conciliador de Pagos Entities Library" |
+| Title + description | **Replace** | Change from "Base Project for AI Agent Driven Development" to "@cobranza-app/entities — Cobranza App Entities Library" |
 | Attention AI Agents note | **Keep** | Retain the note pointing to `AGENTS.md`. Minor wording cleanup allowed |
 | Compatibility | **Remove** | Too base-template-specific (Kilo Code plugin compatibility) |
 | Prerequisites | **Remove** | Too base-template-specific (Kilo Code plugin prerequisite) |
@@ -40,10 +40,10 @@ Rewrite `README.md` to replace base-template content with project-specific docum
 
 ### 1. Title & Description
 
-**Heading**: `# @conciliador/entities — Conciliador de Pagos Entities Library`
+**Heading**: `# @cobranza-app/entities — Cobranza App Entities Library`
 
 **Description paragraph**:
-Central data model definitions (entities, enums, types) for the **Conciliador de Pagos** system — a multi-tenant SaaS for debt management and payment reconciliation. This package serves as the **Single Source of Truth (SSOT)** for all data models across the ecosystem.
+Central data model definitions (entities, enums, types) for the **Cobranza App** system — a multi-tenant SaaS for debt management and payment reconciliation. This package serves as the **Single Source of Truth (SSOT)** for all data models across the ecosystem.
 
 ### 2. Attention AI Agents
 
@@ -53,9 +53,10 @@ Central data model definitions (entities, enums, types) for the **Conciliador de
 ### 3. About
 
 **Draft**:
+
 > ## About
 >
-> The primary goal of this repository is to provide a clean, structured, and authoritative source of truth for all data models in the Conciliador de Pagos platform.
+> The primary goal of this repository is to provide a clean, structured, and authoritative source of truth for all data models in the Cobranza App platform.
 >
 > By centralizing entity definitions in one versioned TypeScript package, we ensure consistency across:
 >
@@ -74,6 +75,7 @@ Central data model definitions (entities, enums, types) for the **Conciliador de
 ### 4. Key Entities
 
 **Draft**:
+
 > ## Key Entities
 >
 > Entities are organized by domain concern:
@@ -91,6 +93,7 @@ Central data model definitions (entities, enums, types) for the **Conciliador de
 ### 5. Tech Stack
 
 **Draft**:
+
 > ## Tech Stack
 >
 > | Technology | Purpose |
@@ -104,6 +107,7 @@ Central data model definitions (entities, enums, types) for the **Conciliador de
 ### 6. Project Structure
 
 **Draft**:
+
 > ## Project Structure
 >
 > ```text
@@ -127,18 +131,19 @@ Central data model definitions (entities, enums, types) for the **Conciliador de
 ### 7. Installation & Usage
 
 **Draft**:
+
 > ## Installation & Usage
 >
 > Install the package via npm:
 >
 > ```bash
-> npm install @conciliador/entities
+> npm install @cobranza-app/entities
 > ```
 >
 > Import directly into your project:
 >
 > ```typescript
-> import { Client, Debt, DebtStatus, Currency } from '@conciliador/entities';
+> import { Client, Debt, DebtStatus, Currency } from '@cobranza-app/entities';
 > ```
 >
 > The library exports only TypeScript interfaces, types, and enums — no runtime code, no side effects.
@@ -146,6 +151,7 @@ Central data model definitions (entities, enums, types) for the **Conciliador de
 ### 8. Development Setup
 
 **Draft**:
+
 > ## Development Setup
 >
 > ```bash
@@ -188,6 +194,7 @@ Keep as-is from current README lines 99-107.
 ### 12. Related Documentation
 
 **Draft**:
+
 > ## Related Documentation
 >
 > - [`brief.md`](.agent/project-info/brief.md) — Core requirements, entity list, and project goals
@@ -220,11 +227,11 @@ Keep as-is: `---` + `*Note: This workflow is actively maintained...*`
 14. Keep AI Agent Plans as-is.
 15. Add Related Documentation section (Section 12).
 16. Keep footer as-is.
-17. Commit with message: `docs: rewrite README for Conciliador de Pagos Entities Library`.
+17. Commit with message: `docs: rewrite README for Cobranza App Entities Library`.
 
 ## Verification Checklist
 
-- [ ] Title reads `@conciliador/entities — Conciliador de Pagos Entities Library`
+- [ ] Title reads `@cobranza-app/entities — Cobranza App Entities Library`
 - [ ] No "Compatibility" section
 - [ ] No "Prerequisites" section
 - [ ] About section has project-specific description and core principles

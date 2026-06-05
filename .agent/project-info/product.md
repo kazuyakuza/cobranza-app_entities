@@ -8,11 +8,11 @@ Companies that manage client debts face three critical challenges:
 2. **Synchronization drift** — When entities evolve, changes must be manually propagated to every consuming project, creating risk of divergence.
 3. **Onboarding friction** — New developers and AI coding agents must reverse-engineer data models from scattered sources instead of referencing a single authoritative definition.
 
-These problems result in bugs, wasted effort, and unreliable data across the Conciliador de Pagos platform.
+These problems result in bugs, wasted effort, and unreliable data across the Cobranza App platform.
 
 ## Product Vision
 
-The **Entities Library** (`@conciliador/entities`) is the **Single Source of Truth (SSOT)** for all data models in the Conciliador de Pagos ecosystem. It provides a single, versioned TypeScript package that:
+The **Entities Library** (`@cobranza-app/entities`) is the **Single Source of Truth (SSOT)** for all data models in the Cobranza App ecosystem. It provides a single, versioned TypeScript package that:
 
 - Defines every core business entity, custom enum, and shared type.
 - Exposes clean TypeScript interfaces ready for direct import by any consumer.
@@ -85,7 +85,7 @@ When a **Payment** is confirmed (manually or via matching):
 
 ## Success Metrics
 
-- All consuming projects reference `@conciliador/entities` for their data model needs.
+- All consuming projects reference `@cobranza-app/entities` for their data model needs.
 - Zero model duplication across the ecosystem.
 - New entity changes propagate via package version updates instead of manual copy-paste.
 - Onboarding time for new developers reduced by having a single, well-documented source.

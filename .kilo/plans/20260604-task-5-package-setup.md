@@ -10,10 +10,10 @@ Replace current minimal content with expanded configuration:
 
 ```json
 {
-  "name": "@conciliador/entities",
+  "name": "@cobranza-app/entities",
   "version": "0.0.1",
   "private": true,
-  "description": "Central data model definitions for the Conciliador de Pagos system",
+  "description": "Central data model definitions for the Cobranza App system",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

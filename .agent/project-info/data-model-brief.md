@@ -1,4 +1,4 @@
-# **Conciliador de Pagos – Data Model Brief**
+# **Cobranza App – Data Model Brief**
 
 ## **1. General Information**
 
