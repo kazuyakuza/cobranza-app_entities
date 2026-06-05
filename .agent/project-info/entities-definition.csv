@@ -1,39 +1,39 @@
 ,entity,property,type,required,comments
-,Company,,,,Empresa cliente del SaaS (el tenant principal)
+,Company,,,,SaaS client company (the main tenant)
 ,,id,UUID,Yes,PK
 ,,friendly_url,String,Yes,"Slug unique (`acme-servicios`, `lopez-contador`). Will be used in URLs"
-,,name,String,Yes,Nombre comercial / fantaYesa
-,,business_name,String,No,Razón social
-,,tax_id,String,No,CUIT / RUC / etc.
-,,contact,String,Yes,Email o información de contacto que se mostrará al cliente final
-,,phone,String,No,Teléfono de contacto
-,,address,String,No,Dirección
-,,logo_url,String,No,URL del logo
+,,name,String,Yes,Trade name / brand name
+,,business_name,String,No,Legal business name
+,,tax_id,String,No,Tax ID (e.g., CUIT, RUC, etc.)
+,,contact,String,Yes,Email or contact information to be displayed to the end client
+,,phone,String,No,Contact phone
+,,address,String,No,Address
+,,logo_url,String,No,Logo URL
 ,,active,Boolean,Yes,Default: true
-,,settings,JSONB,No,Configuraciones generales de la company
+,,settings,JSONB,No,General company settings
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,,,,
-,CompanyPlan,,,,"Configuración de pricing (% de comisión, etc.)"
+,CompanyPlan,,,,"Pricing configuration (% commission, etc.)"
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
-,,commission_rate,"Decimal(5,4)",Yes,Ej: 0.085 = 8.5% (total)
-,,saas_percentage,"Decimal(5,4)",Yes,Porcentaje que se queda la plataforma
-,,intermediary_percentage,"Decimal(5,4)",No,Si hay intermediario
+,,commission_rate,"Decimal(5,4)",Yes,E.g., 0.085 = 8.5% (total)
+,,saas_percentage,"Decimal(5,4)",Yes,Percentage retained by the platform
+,,intermediary_percentage,"Decimal(5,4)",No,If there is an intermediary
 ,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
 ,,active,Boolean,Yes,Default: true
 ,,valid_from,Date,Yes,
-,,valid_until,Date,No,Null = indefinido
+,,valid_until,Date,No,Null = undefined (no end date)
 ,,notes,Text,No,
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,,,,
-,User,,,,Cualquier persona con cuenta en el sistema (Company users + futuros End Users con login)
+,User,,,,Any person with an account in the system (Company users + future End Users with login)
 ,,id,UUID,Yes,PK
-,,email,String,Yes,Único a nivel global
+,,email,String,Yes,Globally unique
 ,,password_hash,String,No,
-,,password_updated_at,Timestamp,No,Fecha de último cambio de contraseña
-,,full_name,String,No,Opcional (puede completarse después)
+,,password_updated_at,Timestamp,No,Date of last password change
+,,full_name,String,No,Optional (can be completed later)
 ,,phone,String,No,
 ,,active,Boolean,Yes,Default: true
 ,,email_verified,Boolean,Yes,Default: false
@@ -43,11 +43,11 @@
 ,,,,,
 ,Role,,,,"Roles (company_admin, company_operator, end_user, super_admin, etc.)"
 ,,id,UUID,Yes,PK
-,,name,String,Yes,"Ej: `company_admin`, `company_operator`, `end_user`, `super_admin`"
+,,name,String,Yes,"E.g., `company_admin`, `company_operator`, `end_user`, `super_admin`"
 ,,description,String,No,
 ,,created_at,Timestamp,Yes,
 ,,,,,
-,CompanyUser,,,,Relación many-to-many entre User y Company + rol específico dentro de la company
+,CompanyUser,,,,Many-to-many relationship between User and Company + specific role within the company
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,user_id,UUID (FK),Yes,
@@ -56,66 +56,66 @@
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,,,,
-,Client,,,,Cliente final / deudor de una Company
+,Client,,,,End client / debtor of a Company
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
-,,client_code,String,Yes,Código único por Company (ej: `CLI-00042`)
-,,full_name,String,Yes,Nombre completo del deudor
-,,email,String,No,Muy recomendado
+,,client_code,String,Yes,Unique code per Company (e.g., `CLI-00042`)
+,,full_name,String,Yes,Full name of the debtor
+,,email,String,No,Highly recommended
 ,,phone,String,No,
 ,,address,String,No,
-,,tax_id,String,No,DNI / CUIT del cliente final
-,,extra_data,JSONB,No,"Campos personalizados (ej: `{ ""dni"": ""..."", ""categoria"": ""..."" }`)"
+,,tax_id,String,No,National ID / Tax ID of the end client (e.g., DNI, CUIT)
+,,extra_data,JSONB,No,"Custom fields (e.g., `{ ""dni"": ""..."", ""category"": ""..."" }`)"
 ,,active,Boolean,Yes,Default: true
-,,notes,Text,No,Notas internas
+,,notes,Text,No,Internal notes
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
-,,updated_by,UUID,No,ID del User que realizó la última modificación
+,,updated_by,UUID,No,ID of the User who made the last modification
 ,,,,,
-,Debt,,,,Deuda individual
+,Debt,,,,Individual debt
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_id,UUID (FK),Yes,
-,,debt_schedule_id,UUID (FK),No,Referencia si la deuda fue generada automáticamente desde un schedule
-,,debt_code,String,Yes,Código legible (ej: `DEUD-2026-0042`)
-,,description,String,Yes,Concepto de la deuda
-,,total_amount,"Decimal(12,2)",Yes,Monto original
+,,debt_schedule_id,UUID (FK),No,Reference if the debt was automatically generated from a schedule
+,,debt_code,String,Yes,Human-readable code (e.g., `DEUD-2026-0042`)
+,,description,String,Yes,Debt concept / description
+,,total_amount,"Decimal(12,2)",Yes,Original amount
 ,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
-,,due_date,Date,Yes,Fecha de vencimiento
-,,issue_date,Date,Yes,Fecha de emisión
-,,daily_interest_rate,"Decimal(5,4)",No,Tasa de interés diaria post-vencimiento (ej: 0.0050 = 0.5% diario). Null = sin interés
-,,status,Enum,Yes,"PENDING -> Deuda vigente, aún no vencida.
-OVERDUE -> Vencida y no pagada (se puede aplicar interés diario).
-PARTIALLY_PAID -> Pagada parcialmente.
-PAID -> Totalmente pagada.
-CANCELLED -> Anulada/cancelada por la Company."
+,,due_date,Date,Yes,Due date
+,,issue_date,Date,Yes,Issue date
+,,daily_interest_rate,"Decimal(5,4)",No,Daily interest rate after due date (e.g., 0.0050 = 0.5% daily). Null = no interest
+,,status,Enum,Yes,"PENDING -> Active debt, not yet overdue.
+OVERDUE -> Overdue and unpaid (daily interest may be applied).
+PARTIALLY_PAID -> Partially paid.
+PAID -> Fully paid.
+CANCELLED -> Voided/cancelled by the Company."
 ,,notes,Text,No,
 ,,extra_data,JSONB,No,
-,,invoice_template_id,UUID (FK),No,Plantilla de factura/recibo a usar
+,,invoice_template_id,UUID (FK),No,Invoice/receipt template to use
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,created_by,UUID,No,
 ,,updated_by,UUID,No,
 ,,,,,
-,DebtSchedule,,,,Deuda recurrente / programada
+,DebtSchedule,,,,Recurring / scheduled debt
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
-,,group_id,UUID,No,UUID para agrupar múltiples DebtSchedule creados en bulk (permite editar en grupo)
+,,group_id,UUID,No,UUID to group multiple DebtSchedules created in bulk (allows group editing)
 ,,client_id,UUID (FK),Yes,
-,,name,String,Yes,Nombre de la recurrencia
+,,name,String,Yes,Name of the recurrence
 ,,description,String,No,
-,,amount,"Decimal(12,2)",Yes,Monto base
+,,amount,"Decimal(12,2)",Yes,Base amount
 ,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
 ,,frequency,Enum,Yes,"`'WEEKLY'`, `'MONTHLY'`, `'BIMONTHLY'`, `'QUARTERLY'`, `'YEARLY'`"
-,,day_of_month,String,Yes,"Ej: `15` → día 15 del mes.<br>Ej: `2L` → 2do Lunes, `4V` → 4to Viernes, `1D` → primer Domingo, etc."
+,,day_of_month,String,Yes,"E.g., `15` → day 15 of the month.<br>E.g., `2L` → 2nd Monday, `4V` → 4th Friday, `1D` → 1st Sunday, etc."
 ,,calculation_type,Enum,Yes,"`'FIXED'`, `'FORMULA'`"
-,,calculation_formula,String,No,Para cálculos dinámicos
-,,daily_interest_rate,"Decimal(5,4)",No,Tasa diaria post-vencimiento (heredable a las deudas generadas)
+,,calculation_formula,String,No,For dynamic calculations
+,,daily_interest_rate,"Decimal(5,4)",No,Daily rate after due date (inheritable by generated debts)
 ,,active,Boolean,Yes,Default: true
 ,,start_date,Date,Yes,
-,,end_date,Date,No,Null = indefinido
+,,end_date,Date,No,Null = undefined (no end date)
 ,,last_generated_date,Date,No,
-,,invoice_template_id,UUID (FK),No,Plantilla por defecto para las deudas generadas
+,,invoice_template_id,UUID (FK),No,Default template for generated debts
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,created_by,UUID,No,
@@ -123,13 +123,13 @@ CANCELLED -> Anulada/cancelada por la Company."
 ,,deleted_at,Timestamp,No,
 ,,deleted_by,UUID,No,
 ,,,,,
-,Invoice,,,,Factura / Pagaré (representación formal visible para el cliente)
+,Invoice,,,,Invoice / Promissory note (formal representation visible to the client)
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_id,UUID (FK),Yes,
 ,,debt_id,UUID (FK),Yes,
-,,invoice_template_id,UUID (FK),No,Plantilla usada para generar esta factura
-,,invoice_number,String,Yes,Número legible
+,,invoice_template_id,UUID (FK),No,Template used to generate this invoice
+,,invoice_number,String,Yes,Human-readable number
 ,,issue_date,Date,Yes,
 ,,due_date,Date,Yes,
 ,,total_amount,"Decimal(12,2)",Yes,
@@ -141,12 +141,12 @@ CANCELLED -> Anulada/cancelada por la Company."
 ,,created_by,UUID,No,
 ,,updated_by,UUID,No,
 ,,,,,
-,InvoiceTemplate,,,,Plantilla configurable por Company
+,InvoiceTemplate,,,,Template configurable by Company
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
-,,name,String,Yes,Nombre interno de la plantilla
-,,subject,String,Yes,Asunto (email o visualización)
-,,body_html,Text,Yes,"HTML con placeholders (`{{client_name}}`, `{{total_amount}}`, `{{due_date}}`, etc.)"
+,,name,String,Yes,Internal template name
+,,subject,String,Yes,Subject (email or display)
+,,body_html,Text,Yes,"HTML with placeholders (`{{client_name}}`, `{{total_amount}}`, `{{due_date}}`, etc.)"
 ,,is_default,Boolean,Yes,Default: false
 ,,active,Boolean,Yes,Default: true
 ,,created_at,Timestamp,Yes,
@@ -156,107 +156,107 @@ CANCELLED -> Anulada/cancelada por la Company."
 ,,deleted_at,Timestamp,No,
 ,,deleted_by,UUID,No,
 ,,,,,
-,PaymentProof,,,,Comprobante subido por el Client
+,PaymentProof,,,,Proof of payment uploaded by the Client
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_id,UUID (FK),Yes,
-,,file_url,String,Yes,URL del comprobante subido
-,,file_name,String,Yes,Nombre original del archivo
+,,file_url,String,Yes,URL of the uploaded proof
+,,file_name,String,Yes,Original file name
 ,,file_type,String,No,"MIME type (image/jpeg, application/pdf, etc.)"
-,,notes,Text,No,Notas adicionales ingresadas por el cliente al subir
+,,notes,Text,No,Additional notes entered by the client when uploading
 ,,created_at,Timestamp,Yes,
-,,created_by,UUID,No,(Client o System)
+,,created_by,UUID,No,(Client or System)
 ,,,,,
-,PaymentAttempt,,,,Intento de pago (estado intermedio)
+,PaymentAttempt,,,,Payment attempt (intermediate state)
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_id,UUID (FK),Yes,
 ,,payment_proof_id,UUID (FK),Yes,
-,,debt_id,UUID (FK),Yes,**Obligatorio**: El cliente debe indicar a qué deuda corresponde el comprobante
-,,amount,"Decimal(12,2)",No,Se llena automáticamente si el parseo del comprobante tiene éxito
-,,currency,Enum,No,"`'ARS'`, `'USD'` — Se llena si el parseo es exitoso"
-,,status,Enum,Yes,"UPLOADED -> Comprobante recién subido
-PARSE_FAILED -> Falló el procesamiento automático del archivo
-PENDING_VALIDATION -> Esperando revisión o matching bancario
-MATCHED -> Coincidió automáticamente con movimiento bancario
-APPROVED -> Aprobado manualmente por la Company
-REJECTED -> Rechazado (manual o automático)"
-,,rejection_reason,String,No,Motivo de rechazo (usado principalmente por Company User al rechazar manualmente)
-,,reviewed_by,UUID,No,Usuario de la Company que revisó
+,,debt_id,UUID (FK),Yes,**Required**: The client must indicate which debt the proof corresponds to
+,,amount,"Decimal(12,2)",No,Auto-filled if the proof parsing is successful
+,,currency,Enum,No,"`'ARS'`, `'USD'` — Filled if parsing is successful"
+,,status,Enum,Yes,"UPLOADED -> Proof just uploaded
+PARSE_FAILED -> Automatic file processing failed
+PENDING_VALIDATION -> Awaiting review or bank matching
+MATCHED -> Automatically matched with bank transaction
+APPROVED -> Manually approved by the Company
+REJECTED -> Rejected (manual or automatic)"
+,,rejection_reason,String,No,Rejection reason (used mainly by Company User when manually rejecting)
+,,reviewed_by,UUID,No,Company user who reviewed
 ,,reviewed_at,Timestamp,No,
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,,,,
-,Payment,,,,Pago confirmado (registro definitivo)
+,Payment,,,,Confirmed payment (final record)
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_id,UUID (FK),Yes,
-,,debt_id,UUID (FK),Yes,Deuda a la que se aplica el pago
-,,payment_attempt_id,UUID (FK),No,Origen del pago (si proviene de un comprobante)
-,,amount,"Decimal(12,2)",Yes,Monto pagado
+,,debt_id,UUID (FK),Yes,Debt to which the payment is applied
+,,payment_attempt_id,UUID (FK),No,Payment origin (if it comes from a proof)
+,,amount,"Decimal(12,2)",Yes,Amount paid
 ,,currency,Enum,Yes,
-,,payment_date,Date,Yes,Fecha efectiva del pago
+,,payment_date,Date,Yes,Effective payment date
 ,,status,Enum,Yes,"`'CONFIRMED'`, `'REFUNDED'`"
 ,,notes,Text,No,
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,created_by,UUID,No,
-,,updated_by,UUID,No,Usuario que modificó el pago (generalmente Company User)
+,,updated_by,UUID,No,User who modified the payment (usually Company User)
 ,,,,,
-,BankStatement,,,,Extracto bancario subido (solo durante el proceso)
+,BankStatement,,,,Uploaded bank statement (process-only)
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
-,,bank,Enum,Yes,"Ej: `'GALICIA'`, `'BBVA'`, `'SANTANDER'`, `'BRUBANK'`, `'MERCADOPAGO'`, etc."
-,,format,Enum,Yes,"Ej: `'PDF_TEXT'`, `'PDF_TABLA'`, `'EXCEL'`, `'CSV'`, `'API'` — Define qué parser usar"
-,,file_url,String,Yes,URL del extracto subido
-,,file_name,String,Yes,Nombre original del archivo
-,,**period_from**,Date,No,Inicio del período del extracto
-,,**period_to**,Date,No,Fin del período del extracto
+,,bank,Enum,Yes,"E.g., `'GALICIA'`, `'BBVA'`, `'SANTANDER'`, `'BRUBANK'`, `'MERCADOPAGO'`, etc."
+,,format,Enum,Yes,"E.g., `'PDF_TEXT'`, `'PDF_TABLA'`, `'EXCEL'`, `'CSV'`, `'API'` — Defines which parser to use"
+,,file_url,String,Yes,URL of the uploaded statement
+,,file_name,String,Yes,Original file name
+,,**period_from**,Date,No,Start of the statement period
+,,**period_to**,Date,No,End of the statement period
 ,,status,Enum,Yes,"`'UPLOADED'`, `'PARSING'`, `'PROCESSED'`, `'FAILED'`, `'MANUALLY_REVIEWED'`"
-,,total_transactions,Integer,No,Cantidad de movimientos detectados
-,,notes,Text,No,Notas (útil para errores de parseo)
+,,total_transactions,Integer,No,Number of detected transactions
+,,notes,Text,No,Notes (useful for parsing errors)
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,Usuario que subió el extracto
-,,**updated_by**,UUID,No,Usuario que modificó (ej: para correcciones manuales)
+,,created_by,UUID,No,User who uploaded the statement
+,,**updated_by**,UUID,No,User who modified (e.g., for manual corrections)
 ,,,,,
-,BankTransaction,,,,Movimientos parseados del extracto
+,BankTransaction,,,,Parsed transactions from the statement
 ,,id,UUID,Yes,PK
 ,,bank_statement_id,UUID (FK),Yes,
 ,,company_id,UUID (FK),Yes,
-,,**client_id**,UUID (FK),No,Cliente detectado automáticamente o manualmente a partir de los datos de la transferencia
-,,transaction_date,Date,Yes,Fecha del movimiento
-,,amount,"Decimal(12,2)",Yes,Monto
+,,**client_id**,UUID (FK),No,Client detected automatically or manually from the transfer data
+,,transaction_date,Date,Yes,Transaction date
+,,amount,"Decimal(12,2)",Yes,Amount
 ,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
-,,description,String,Yes,Descripción completa del banco
-,,reference,String,No,Número de referencia / operación / CBU / alias
-,,balance_after,"Decimal(12,2)",No,Saldo posterior
+,,description,String,Yes,Full bank description
+,,reference,String,No,Reference / operation / CBU / alias number
+,,balance_after,"Decimal(12,2)",No,Balance after
 ,,status,Enum,Yes,"`'UNMATCHED'`, `'MATCHED'`, `'IGNORED'`"
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,,,,
-,PaymentMatch,,,,Registro del matcheo exitoso
+,PaymentMatch,,,,Record of successful matching
 ,,id,UUID,Yes,PK
 ,,payment_attempt_id,UUID (FK),Yes,
 ,,bank_transaction_id,UUID (FK),Yes,
 ,,company_id,UUID (FK),Yes,
-,,matched_amount,"Decimal(12,2)",Yes,Monto que se usó para el match (permite coincidencias parciales)
-,,confidence_score,"Decimal(5,2)",No,Puntaje de coincidencia automática (0.00 - 100.00)
+,,matched_amount,"Decimal(12,2)",Yes,Amount used for the match (allows partial matches)
+,,confidence_score,"Decimal(5,2)",No,Automatic match score (0.00 - 100.00)
 ,,matched_by,Enum,Yes,"`'AUTOMATIC'`, `'MANUAL'`"
 ,,matched_at,Timestamp,Yes,
-,,notes,Text,No,"Notas del matcheo (ej: ""coincidencia por monto + referencia"")"
+,,notes,Text,No,"Match notes (e.g., ""match by amount + reference"")"
 ,,,,,
 ,Notification,,,,
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_id,UUID (FK),No,
-,,user_id,UUID (FK),No,Usuario destinatario (Company o End User)
-,,notification_template_id,UUID (FK),No,Plantilla usada (si corresponde)
-,,to,String,Yes,Email / Teléfono / WhatsApp destino
-,,from,String,No,Remitente (ej: no-reply@conciliador.app)
+,,user_id,UUID (FK),No,Recipient user (Company or End User)
+,,notification_template_id,UUID (FK),No,Template used (if applicable)
+,,to,String,Yes,Destination email / phone / WhatsApp
+,,from,String,No,Sender (e.g., no-reply@conciliador.app)
 ,,type,Enum,Yes,"`'PAYMENT_UPLOADED'`, `'PAYMENT_APPROVED'`, `'PAYMENT_REJECTED'`, `'DEBT_OVERDUE'`, etc."
-,,subject,String,Yes,Asunto final
-,,body,Text,Yes,Contenido final (HTML o texto)
+,,subject,String,Yes,Final subject
+,,body,Text,Yes,Final content (HTML or text)
 ,,channel,Enum,Yes,"`'EMAIL'`, `'WHATSAPP'`, `'SMS'`"
 ,,status,Enum,Yes,"`'PENDING'`, `'SENT'`, `'FAILED'`, `'CANCELLED'`"
 ,,sent_at,Timestamp,No,
@@ -265,11 +265,11 @@ REJECTED -> Rechazado (manual o automático)"
 ,NotificationTemplate,,,,
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
-,,name,String,Yes,Nombre interno
-,,type,Enum,Yes,Igual que `Notification.type`
-,,subject,String,Yes,Asunto con placeholders
-,,body_plain,Text,No,Versión texto plano (para WhatsApp/SMS)
-,,body_html,Text,Yes,Versión HTML (para email)
+,,name,String,Yes,Internal name
+,,type,Enum,Yes,Same as `Notification.type`
+,,subject,String,Yes,Subject with placeholders
+,,body_plain,Text,No,Plain text version (for WhatsApp/SMS)
+,,body_html,Text,Yes,HTML version (for email)
 ,,channel,Enum,Yes,"`'EMAIL'`, `'WHATSAPP'`, `'SMS'`"
 ,,is_default,Boolean,Yes,Default: false
 ,,active,Boolean,Yes,Default: true
@@ -278,7 +278,7 @@ REJECTED -> Rechazado (manual o automático)"
 ,,created_by,UUID,No,
 ,,updated_by,UUID,No,
 ,,,,,
-,ClientDebtSummary,,,,"Saldo actual, deuda total, etc. (puede ser vista materializada)"
+,ClientDebtSummary,,,,"Current balance, total debt, etc. (can be a materialized view)"
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_id,UUID (FK),Yes,
@@ -286,21 +286,21 @@ REJECTED -> Rechazado (manual o automático)"
 ,,total_paid,"Decimal(14,2)",Yes,
 ,,balance,"Decimal(14,2)",Yes,
 ,,currency,Enum,Yes,
-,,last_payment_id,UUID (FK),No,Referencia al último pago confirmado
-,,last_debt_id,UUID (FK),No,Referencia a la última deuda generada
+,,last_payment_id,UUID (FK),No,Reference to the last confirmed payment
+,,last_debt_id,UUID (FK),No,Reference to the last generated debt
 ,,last_payment_date,Date,No,
 ,,last_debt_date,Date,No,
 ,,status,Enum,Yes,"`'NORMAL'`, `'OVERDUE'`, `'INACTIVE'`"
 ,,updated_at,Timestamp,Yes,
 ,,,,,
-,CompanyMonthlySummary,,,,Para facturación del SaaS
+,CompanyMonthlySummary,,,,For SaaS billing
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,year,Integer,Yes,
 ,,month,Integer,Yes,(1-12)
-,,total_debts_generated,"Decimal(14,2)",Yes,Monto total de deudas generadas
-,,total_payments_received,"Decimal(14,2)",Yes,Monto total de pagos confirmados
-,,commission_earned,"Decimal(14,2)",Yes,Comisión generada para la plataforma
+,,total_debts_generated,"Decimal(14,2)",Yes,Total amount of generated debts
+,,total_payments_received,"Decimal(14,2)",Yes,Total amount of confirmed payments
+,,commission_earned,"Decimal(14,2)",Yes,Commission earned by the platform
 ,,currency,Enum,Yes,
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
