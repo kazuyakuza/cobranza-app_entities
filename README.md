@@ -2,8 +2,6 @@
 
 Central data model definitions (entities, enums, types) for the **Cobranza App** system — a multi-tenant SaaS for debt management and payment reconciliation. This package serves as the **Single Source of Truth (SSOT)** for all data models across the ecosystem.
 
-**Attention AI Agents:** Before making any changes, you **must** read and adhere to the guidelines outlined in [`AGENTS.md`](AGENTS.md). This file contains critical information about the project's workflow, rules, and architectural standards.
-
 ## About
 
 The primary goal of this repository is to provide a clean, structured, and authoritative source of truth for all data models in the Cobranza App platform.
