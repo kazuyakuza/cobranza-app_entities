@@ -1,41 +1,109 @@
-# Base Project for AI Agent Driven Development
+# @conciliador/entities — Conciliador de Pagos Entities Library
 
-This project serves as a foundational template for future AI-agent driven development. It is pre-configured with essential rules, workflows, and structures optimized for collaboration between human developers and AI agents (specifically Kilo Code).
+Central data model definitions (entities, enums, types) for the **Conciliador de Pagos** system — a multi-tenant SaaS for debt management and payment reconciliation. This package serves as the **Single Source of Truth (SSOT)** for all data models across the ecosystem.
 
 **Attention AI Agents:** Before making any changes, you **must** read and adhere to the guidelines outlined in [`AGENTS.md`](AGENTS.md). This file contains critical information about the project's workflow, rules, and architectural standards.
 
-## Compatibility
+## About
 
-This template was implemented and tested with the **Kilo Code VSCode plugin**. It should also work with:
+The primary goal of this repository is to provide a clean, structured, and authoritative source of truth for all data models in the Conciliador de Pagos platform.
 
-- **Kilo Code CLI** (command-line interface)
-- Any AI agent manager or similar tool that supports custom sub-agent definitions, rule files, and workflow commands via markdown-based configuration
+By centralizing entity definitions in one versioned TypeScript package, we ensure consistency across:
 
-The project uses standard Markdown-based configuration (`.kilo/`, `.agent/`) and does not depend on any proprietary format, making it adaptable to other AI-driven development tools.
+- NestJS backend microservices
+- Angular frontend applications
+- Future services (mobile apps, scripts, etc.)
 
-## Prerequisites
+### Core Principles
 
-- **Kilo Code**: Optimized for the Kilo Code plugin for VSCode, with CLI support. See [compatibility section](#compatibility) for details.
-- **Git**: Ensure your environment is configured for the workflow. See [`how-to-set-up-git.md`](docs/how-to-set-up-git.md).
+- **TypeScript First** — All definitions are in modern TypeScript with strict mode.
+- **Multi-Tenancy Ready** — Every major entity includes `companyId` for tenant isolation.
+- **Audit & Soft Delete** — Standard audit fields (`createdAt`, `updatedAt`, `deletedAt`, `createdBy`, `updatedBy`) built into every entity.
+- **Extensibility** — Entities are designed to be extended in consuming projects without modifying the library.
+- **Consistency** — Clear naming conventions, detailed JSDoc comments, and organized barrel exports.
 
-## About this Project
+## Key Entities
 
-The primary goal of this repository is to provide a clean, structured starting point for new projects with built-in "AI-Readiness."
+Entities are organized by domain concern:
 
-### Design Principles
+| Group | Entities |
+|-------|----------|
+| **Core & Multi-Tenancy** | `Company`, `CompanyPlan`, `User`, `Role`, `CompanyUser` |
+| **Clients & Debts** | `Client`, `Debt`, `DebtSchedule` |
+| **Invoicing & Templates** | `Invoice`, `InvoiceTemplate`, `Receipt`, `ReceiptTemplate` |
+| **Payments & Reconciliation** | `PaymentProof`, `PaymentAttempt`, `Payment`, `BankStatement`, `BankTransaction`, `PaymentMatch` |
+| **Communication & Summaries** | `Notification`, `NotificationTemplate`, `ClientDebtSummary`, `CompanyMonthlySummary` |
 
-- **Foundation**: A structured baseline for new repositories.
-- **AI-Readiness**: Integrated configurations (like `.kilo`, `.agent`, and `.kilocodeignore`) to enable immediate and effective AI agent participation.
-- **Standardization**: Established coding standards, workflows, and documentation practices.
-- **Project Info**: A persistent context and knowledge management system for agents.
+For full property definitions, see [`entities-definition.csv`](.agent/project-info/entities-definition.csv). For relationship diagrams, see [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md).
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **TypeScript** >= 5.x | Strict-mode type definitions |
+| **Node.js** >= 20.x LTS | Build tooling runtime |
+| **npm** >= 10.x | Package manager and publish tool |
+
+Zero runtime dependencies. The library exports only TypeScript interfaces, types, and enums — no services, no side effects, no network calls.
 
 ## Project Structure
 
-Understanding the purpose of the configuration directories is key to effective development:
+```text
+src/
+├── entities/          # Domain-organized entity interfaces
+│   ├── company/
+│   ├── client/
+│   ├── debt/
+│   ├── payment/
+│   ├── bank/
+│   ├── invoice/
+│   ├── receipt/
+│   ├── notification/
+│   └── summary/
+├── enums/             # Custom enums (e.g., DebtStatus, PaymentStatus)
+├── types/             # Shared types (e.g., UUID, Money)
+├── interfaces/        # Base interfaces (e.g., BaseEntity)
+└── index.ts           # Root barrel export
+```
 
-- [`.agent/`](.agent/): Stores project-specific agent context. Includes [`.agent/project-info/`](.agent/project-info/) for persistent project knowledge (`brief.md`, `product.md`, `context.md`, `architecture.md`, `tech.md`), the [`.agent/todos/`](.agent/todos/) directory for task tracking, local rules, and the [`project-structure.md`](.agent/project-structure.md) map.
-- [`.kilo/`](.kilo/): The operational core of the AI integration. Contains custom [`.kilo/agents/`](.kilo/agents/) (Architect, Implementer, Code Reviewer, Docs Specialist, etc.), global [`.kilo/rules/`](.kilo/rules/) (19 rule files), standardized [`.kilo/commands/`](.kilo/commands/) (workflows like the Critical Workflow), [`.kilo/modes/`](.kilo/modes/) for agent mode overrides, and the [`.kilo/plans/`](.kilo/plans/) directory where agents store detailed implementation plans.
-- [`.kilocodeignore`](.kilocodeignore): Controls which files are excluded from codebase indexing, skipping lock files, dependency directories, build outputs, and binary assets.
+## Installation & Usage
+
+Install the package via npm:
+
+```bash
+npm install @conciliador/entities
+```
+
+Import directly into your project:
+
+```typescript
+import { Client, Debt, DebtStatus, Currency } from '@conciliador/entities';
+```
+
+The library exports only TypeScript interfaces, types, and enums — no runtime code, no side effects.
+
+## Development Setup
+
+```bash
+# Clone the repository
+git clone <repo-url>
+cd entities
+
+# Install dependencies
+npm install
+
+# Type-check without emitting
+npx tsc --noEmit
+
+# Build declarations and JS
+npx tsc
+```
+
+Build outputs to `dist/` directory. When ready to publish:
+
+```bash
+npm publish --access public
+```
 
 ## The Critical Workflow
 
@@ -74,8 +142,6 @@ For full details, see [`critical-workflow.md`](.kilo/commands/critical-workflow.
 
 To initiate work with an AI agent, use one of the following copy-paste friendly commands in the chat.
 
-> **Note on Project Info:** When cloning this template for a new project, the Project Info initialization workflow will trigger automatically. The file `.agent/project-info/brief.md` defines the project's core requirements and scope — AI agents rely on this for context across sessions. To initialize, run `/critical-workflow` and ask to "initialize project info". See [`.kilo/commands/project-info-init.md`](.kilo/commands/project-info-init.md) for details. If the project brief is not defined, agents may produce work that does not align with your goals.
-
 ### Option 1: Using a TODO File (Recommended)
 
 1. Create a new file named `YYYYMMDD-todo-X.md` inside a date-specific subdirectory under `.agent/todos/` (e.g., `.agent/todos/20260602/20260602-todo-1.md`).
@@ -105,6 +171,16 @@ The AI agent will ask for your approval before proceeding with plans. To skip ap
 ```text
 "Don't request me to approve plans"
 ```
+
+## Related Documentation
+
+- [`brief.md`](.agent/project-info/brief.md) — Core requirements, entity list, and project goals
+- [`product.md`](.agent/project-info/product.md) — Product vision, target users, and key flows
+- [`architecture.md`](.agent/project-info/architecture.md) — Design patterns, package structure, and naming conventions
+- [`tech.md`](.agent/project-info/tech.md) — Technology stack, build workflow, and constraints
+- [`data-model-brief.md`](.agent/project-info/data-model-brief.md) — Detailed entity definitions and roles
+- [`entities-definition.csv`](.agent/project-info/entities-definition.csv) — Full property definitions for all entities
+- [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md) — Entity relationship diagrams
 
 ---
 
