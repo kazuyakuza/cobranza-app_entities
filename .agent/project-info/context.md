@@ -25,13 +25,13 @@ The repository currently contains:
 - Root `package.json` created with initial version `0.0.1`.
 - Feature branch `feat/initialize-project` created from `main`.
 - `README.md` rewritten with project-specific content; all cross-reference links verified.
+- Defined `src/` folder structure with barrel exports, 12 enum files, types, and interfaces.
 
 ## Immediate Next Steps
 
 1. **Update README** — Replace base template content with Conciliador de Pagos Entities Library specifics.
-2. **Define project structure** — Create `src/` folder structure with barrel export files.
-3. **Set up package configuration** — Create `tsconfig.json`, finalize `package.json` scripts, and install dependencies.
-4. **Implement entities** — Begin writing TypeScript entity interfaces based on the data model definitions.
+2. **Set up package configuration** — Create `tsconfig.json`, finalize `package.json` scripts, and install dependencies.
+3. **Implement entities** — Begin writing TypeScript entity interfaces based on the data model definitions.
 
 ## Known Issues
 
