@@ -1,0 +1,49 @@
+import type { UUID } from '../../types/common';
+import type { JsonData } from '../../types/common';
+
+/**
+ * End client / debtor of a Company.
+ */
+export interface Client {
+  /** Primary key identifier. */
+  id: UUID;
+
+  /** Reference to the company. */
+  companyId: UUID;
+
+  /** Unique code per Company (e.g., `CLI-00042`). */
+  clientCode: string;
+
+  /** Full name of the debtor. */
+  fullName: string;
+
+  /** Email. Highly recommended. */
+  email?: string;
+
+  /** Phone number. */
+  phone?: string;
+
+  /** Address. */
+  address?: string;
+
+  /** National ID / Tax ID of the end client (e.g., DNI, CUIT). */
+  taxId?: string;
+
+  /** Custom fields (e.g., `{ "dni": "...", "category": "..." }`). */
+  extraData?: JsonData;
+
+  /** Whether the client is active. Default: true. */
+  active: boolean;
+
+  /** Internal notes. */
+  notes?: string;
+
+  /** Timestamp when the entity was created. */
+  createdAt: Date;
+
+  /** Timestamp when the entity was last updated. */
+  updatedAt: Date;
+
+  /** ID of the User who made the last modification. */
+  updatedBy?: UUID;
+}
