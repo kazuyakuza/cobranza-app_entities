@@ -22,6 +22,23 @@ By centralizing entity definitions in one versioned TypeScript package, we ensur
 - **Extensibility** — Entities are designed to be extended in consuming projects without modifying the library.
 - **Consistency** — Clear naming conventions, detailed JSDoc comments, and organized barrel exports.
 
+## Types and Interfaces
+
+The library provides shared type aliases and base interfaces used across all domain entities:
+
+| Type | Description |
+|------|-------------|
+| `UUID` | Unique identifier for all primary and foreign keys |
+| `Money` | Monetary amount (string, precision-safe) |
+| `Decimal` | Decimal column values (string, precision-safe) |
+| `JsonData` | JSONB column data (`Record<string, unknown>`) |
+| `DateString` | ISO date string (e.g., `'YYYY-MM-DD'`) |
+
+| Interface | Description |
+|-----------|-------------|
+| `BaseEntity` | Base interface with `id`, `createdAt`, `updatedAt`, `createdBy?`, `updatedBy?` |
+| `SoftDeletable` | Mixin interface with `deletedAt?`, `deletedBy?` for soft-delete support |
+
 ## Key Entities
 
 Entities are organized by domain concern:
