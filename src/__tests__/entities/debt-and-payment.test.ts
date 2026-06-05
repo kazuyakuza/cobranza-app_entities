@@ -1,0 +1,48 @@
+import { describe, it, expect } from 'vitest';
+import type { Debt } from '../../entities/debt/debt.entity';
+import type { Payment } from '../../entities/payment/payment.entity';
+import { DebtStatus } from '../../enums/debt-status.enum';
+import { Currency } from '../../enums/currency.enum';
+import { PaymentStatus } from '../../enums/payment-status.enum';
+
+describe('Debt entity', () => {
+  it('accepts a valid debt object with required fields', () => {
+    const debt = {
+      id: 'debt-uuid',
+      companyId: 'comp-uuid',
+      clientId: 'client-uuid',
+      debtCode: 'DEUD-2026-0042',
+      description: 'Test debt',
+      totalAmount: '1000.00',
+      currency: Currency.ARS,
+      dueDate: new Date('2026-12-31'),
+      issueDate: new Date('2026-01-01'),
+      status: DebtStatus.PENDING,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    } satisfies Debt;
+
+    expect(debt.currency).toBe(Currency.ARS);
+    expect(debt.status).toBe(DebtStatus.PENDING);
+  });
+});
+
+describe('Payment entity', () => {
+  it('accepts a valid payment object with required fields', () => {
+    const payment = {
+      id: 'pay-uuid',
+      companyId: 'comp-uuid',
+      clientId: 'client-uuid',
+      debtId: 'debt-uuid',
+      amount: '500.00',
+      currency: Currency.USD,
+      paymentDate: new Date('2026-06-01'),
+      status: PaymentStatus.CONFIRMED,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    } satisfies Payment;
+
+    expect(payment.amount).toBe('500.00');
+    expect(payment.status).toBe(PaymentStatus.CONFIRMED);
+  });
+});
