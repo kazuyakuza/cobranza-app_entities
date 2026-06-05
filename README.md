@@ -196,6 +196,14 @@ function isPaymentCompleted(status: PaymentStatus): boolean {
 }
 ```
 
+## Usage Examples
+
+For detailed, copy-paste-ready integration examples, see:
+
+- [`docs/usage-nestjs.md`](docs/usage-nestjs.md) — Controllers, DTOs, services, and TypeORM patterns
+- [`docs/usage-angular.md`](docs/usage-angular.md) — Services, components, reactive forms, and enum-driven UI
+- [`docs/openapi-examples.md`](docs/openapi-examples.md) — Swagger/OpenAPI decorator usage with library interfaces
+
 ## Related Documentation
 
 - [`brief.md`](.agent/project-info/brief.md) — Core requirements, entity list, and project goals
