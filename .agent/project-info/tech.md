@@ -23,7 +23,7 @@
 
 ### tsconfig.json
 
-The project will use a `tsconfig.json` with:
+Created and configured with:
 
 - `strict: true` — Full strict mode
 - `declaration: true` — Generate `.d.ts` files for consumers
