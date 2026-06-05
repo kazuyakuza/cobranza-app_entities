@@ -38,3 +38,6 @@ dist/
 
 # Kilo agent manager
 .kilo/agent-manager.json
+
+# ESLint cache
+.eslintcache
