@@ -18,6 +18,7 @@ The repository currently contains:
 
 ## Recent Changes
 
+- Translated Spanish comments in `entities-definition.csv` to English.
 - Created core project info files: `product.md`, `architecture.md`, `tech.md`, `context.md`.
 - Reviewed and finalized project-info documentation: cross-references, links, and consistency verified.
 - Updated `.initialized` marker from default to initialized state.
@@ -28,14 +29,12 @@ The repository currently contains:
 ## Immediate Next Steps
 
 1. **Update README** — Replace base template content with Conciliador de Pagos Entities Library specifics.
-2. **Translate CSV** — Convert Spanish comments in `entities-definition.csv` to English.
-3. **Define project structure** — Create `src/` folder structure with barrel export files.
-4. **Set up package configuration** — Create `tsconfig.json`, finalize `package.json` scripts, and install dependencies.
-5. **Implement entities** — Begin writing TypeScript entity interfaces based on the data model definitions.
+2. **Define project structure** — Create `src/` folder structure with barrel export files.
+3. **Set up package configuration** — Create `tsconfig.json`, finalize `package.json` scripts, and install dependencies.
+4. **Implement entities** — Begin writing TypeScript entity interfaces based on the data model definitions.
 
 ## Known Issues
 
-- The `entities-definition.csv` file contains Spanish comments in the `comments` column that need translation to English.
 - No `tsconfig.json` exists yet — TypeScript compilation is not configured.
 - No test framework is configured yet.
 
