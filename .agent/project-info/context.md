@@ -19,6 +19,7 @@ The repository currently contains:
 ## Recent Changes
 
 - Created core project info files: `product.md`, `architecture.md`, `tech.md`, `context.md`.
+- Reviewed and finalized project-info documentation: cross-references, links, and consistency verified.
 - Updated `.initialized` marker from default to initialized state.
 - Root `package.json` created with initial version `0.0.1`.
 - Feature branch `feat/initialize-project` created from `main`.
