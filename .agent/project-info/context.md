@@ -14,7 +14,7 @@ The repository currently contains:
 - No `tsconfig.json` yet.
 - No `node_modules/` yet.
 - `.npmrc.sample` file exists.
-- `README.md` still has base template content.
+- `README.md` rewritten with project-specific content for Conciliador de Pagos Entities Library.
 
 ## Recent Changes
 
@@ -23,6 +23,7 @@ The repository currently contains:
 - Updated `.initialized` marker from default to initialized state.
 - Root `package.json` created with initial version `0.0.1`.
 - Feature branch `feat/initialize-project` created from `main`.
+- `README.md` rewritten with project-specific content; all cross-reference links verified.
 
 ## Immediate Next Steps
 
@@ -35,7 +36,6 @@ The repository currently contains:
 ## Known Issues
 
 - The `entities-definition.csv` file contains Spanish comments in the `comments` column that need translation to English.
-- `README.md` still contains base project template content and needs updating for this specific project.
 - No `tsconfig.json` exists yet — TypeScript compilation is not configured.
 - No test framework is configured yet.
 
