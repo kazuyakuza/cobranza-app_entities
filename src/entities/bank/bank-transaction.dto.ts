@@ -12,6 +12,7 @@ export type CreateBankTransactionDto = Omit<BankTransaction, 'id' | 'createdAt' 
 
 /**
  * Fields allowed when updating a BankTransaction.
+ * All fields inherit the encryption conventions from CreateBankTransactionDto.
  */
 export type UpdateBankTransactionDto = Partial<CreateBankTransactionDto>;
 

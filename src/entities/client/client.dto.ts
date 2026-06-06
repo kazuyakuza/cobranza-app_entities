@@ -12,6 +12,7 @@ export type CreateClientDto = Omit<Client, 'id' | 'createdAt' | 'updatedAt' | 'u
 
 /**
  * Fields allowed when updating a Client.
+ * All fields inherit the encryption conventions from CreateClientDto.
  */
 export type UpdateClientDto = Partial<CreateClientDto>;
 

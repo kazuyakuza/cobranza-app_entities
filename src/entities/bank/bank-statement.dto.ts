@@ -16,6 +16,7 @@ export type CreateBankStatementDto = Omit<
 
 /**
  * Fields allowed when updating a BankStatement.
+ * All fields inherit the encryption conventions from CreateBankStatementDto.
  */
 export type UpdateBankStatementDto = Partial<CreateBankStatementDto>;
 

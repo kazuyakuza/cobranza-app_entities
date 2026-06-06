@@ -13,7 +13,7 @@ export type CreateCompanyDto = Omit<Company, 'id' | 'createdAt' | 'updatedAt'>;
 
 /**
  * Fields allowed when updating a Company.
- * All creation fields are optional.
+ * All fields inherit the encryption conventions from CreateCompanyDto.
  */
 export type UpdateCompanyDto = Partial<CreateCompanyDto>;
 

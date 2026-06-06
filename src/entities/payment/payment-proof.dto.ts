@@ -13,6 +13,7 @@ export type CreatePaymentProofDto = Omit<PaymentProof, 'id' | 'createdAt' | 'cre
 
 /**
  * Fields allowed when updating a PaymentProof.
+ * All fields inherit the encryption conventions from CreatePaymentProofDto.
  */
 export type UpdatePaymentProofDto = Partial<CreatePaymentProofDto>;
 

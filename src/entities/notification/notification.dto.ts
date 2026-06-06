@@ -13,6 +13,7 @@ export type CreateNotificationDto = Omit<Notification, 'id' | 'createdAt' | 'sen
 
 /**
  * Fields allowed when updating a Notification.
+ * All fields inherit the encryption conventions from CreateNotificationDto.
  */
 export type UpdateNotificationDto = Partial<CreateNotificationDto>;
 

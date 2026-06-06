@@ -16,6 +16,7 @@ export type CreateUserDto = Omit<
 
 /**
  * Fields allowed when updating a User.
+ * All fields inherit the encryption conventions from CreateUserDto.
  */
 export type UpdateUserDto = Partial<CreateUserDto>;
 
