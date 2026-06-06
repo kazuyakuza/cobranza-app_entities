@@ -36,6 +36,61 @@ The library provides shared type aliases and base interfaces used across all dom
 |-----------|-------------|
 | `BaseEntity` | Base interface with `id`, `createdAt`, `updatedAt`, `createdBy?`, `updatedBy?` |
 | `SoftDeletable` | Mixin interface with `deletedAt?`, `deletedBy?` for soft-delete support |
+| `EncryptedValue` | Container for encrypted fields (`encryptedData`, `keyName`, `algorithm?`, `version?`) |
+| `Location` | Geographic location (`address`, `city`, `state`, `country`, `zipCode`, `coordinates?`) |
+
+## Data Encryption
+
+Sensitive fields in this library are stored as `EncryptedValue` objects rather than plain strings. Encryption is performed by the consuming microservice, not by this library.
+
+### EncryptedValue Type
+
+```typescript
+import { EncryptedValue } from '@cobranza-app/entities';
+
+const encrypted: EncryptedValue = {
+  encryptedData: 'U2FsdGVkX1+vupppZksvRf5pq5g5XjFRlipTg9+MvKLJmzJ...',
+  keyName: 'client_pii_key',
+  algorithm: 'AES-256-GCM',
+  version: 1,
+};
+```
+
+### Entities with Encrypted Fields
+
+| Entity | Encrypted Fields | Hash Columns |
+|--------|-----------------|--------------|
+| `Company` | `businessName`, `taxId`, `contact`, `phone` | `taxIdHash`, `contactHash` |
+| `User` | `fullName`, `phone` | none |
+| `Client` | `fullName`, `taxId`, `email`, `phone` | `taxIdHash`, `emailHash` |
+| `BankTransaction` | `description`, `reference` | `referenceHash` |
+| `BankStatement` | `notes` | none |
+| `Notification` | `to`, `from`, `subject`, `body` | none |
+| `PaymentProof` | `notes` | none |
+
+### Encryption Flow Across Microservices
+
+1. **Ingress**: A microservice receives plain-text sensitive data via API, message queue, or event.
+2. **Validation**: Data is validated against the entity DTO.
+3. **Encryption**: The service encrypts sensitive fields using its configured key.
+4. **Persistence**: The encrypted payload is stored as `EncryptedValue` (JSONB in the database).
+5. **Egress**: When another microservice reads the entity, it receives the `EncryptedValue` and decrypts it using the same key name.
+
+> Encryption and decryption always happen inside the microservice boundary, never in the database or in transit without TLS.
+
+### Searchable Encrypted Fields (Hash Columns)
+
+Fields that must support exact-match queries (e.g., tax ID lookup, email uniqueness check) have a parallel `xxxHash` column containing a SHA-256 hex digest of the plain-text value. The hash is computed **before** encryption and stored alongside the encrypted payload.
+
+| Field | Hash Column | Use Case |
+|-------|-------------|----------|
+| `Client.taxId` | `Client.taxIdHash` | Exact-match client lookup by tax ID |
+| `Client.email` | `Client.emailHash` | Uniqueness check and lookup |
+| `Company.taxId` | `Company.taxIdHash` | Exact-match company lookup |
+| `Company.contact` | `Company.contactHash` | Contact search |
+| `BankTransaction.reference` | `BankTransaction.referenceHash` | Reference search and matching |
+
+For implementation details, see [`docs/encryption-usage-guide.md`](docs/encryption-usage-guide.md).
 
 ## Available Entities
 
@@ -275,3 +330,4 @@ For detailed, copy-paste-ready integration examples, see:
 - [`entities-definition.csv`](.agent/project-info/entities-definition.csv) — Full property definitions for all entities
 - [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md) — Entity relationship diagrams
 - [`json-schema-usage.md`](/docs/json-schema-usage.md) — JSON Schema usage guide for Angular, NestJS, and tooling
+- [`encryption-usage-guide.md`](/docs/encryption-usage-guide.md) — Encrypting, decrypting, and hashing in microservices
