@@ -3,12 +3,12 @@
 ,,id,UUID,Yes,PK
 ,,friendly_url,String,Yes,"Slug unique (`acme-servicios`, `lopez-contador`). Will be used in URLs"
 ,,name,String,Yes,Trade name / brand name
-,,business_name,JSONB,No,Legal business name { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,tax_id,JSONB,No,Tax ID (e.g., CUIT, RUC, etc.) { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,business_name,JSONB,No,Legal business name. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,tax_id,JSONB,No,Tax ID (e.g., CUIT, RUC, etc.). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,tax_id_hash,String,No,Hash of tax_id for indexed search/lookup
-,,contact,JSONB,Yes,Email or contact information to be displayed to the end client { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,contact,JSONB,Yes,Email or contact information to be displayed to the end client. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,contact_hash,String,No,Hash of contact for indexed search/lookup
-,,phone,JSONB,No,Contact phone { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,phone,JSONB,No,Contact phone. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,location,JSONB,No,Physical location { address: { addressLine1: string; addressLine2?: string; }; city?: string; state?: string; zipCode?: string; country?: string; }
 ,,logo_url,String,No,Logo URL
 ,,active,Boolean,Yes,Default: true
@@ -35,7 +35,7 @@
 ,,email,String,Yes,Globally unique
 ,,password_hash,String,No,
 ,,password_updated_at,Timestamp,No,Date of last password change
-,,full_name,JSONB,No,Optional (can be completed later) { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,full_name,JSONB,No,Optional (can be completed later). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,phone,JSONB,No,{ encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,active,Boolean,Yes,Default: true
 ,,email_verified,Boolean,Yes,Default: false
@@ -62,12 +62,12 @@
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_code,String,Yes,Unique code per Company (e.g., `CLI-00042`)
-,,full_name,JSONB,Yes,Full name of the debtor { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,email,JSONB,No,Highly recommended { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,full_name,JSONB,Yes,Full name of the debtor. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,email,JSONB,No,Highly recommended. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,email_hash,String,No,Hash of email for indexed search/lookup
 ,,phone,JSONB,No,{ encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,location,JSONB,No,{ address: { addressLine1: string; addressLine2?: string; }; city?: string; state?: string; zipCode?: string; country?: string; }
-,,tax_id,JSONB,No,National ID / Tax ID of the end client (e.g., DNI, CUIT) { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,tax_id,JSONB,No,National ID / Tax ID of the end client (e.g., DNI, CUIT). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,tax_id_hash,String,No,Hash of tax_id for indexed search/lookup
 ,,extra_data,JSONB,No,"Custom fields (e.g., `{ ""dni"": ""..."", ""category"": ""..."" }`)"
 ,,active,Boolean,Yes,Default: true
@@ -167,7 +167,7 @@ CANCELLED -> Voided/cancelled by the Company."
 ,,file_url,String,Yes,URL of the uploaded proof
 ,,file_name,String,Yes,Original file name
 ,,file_type,String,No,"MIME type (image/jpeg, application/pdf, etc.)"
-,,notes,JSONB,No,Additional notes entered by the client when uploading { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,notes,JSONB,No,Additional notes entered by the client when uploading. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,created_at,Timestamp,Yes,
 ,,created_by,UUID,No,(Client or System)
 ,,,,,
@@ -218,7 +218,7 @@ REJECTED -> Rejected (manual or automatic)"
 ,,**period_to**,Date,No,End of the statement period
 ,,status,Enum,Yes,"`'UPLOADED'`, `'PARSING'`, `'PROCESSED'`, `'FAILED'`, `'MANUALLY_REVIEWED'`"
 ,,total_transactions,Integer,No,Number of detected transactions
-,,notes,JSONB,No,Notes (useful for parsing errors) { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,notes,JSONB,No,Notes (useful for parsing errors). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,created_at,Timestamp,Yes,
 ,,updated_at,Timestamp,Yes,
 ,,created_by,UUID,No,User who uploaded the statement
@@ -232,8 +232,8 @@ REJECTED -> Rejected (manual or automatic)"
 ,,transaction_date,Date,Yes,Transaction date
 ,,amount,"Decimal(12,2)",Yes,Amount
 ,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
-,,description,JSONB,Yes,Full bank description { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,reference,JSONB,No,Reference / operation / CBU / alias number { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,description,JSONB,Yes,Full bank description. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,reference,JSONB,No,Reference / operation / CBU / alias number. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,reference_hash,String,No,Hash of reference for indexed search/lookup
 ,,balance_after,"Decimal(12,2)",No,Balance after
 ,,status,Enum,Yes,"`'UNMATCHED'`, `'MATCHED'`, `'IGNORED'`"
@@ -257,11 +257,11 @@ REJECTED -> Rejected (manual or automatic)"
 ,,client_id,UUID (FK),No,
 ,,user_id,UUID (FK),No,Recipient user (Company or End User)
 ,,notification_template_id,UUID (FK),No,Template used (if applicable)
-,,to,JSONB,Yes,Destination email / phone / WhatsApp { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,from,JSONB,No,Sender (e.g., no-reply@conciliador.app) { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,to,JSONB,Yes,Destination email / phone / WhatsApp. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,from,JSONB,No,Sender (e.g., no-reply@conciliador.app). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,type,Enum,Yes,"`'PAYMENT_UPLOADED'`, `'PAYMENT_APPROVED'`, `'PAYMENT_REJECTED'`, `'DEBT_OVERDUE'`, etc."
-,,subject,JSONB,Yes,Final subject { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,body,JSONB,Yes,Final content (HTML or text) { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,subject,JSONB,Yes,Final subject. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,body,JSONB,Yes,Final content (HTML or text). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,channel,Enum,Yes,"`'EMAIL'`, `'WHATSAPP'`, `'SMS'`"
 ,,status,Enum,Yes,"`'PENDING'`, `'SENT'`, `'FAILED'`, `'CANCELLED'`"
 ,,sent_at,Timestamp,No,
