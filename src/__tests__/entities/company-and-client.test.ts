@@ -8,7 +8,7 @@ describe('Company entity', () => {
       id: 'comp-uuid',
       friendlyUrl: 'acme-servicios',
       name: 'Acme Servicios',
-      contact: 'contact@acme.com',
+      contact: { encryptedData: 'encrypted-contact', keyName: 'test-key' },
       active: true,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -25,13 +25,13 @@ describe('Client entity', () => {
       id: 'client-uuid',
       companyId: 'comp-uuid',
       clientCode: 'CLI-00042',
-      fullName: 'Juan Perez',
+      fullName: { encryptedData: 'encrypted-fullName', keyName: 'test-key' },
       active: true,
       createdAt: new Date(),
       updatedAt: new Date(),
     } satisfies Client;
 
     expect(client.clientCode).toBe('CLI-00042');
-    expect(client.fullName).toBe('Juan Perez');
+    expect(client.fullName.encryptedData).toBe('encrypted-fullName');
   });
 });

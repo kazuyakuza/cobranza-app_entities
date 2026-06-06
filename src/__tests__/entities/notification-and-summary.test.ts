@@ -12,10 +12,10 @@ describe('Notification entity', () => {
     const notification = {
       id: 'notif-uuid',
       companyId: 'comp-uuid',
-      to: 'client@example.com',
+      to: { encryptedData: 'encrypted-to', keyName: 'test-key' },
       type: NotificationType.PAYMENT_UPLOADED,
-      subject: 'Payment received',
-      body: '<p>Thank you</p>',
+      subject: { encryptedData: 'encrypted-subject', keyName: 'test-key' },
+      body: { encryptedData: 'encrypted-body', keyName: 'test-key' },
       channel: NotificationChannel.EMAIL,
       status: NotificationStatus.SENT,
       createdAt: new Date(),
