@@ -182,31 +182,6 @@ const debtValidationSchema = schemas.debt.debt;
 
 Zero runtime dependencies. The library exports only TypeScript interfaces, types, and enums — no services, no side effects, no network calls.
 
-## Code Quality
-
-This project uses ESLint and Prettier for code consistency. Run `npm run lint` to check for issues and `npm run format` to auto-format code.
-
-## Project Structure
-
-```text
-src/
-├── entities/          # Domain-organized entity interfaces and DTOs
-│   ├── company/       # *.entity.ts, *.dto.ts, index.ts
-│   ├── client/        # *.entity.ts, *.dto.ts, index.ts
-│   ├── debt/          # *.entity.ts, *.dto.ts, index.ts
-│   ├── payment/       # *.entity.ts, *.dto.ts, index.ts
-│   ├── bank/          # *.entity.ts, *.dto.ts, index.ts
-│   ├── invoice/       # *.entity.ts, *.dto.ts, index.ts
-│   ├── receipt/       # *.entity.ts, *.dto.ts, index.ts
-│   ├── notification/  # *.entity.ts, *.dto.ts, index.ts
-│   └── summary/       # *.entity.ts, *.dto.ts, index.ts
-├── enums/             # Custom enums (e.g., DebtStatus, PaymentStatus)
-├── types/             # Shared types (e.g., UUID, Money)
-├── interfaces/        # Base interfaces (e.g., BaseEntity)
-├── schemas/           # JSON Schema files (one per entity)
-└── index.ts           # Root barrel export
-```
-
 ## Installation & Usage
 
 Install the package via npm:
@@ -322,10 +297,6 @@ For detailed, copy-paste-ready integration examples, see:
 
 ## Related Documentation
 
-- [`brief.md`](.agent/project-info/brief.md) — Core requirements, entity list, and project goals
-- [`product.md`](.agent/project-info/product.md) — Product vision, target users, and key flows
-- [`architecture.md`](.agent/project-info/architecture.md) — Design patterns, package structure, and naming conventions
-- [`tech.md`](.agent/project-info/tech.md) — Technology stack, build workflow, and constraints
 - [`data-model-brief.md`](.agent/project-info/data-model-brief.md) — Detailed entity definitions and roles
 - [`entities-definition.csv`](.agent/project-info/entities-definition.csv) — Full property definitions for all entities
 - [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md) — Entity relationship diagrams
