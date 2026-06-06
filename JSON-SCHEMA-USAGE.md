@@ -104,13 +104,16 @@ Use JSON Schema properties to build `FormGroup` definitions with Angular's `Reac
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { schemas } from '@cobranza-app/entities';
 
-const debtSchema = schemas.debt.debt;
+interface JsonSchemaObject {
+  properties: Record<string, { format?: string; type?: string; enum?: string[] }>;
+  required?: string[];
+}
 
 function buildFormFromSchema(
-  schema: typeof debtSchema,
+  schema: JsonSchemaObject,
   fb: FormBuilder,
 ): FormGroup {
-  const group: Record<string, unknown> = {};
+  const group: Record<string, any> = {};
   for (const [key, prop] of Object.entries(schema.properties)) {
     const validators = schema.required?.includes(key) ? [Validators.required] : [];
     if ((prop as { format?: string }).format === 'email') {
@@ -181,8 +184,9 @@ Object.values(schemas).forEach((domain) => {
 For decorator-based DTO documentation, reference the schema properties in `@ApiProperty()`:
 
 ```typescript
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Debt as DebtInterface, DebtStatus, Currency, UUID, Decimal } from '@cobranza-app/entities';
+import { ApiProperty } from '@nestjs/swagger';
+import { DebtStatus, Currency } from '@cobranza-app/entities';
+import type { Debt as DebtInterface, UUID, Decimal } from '@cobranza-app/entities';
 
 export class Debt implements DebtInterface {
   @ApiProperty({ format: 'uuid', description: 'Primary key' })
@@ -353,35 +357,36 @@ The JSON Schema type system maps from TypeScript as follows:
 | `boolean` | `{ "type": "boolean" }` |
 | `string` | `{ "type": "string" }` |
 | Enums (e.g., `DebtStatus`) | `{ "type": "string", "enum": ["PENDING", "OVERDUE", ...] }` |
+| `DateString` | `{ "type": "string" }` (no format, or `format: date` for date-only) |
 
 ---
 
 ## 7. Available Schemas Reference
 
-| Domain | Entity | File Name | Schema Title |
-|--------|--------|-----------|--------------|
-| company | Company | `company.schema.json` | Company |
-| company | CompanyPlan | `company-plan.schema.json` | CompanyPlan |
-| company | User | `user.schema.json` | User |
-| company | Role | `role.schema.json` | Role |
-| company | CompanyUser | `company-user.schema.json` | CompanyUser |
-| client | Client | `client.schema.json` | Client |
-| debt | Debt | `debt.schema.json` | Debt |
-| debt | DebtSchedule | `debt-schedule.schema.json` | DebtSchedule |
-| invoice | Invoice | `invoice.schema.json` | Invoice |
-| invoice | InvoiceTemplate | `invoice-template.schema.json` | InvoiceTemplate |
-| receipt | Receipt | `receipt.schema.json` | Receipt |
-| receipt | ReceiptTemplate | `receipt-template.schema.json` | ReceiptTemplate |
-| payment | PaymentProof | `payment-proof.schema.json` | PaymentProof |
-| payment | PaymentAttempt | `payment-attempt.schema.json` | PaymentAttempt |
-| payment | Payment | `payment.schema.json` | Payment |
-| bank | BankStatement | `bank-statement.schema.json` | BankStatement |
-| bank | BankTransaction | `bank-transaction.schema.json` | BankTransaction |
-| bank | PaymentMatch | `payment-match.schema.json` | PaymentMatch |
-| notification | Notification | `notification.schema.json` | Notification |
-| notification | NotificationTemplate | `notification-template.schema.json` | NotificationTemplate |
-| summary | ClientDebtSummary | `client-debt-summary.schema.json` | ClientDebtSummary |
-| summary | CompanyMonthlySummary | `company-monthly-summary.schema.json` | CompanyMonthlySummary |
+| Domain | Entity | File Name | Schema Title | Notes |
+|--------|--------|-----------|--------------|-------|
+| company | Company | `company.schema.json` | Company | |
+| company | CompanyPlan | `company-plan.schema.json` | CompanyPlan | |
+| company | User | `user.schema.json` | User | |
+| company | Role | `role.schema.json` | Role | Minimal schema: id, name, description, createdAt only |
+| company | CompanyUser | `company-user.schema.json` | CompanyUser | Does not extend BaseEntity |
+| client | Client | `client.schema.json` | Client | |
+| debt | Debt | `debt.schema.json` | Debt | |
+| debt | DebtSchedule | `debt-schedule.schema.json` | DebtSchedule | |
+| invoice | Invoice | `invoice.schema.json` | Invoice | |
+| invoice | InvoiceTemplate | `invoice-template.schema.json` | InvoiceTemplate | |
+| receipt | Receipt | `receipt.schema.json` | Receipt | |
+| receipt | ReceiptTemplate | `receipt-template.schema.json` | ReceiptTemplate | |
+| payment | PaymentProof | `payment-proof.schema.json` | PaymentProof | Only has createdAt/createdBy, no updatedAt |
+| payment | PaymentAttempt | `payment-attempt.schema.json` | PaymentAttempt | |
+| payment | Payment | `payment.schema.json` | Payment | |
+| bank | BankStatement | `bank-statement.schema.json` | BankStatement | |
+| bank | BankTransaction | `bank-transaction.schema.json` | BankTransaction | |
+| bank | PaymentMatch | `payment-match.schema.json` | PaymentMatch | Does not extend BaseEntity; has matchedAt instead of createdAt |
+| notification | Notification | `notification.schema.json` | Notification | |
+| notification | NotificationTemplate | `notification-template.schema.json` | NotificationTemplate | |
+| summary | ClientDebtSummary | `client-debt-summary.schema.json` | ClientDebtSummary | |
+| summary | CompanyMonthlySummary | `company-monthly-summary.schema.json` | CompanyMonthlySummary | |
 
 All 22 schemas use `"$schema": "http://json-schema.org/draft-07/schema#"` and `"type": "object"`. Each schema defines `properties`, `required`, and `enum` where applicable.
 
