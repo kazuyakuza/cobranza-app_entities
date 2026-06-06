@@ -36,7 +36,7 @@
 ,,password_hash,String,No,
 ,,password_updated_at,Timestamp,No,Date of last password change
 ,,full_name,JSONB,No,Optional (can be completed later). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,phone,JSONB,No,{ encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,phone,JSONB,No,EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,active,Boolean,Yes,Default: true
 ,,email_verified,Boolean,Yes,Default: false
 ,,last_login_at,Timestamp,No,
@@ -65,7 +65,7 @@
 ,,full_name,JSONB,Yes,Full name of the debtor. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,email,JSONB,No,Highly recommended. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,email_hash,String,No,Hash of email for indexed search/lookup
-,,phone,JSONB,No,{ encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,phone,JSONB,No,EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,location,JSONB,No,{ address: { addressLine1: string; addressLine2?: string; }; city?: string; state?: string; zipCode?: string; country?: string; }
 ,,tax_id,JSONB,No,National ID / Tax ID of the end client (e.g., DNI, CUIT). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,tax_id_hash,String,No,Hash of tax_id for indexed search/lookup
