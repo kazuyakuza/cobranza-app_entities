@@ -15,6 +15,7 @@
 - src/enums/ - shared enum definitions
 - src/types/ - shared type aliases
 - src/interfaces/ - shared interface definitions
+- src/schemas/ - JSON Schema definitions for each entity
 
 # Other folders
 

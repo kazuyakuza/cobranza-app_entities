@@ -83,6 +83,40 @@ const updatePayload: UpdateClientDto = {
 
 For full property definitions, see [`entities-definition.csv`](.agent/project-info/entities-definition.csv). For relationship diagrams, see [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md).
 
+## JSON Schemas
+
+Each entity has a companion JSON Schema (Draft-07) file for runtime validation, dynamic form generation, OpenAPI spec generation, and AI agent integration.
+
+Schemas are located in `src/schemas/` and are exported individually and as a grouped `schemas` object:
+
+```typescript
+import { debtSchema, clientSchema } from '@cobranza-app/entities';
+// or grouped access
+import { schemas } from '@cobranza-app/entities';
+const debtValidationSchema = schemas.debt.debt;
+```
+
+### Domain Groups
+
+| Domain | Schema Count |
+|--------|-------------|
+| company | 5 (Company, CompanyPlan, User, Role, CompanyUser) |
+| client | 1 (Client) |
+| debt | 2 (Debt, DebtSchedule) |
+| payment | 3 (Payment, PaymentAttempt, PaymentProof) |
+| bank | 3 (BankStatement, BankTransaction, PaymentMatch) |
+| invoice | 2 (Invoice, InvoiceTemplate) |
+| receipt | 2 (Receipt, ReceiptTemplate) |
+| notification | 2 (Notification, NotificationTemplate) |
+| summary | 2 (ClientDebtSummary, CompanyMonthlySummary) |
+
+### Use Cases
+
+- **Dynamic Forms** — drive form field generation from schema definitions
+- **Runtime Validation** — validate incoming payloads against entity schemas
+- **Swagger / OpenAPI** — generate API specifications from JSON Schemas
+- **AI Agents** — provide structured entity contracts for LLM-based integrations
+
 ## Tech Stack
 
 | Technology | Purpose |
@@ -114,6 +148,7 @@ src/
 ├── enums/             # Custom enums (e.g., DebtStatus, PaymentStatus)
 ├── types/             # Shared types (e.g., UUID, Money)
 ├── interfaces/        # Base interfaces (e.g., BaseEntity)
+├── schemas/           # JSON Schema files (one per entity)
 └── index.ts           # Root barrel export
 ```
 
