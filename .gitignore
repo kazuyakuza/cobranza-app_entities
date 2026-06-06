@@ -35,6 +35,7 @@ dist/
 
 # Tokens and secrets
 .git-credentials
+.npmrc
 
 # Kilo agent manager
 .kilo/agent-manager.json
