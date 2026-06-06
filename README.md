@@ -90,7 +90,7 @@ Fields that must support exact-match queries (e.g., tax ID lookup, email uniquen
 | `Company.contact` | `Company.contactHash` | Contact search |
 | `BankTransaction.reference` | `BankTransaction.referenceHash` | Reference search and matching |
 
-For implementation details, see [`docs/encryption-usage-guide.md`](docs/encryption-usage-guide.md).
+For implementation details, see [`encryption-usage-guide.md`](/docs/encryption-usage-guide.md).
 
 ## Available Entities
 
