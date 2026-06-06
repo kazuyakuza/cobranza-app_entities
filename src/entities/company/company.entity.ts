@@ -1,5 +1,6 @@
 import type { UUID } from '../../types/common';
 import type { JsonData } from '../../types/common';
+import type { Location } from '../../types/location';
 
 /**
  * SaaS client company (the main tenant).
@@ -26,8 +27,8 @@ export interface Company {
   /** Contact phone. */
   phone?: string;
 
-  /** Address. */
-  address?: string;
+  /** Physical location of the company. */
+  location?: Location;
 
   /** Logo URL. */
   logoUrl?: string;

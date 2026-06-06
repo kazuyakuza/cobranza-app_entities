@@ -9,7 +9,24 @@
     "fullName": { "type": "string" },
     "email": { "type": "string" },
     "phone": { "type": "string" },
-    "address": { "type": "string" },
+    "location": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "object",
+          "properties": {
+            "addressLine1": { "type": "string" },
+            "addressLine2": { "type": "string" }
+          },
+          "required": ["addressLine1"]
+        },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "zipCode": { "type": "string" },
+        "country": { "type": "string" }
+      },
+      "required": ["address"]
+    },
     "taxId": { "type": "string" },
     "extraData": { "type": "object" },
     "active": { "type": "boolean" },

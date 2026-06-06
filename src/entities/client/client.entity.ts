@@ -1,5 +1,6 @@
 import type { UUID } from '../../types/common';
 import type { JsonData } from '../../types/common';
+import type { Location } from '../../types/location';
 
 /**
  * End client / debtor of a Company.
@@ -23,8 +24,8 @@ export interface Client {
   /** Phone number. */
   phone?: string;
 
-  /** Address. */
-  address?: string;
+  /** Physical location of the client. */
+  location?: Location;
 
   /** National ID / Tax ID of the end client (e.g., DNI, CUIT). */
   taxId?: string;
