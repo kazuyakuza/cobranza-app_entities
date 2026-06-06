@@ -274,4 +274,4 @@ For detailed, copy-paste-ready integration examples, see:
 - [`data-model-brief.md`](.agent/project-info/data-model-brief.md) — Detailed entity definitions and roles
 - [`entities-definition.csv`](.agent/project-info/entities-definition.csv) — Full property definitions for all entities
 - [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md) — Entity relationship diagrams
-- [`JSON-SCHEMA-USAGE.md`](JSON-SCHEMA-USAGE.md) — JSON Schema usage guide for Angular, NestJS, and tooling
+- [`json-schema-usage.md`](/docs/json-schema-usage.md) — JSON Schema usage guide for Angular, NestJS, and tooling
