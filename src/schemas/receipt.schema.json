@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Receipt",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "clientId": { "type": "string", "format": "uuid" },
+    "debtId": { "type": "string", "format": "uuid" },
+    "receiptTemplateId": { "type": "string", "format": "uuid" },
+    "receiptNumber": { "type": "string" },
+    "issueDate": { "type": "string", "format": "date-time" },
+    "dueDate": { "type": "string", "format": "date-time" },
+    "totalAmount": { "type": "string" },
+    "currency": { "type": "string", "enum": ["ARS", "USD"] },
+    "status": { "type": "string", "enum": ["PENDING", "PAID", "PARTIALLY_PAID", "OVERDUE", "CANCELLED"] },
+    "notes": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedBy": { "type": "string", "format": "uuid" }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "clientId",
+    "debtId",
+    "receiptNumber",
+    "issueDate",
+    "dueDate",
+    "totalAmount",
+    "currency",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Client",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "clientCode": { "type": "string" },
+    "fullName": { "type": "string" },
+    "email": { "type": "string" },
+    "phone": { "type": "string" },
+    "address": { "type": "string" },
+    "taxId": { "type": "string" },
+    "extraData": { "type": "object" },
+    "active": { "type": "boolean" },
+    "notes": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "clientCode",
+    "fullName",
+    "active",
+    "createdAt",
+    "updatedAt"
+  ]
+}

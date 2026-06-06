@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentMatch",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "paymentAttemptId": { "type": "string", "format": "uuid" },
+    "bankTransactionId": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "matchedAmount": { "type": "string" },
+    "confidenceScore": { "type": "string" },
+    "matchedBy": { "type": "string", "enum": ["AUTOMATIC", "MANUAL"] },
+    "matchedAt": { "type": "string", "format": "date-time" },
+    "notes": { "type": "string" }
+  },
+  "required": [
+    "id",
+    "paymentAttemptId",
+    "bankTransactionId",
+    "companyId",
+    "matchedAmount",
+    "matchedBy",
+    "matchedAt"
+  ]
+}

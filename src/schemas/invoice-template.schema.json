@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InvoiceTemplate",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "name": { "type": "string" },
+    "subject": { "type": "string" },
+    "bodyHtml": { "type": "string" },
+    "isDefault": { "type": "boolean" },
+    "active": { "type": "boolean" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "name",
+    "subject",
+    "bodyHtml",
+    "isDefault",
+    "active",
+    "createdAt",
+    "updatedAt"
+  ]
+}

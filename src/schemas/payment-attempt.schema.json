@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaymentAttempt",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "clientId": { "type": "string", "format": "uuid" },
+    "paymentProofId": { "type": "string", "format": "uuid" },
+    "debtId": { "type": "string", "format": "uuid" },
+    "amount": { "type": "string" },
+    "currency": { "type": "string", "enum": ["ARS", "USD"] },
+    "status": { "type": "string", "enum": ["UPLOADED", "PARSE_FAILED", "PENDING_VALIDATION", "MATCHED", "APPROVED", "REJECTED"] },
+    "rejectionReason": { "type": "string" },
+    "reviewedBy": { "type": "string", "format": "uuid" },
+    "reviewedAt": { "type": "string", "format": "date-time" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "clientId",
+    "paymentProofId",
+    "debtId",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ]
+}

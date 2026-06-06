@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CompanyMonthlySummary",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "year": { "type": "integer" },
+    "month": { "type": "integer" },
+    "totalDebtsGenerated": { "type": "string" },
+    "totalPaymentsReceived": { "type": "string" },
+    "commissionEarned": { "type": "string" },
+    "currency": { "type": "string", "enum": ["ARS", "USD"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "year",
+    "month",
+    "totalDebtsGenerated",
+    "totalPaymentsReceived",
+    "commissionEarned",
+    "currency",
+    "createdAt",
+    "updatedAt"
+  ]
+}

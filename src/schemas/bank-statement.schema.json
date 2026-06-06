@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BankStatement",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "bank": { "type": "string", "enum": ["GALICIA", "BBVA", "SANTANDER", "BRUBANK", "MERCADOPAGO"] },
+    "format": { "type": "string", "enum": ["PDF_TEXT", "PDF_TABLA", "EXCEL", "CSV", "API"] },
+    "fileUrl": { "type": "string" },
+    "fileName": { "type": "string" },
+    "periodFrom": { "type": "string", "format": "date-time" },
+    "periodTo": { "type": "string", "format": "date-time" },
+    "status": { "type": "string", "enum": ["UPLOADED", "PARSING", "PROCESSED", "FAILED", "MANUALLY_REVIEWED"] },
+    "totalTransactions": { "type": "integer" },
+    "notes": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedBy": { "type": "string", "format": "uuid" }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "bank",
+    "format",
+    "fileUrl",
+    "fileName",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ]
+}

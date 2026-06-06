@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Notification",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "companyId": { "type": "string", "format": "uuid" },
+    "clientId": { "type": "string", "format": "uuid" },
+    "userId": { "type": "string", "format": "uuid" },
+    "notificationTemplateId": { "type": "string", "format": "uuid" },
+    "to": { "type": "string" },
+    "from": { "type": "string" },
+    "type": { "type": "string", "enum": ["PAYMENT_UPLOADED", "PAYMENT_APPROVED", "PAYMENT_REJECTED", "DEBT_OVERDUE"] },
+    "subject": { "type": "string" },
+    "body": { "type": "string" },
+    "channel": { "type": "string", "enum": ["EMAIL", "WHATSAPP", "SMS"] },
+    "status": { "type": "string", "enum": ["PENDING", "SENT", "FAILED", "CANCELLED"] },
+    "sentAt": { "type": "string", "format": "date-time" },
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "required": [
+    "id",
+    "companyId",
+    "to",
+    "type",
+    "subject",
+    "body",
+    "channel",
+    "status",
+    "createdAt"
+  ]
+}
