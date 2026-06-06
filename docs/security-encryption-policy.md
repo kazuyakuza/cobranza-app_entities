@@ -78,3 +78,4 @@ Searchable encrypted fields have a parallel `xxxHash` column:
   },
   "taxIdHash": "a3f5c8..."
 }
+```
