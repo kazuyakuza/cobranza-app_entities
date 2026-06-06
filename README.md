@@ -53,6 +53,34 @@ Entities are organized into 9 domain modules:
 
 All entities are plain TypeScript interfaces. They contain no decorators or runtime logic, making them safe to import into any framework.
 
+## DTOs (Data Transfer Objects)
+
+Each entity has companion DTOs for API layer communication. They are co-located with their entity files and exported through the same barrel exports.
+
+| DTO Type | Purpose |
+|----------|---------|
+| `CreateXxxDto` | Required fields for entity creation (omits `id`, audit timestamps, and system-managed fields) |
+| `UpdateXxxDto` | Optional fields for entity updates (`Partial<CreateXxxDto>`) |
+| `XxxResponse` | Full entity shape returned by API responses (extends the entity interface) |
+
+DTOs use TypeScript utility types (`Omit`, `Partial`, `extends`) for type-safe, zero-overhead abstractions. Import them alongside entities:
+
+```typescript
+import { Client, CreateClientDto, UpdateClientDto } from '@cobranza-app/entities';
+
+// Creating a new client
+const payload: CreateClientDto = {
+  name: 'Acme Corp',
+  email: 'billing@acme.com',
+  companyId: '550e8400-e29b-41d4-a716-446655440000',
+};
+
+// Updating an existing client
+const updatePayload: UpdateClientDto = {
+  email: 'new-billing@acme.com',
+};
+```
+
 For full property definitions, see [`entities-definition.csv`](.agent/project-info/entities-definition.csv). For relationship diagrams, see [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md).
 
 ## Tech Stack
@@ -73,16 +101,16 @@ This project uses ESLint and Prettier for code consistency. Run `npm run lint` t
 
 ```text
 src/
-├── entities/          # Domain-organized entity interfaces
-│   ├── company/
-│   ├── client/
-│   ├── debt/
-│   ├── payment/
-│   ├── bank/
-│   ├── invoice/
-│   ├── receipt/
-│   ├── notification/
-│   └── summary/
+├── entities/          # Domain-organized entity interfaces and DTOs
+│   ├── company/       # *.entity.ts, *.dto.ts, index.ts
+│   ├── client/        # *.entity.ts, *.dto.ts, index.ts
+│   ├── debt/          # *.entity.ts, *.dto.ts, index.ts
+│   ├── payment/       # *.entity.ts, *.dto.ts, index.ts
+│   ├── bank/          # *.entity.ts, *.dto.ts, index.ts
+│   ├── invoice/       # *.entity.ts, *.dto.ts, index.ts
+│   ├── receipt/       # *.entity.ts, *.dto.ts, index.ts
+│   ├── notification/  # *.entity.ts, *.dto.ts, index.ts
+│   └── summary/       # *.entity.ts, *.dto.ts, index.ts
 ├── enums/             # Custom enums (e.g., DebtStatus, PaymentStatus)
 ├── types/             # Shared types (e.g., UUID, Money)
 ├── interfaces/        # Base interfaces (e.g., BaseEntity)

@@ -4,7 +4,8 @@ import type { BankStatement } from './bank-statement.entity';
  * Fields required to create a BankStatement.
  * Omits audit and derived fields.
  */
-export type CreateBankStatementDto = Omit<BankStatement,
+export type CreateBankStatementDto = Omit<
+  BankStatement,
   'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy' | 'totalTransactions'
 >;
 

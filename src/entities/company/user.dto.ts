@@ -4,7 +4,10 @@ import type { User } from './user.entity';
  * Fields required to create a User.
  * Omits system-managed identity and audit fields.
  */
-export type CreateUserDto = Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'passwordHash' | 'passwordUpdatedAt' | 'lastLoginAt'>;
+export type CreateUserDto = Omit<
+  User,
+  'id' | 'createdAt' | 'updatedAt' | 'passwordHash' | 'passwordUpdatedAt' | 'lastLoginAt'
+>;
 
 /**
  * Fields allowed when updating a User.

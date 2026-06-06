@@ -3,7 +3,10 @@ import type { Receipt } from './receipt.entity';
 /**
  * Fields required to create a Receipt.
  */
-export type CreateReceiptDto = Omit<Receipt, 'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'>;
+export type CreateReceiptDto = Omit<
+  Receipt,
+  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+>;
 
 /**
  * Fields allowed when updating a Receipt.

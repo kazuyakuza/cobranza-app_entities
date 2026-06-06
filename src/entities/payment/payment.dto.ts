@@ -3,7 +3,10 @@ import type { Payment } from './payment.entity';
 /**
  * Fields required to create a Payment.
  */
-export type CreatePaymentDto = Omit<Payment, 'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'>;
+export type CreatePaymentDto = Omit<
+  Payment,
+  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+>;
 
 /**
  * Fields allowed when updating a Payment.

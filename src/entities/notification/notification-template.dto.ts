@@ -3,7 +3,8 @@ import type { NotificationTemplate } from './notification-template.entity';
 /**
  * Fields required to create a NotificationTemplate.
  */
-export type CreateNotificationTemplateDto = Omit<NotificationTemplate,
+export type CreateNotificationTemplateDto = Omit<
+  NotificationTemplate,
   'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
 >;
 

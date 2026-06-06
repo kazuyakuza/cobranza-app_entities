@@ -3,7 +3,8 @@ import type { CompanyMonthlySummary } from './company-monthly-summary.entity';
 /**
  * Fields required to create a CompanyMonthlySummary.
  */
-export type CreateCompanyMonthlySummaryDto = Omit<CompanyMonthlySummary,
+export type CreateCompanyMonthlySummaryDto = Omit<
+  CompanyMonthlySummary,
   'id' | 'createdAt' | 'updatedAt'
 >;
 

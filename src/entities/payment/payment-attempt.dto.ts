@@ -4,7 +4,8 @@ import type { PaymentAttempt } from './payment-attempt.entity';
  * Fields required to create a PaymentAttempt.
  * Omits audit and auto-filled fields managed by the system.
  */
-export type CreatePaymentAttemptDto = Omit<PaymentAttempt,
+export type CreatePaymentAttemptDto = Omit<
+  PaymentAttempt,
   'id' | 'createdAt' | 'updatedAt' | 'reviewedBy' | 'reviewedAt' | 'amount' | 'currency'
 >;
 

@@ -4,7 +4,10 @@ import type { Debt } from './debt.entity';
  * Fields required to create a Debt.
  * Omits `BaseEntity` audit fields.
  */
-export type CreateDebtDto = Omit<Debt, 'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'>;
+export type CreateDebtDto = Omit<
+  Debt,
+  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+>;
 
 /**
  * Fields allowed when updating a Debt.
