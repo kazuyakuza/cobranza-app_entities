@@ -1,6 +1,7 @@
 import type { UUID } from '../../types/common';
 import type { JsonData } from '../../types/common';
 import type { Location } from '../../types/location';
+import type { EncryptedValue } from '../../types/encrypted';
 
 /**
  * End client / debtor of a Company.
@@ -16,19 +17,25 @@ export interface Client {
   clientCode: string;
 
   /** Full name of the debtor. */
-  fullName: string;
+  fullName: EncryptedValue;
 
   /** Email. Highly recommended. */
-  email?: string;
+  email?: EncryptedValue | null;
+
+  /** Hash of email for indexed search/lookup. */
+  emailHash?: string | null;
 
   /** Phone number. */
-  phone?: string;
+  phone?: EncryptedValue | null;
 
   /** Physical location of the client. */
   location?: Location;
 
   /** National ID / Tax ID of the end client (e.g., DNI, CUIT). */
-  taxId?: string;
+  taxId?: EncryptedValue | null;
+
+  /** Hash of taxId for indexed search/lookup. */
+  taxIdHash?: string | null;
 
   /** Custom fields (e.g., `{ "dni": "...", "category": "..." }`). */
   extraData?: JsonData;

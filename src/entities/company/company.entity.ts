@@ -1,6 +1,7 @@
 import type { UUID } from '../../types/common';
 import type { JsonData } from '../../types/common';
 import type { Location } from '../../types/location';
+import type { EncryptedValue } from '../../types/encrypted';
 
 /**
  * SaaS client company (the main tenant).
@@ -16,16 +17,22 @@ export interface Company {
   name: string;
 
   /** Legal business name. */
-  businessName?: string;
+  businessName?: EncryptedValue | null;
 
   /** Tax ID (e.g., CUIT, RUC, etc.). */
-  taxId?: string;
+  taxId?: EncryptedValue | null;
+
+  /** Hash of taxId for indexed search/lookup. */
+  taxIdHash?: string | null;
 
   /** Email or contact information to be displayed to the end client. */
-  contact: string;
+  contact: EncryptedValue;
+
+  /** Hash of contact for indexed search/lookup. */
+  contactHash?: string | null;
 
   /** Contact phone. */
-  phone?: string;
+  phone?: EncryptedValue | null;
 
   /** Physical location of the company. */
   location?: Location;

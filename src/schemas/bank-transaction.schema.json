@@ -10,8 +10,27 @@
     "transactionDate": { "type": "string", "format": "date-time" },
     "amount": { "type": "string" },
     "currency": { "type": "string", "enum": ["ARS", "USD"] },
-    "description": { "type": "string" },
-    "reference": { "type": "string" },
+    "description": {
+      "type": "object",
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "reference": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "referenceHash": { "type": ["string", "null"] },
     "balanceAfter": { "type": "string" },
     "status": { "type": "string", "enum": ["UNMATCHED", "MATCHED", "IGNORED"] },
     "createdAt": { "type": "string", "format": "date-time" },

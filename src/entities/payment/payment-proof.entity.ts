@@ -1,4 +1,5 @@
 import type { UUID } from '../../types/common';
+import type { EncryptedValue } from '../../types/encrypted';
 
 /**
  * Proof of payment uploaded by the Client.
@@ -23,7 +24,7 @@ export interface PaymentProof {
   fileType?: string;
 
   /** Additional notes entered by the client when uploading. */
-  notes?: string;
+  notes?: EncryptedValue | null;
 
   /** Timestamp when the entity was created. */
   createdAt: Date;

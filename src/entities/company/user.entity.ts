@@ -1,4 +1,5 @@
 import type { UUID } from '../../types/common';
+import type { EncryptedValue } from '../../types/encrypted';
 
 /**
  * Any person with an account in the system (Company users + future End Users with login).
@@ -17,10 +18,10 @@ export interface User {
   passwordUpdatedAt?: Date;
 
   /** Optional full name (can be completed later). */
-  fullName?: string;
+  fullName?: EncryptedValue | null;
 
   /** Phone number. */
-  phone?: string;
+  phone?: EncryptedValue | null;
 
   /** Whether the user is active. Default: true. */
   active: boolean;

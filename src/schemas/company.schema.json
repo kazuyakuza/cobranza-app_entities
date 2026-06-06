@@ -6,10 +6,48 @@
     "id": { "type": "string", "format": "uuid" },
     "friendlyUrl": { "type": "string" },
     "name": { "type": "string" },
-    "businessName": { "type": "string" },
-    "taxId": { "type": "string" },
-    "contact": { "type": "string" },
-    "phone": { "type": "string" },
+    "businessName": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "taxId": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "taxIdHash": { "type": ["string", "null"] },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "contactHash": { "type": ["string", "null"] },
+    "phone": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
     "location": {
       "type": "object",
       "properties": {

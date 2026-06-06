@@ -2,6 +2,7 @@ import type { UUID } from '../../types/common';
 import type { Decimal } from '../../types/common';
 import { Currency } from '../../enums/currency.enum';
 import { BankTransactionStatus } from '../../enums/bank-transaction-status.enum';
+import type { EncryptedValue } from '../../types/encrypted';
 
 /**
  * Parsed transactions from the statement.
@@ -29,10 +30,13 @@ export interface BankTransaction {
   currency: Currency;
 
   /** Full bank description. */
-  description: string;
+  description: EncryptedValue;
 
   /** Reference / operation / CBU / alias number. */
-  reference?: string;
+  reference?: EncryptedValue | null;
+
+  /** Hash of reference for indexed search/lookup. */
+  referenceHash?: string | null;
 
   /** Balance after. */
   balanceAfter?: Decimal;

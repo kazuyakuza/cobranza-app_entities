@@ -13,7 +13,16 @@
     "periodTo": { "type": "string", "format": "date-time" },
     "status": { "type": "string", "enum": ["UPLOADED", "PARSING", "PROCESSED", "FAILED", "MANUALLY_REVIEWED"] },
     "totalTransactions": { "type": "integer" },
-    "notes": { "type": "string" },
+    "notes": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
     "createdAt": { "type": "string", "format": "date-time" },
     "updatedAt": { "type": "string", "format": "date-time" },
     "createdBy": { "type": "string", "format": "uuid" },

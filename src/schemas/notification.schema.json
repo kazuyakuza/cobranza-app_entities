@@ -8,11 +8,47 @@
     "clientId": { "type": "string", "format": "uuid" },
     "userId": { "type": "string", "format": "uuid" },
     "notificationTemplateId": { "type": "string", "format": "uuid" },
-    "to": { "type": "string" },
-    "from": { "type": "string" },
+    "to": {
+      "type": "object",
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "from": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
     "type": { "type": "string", "enum": ["PAYMENT_UPLOADED", "PAYMENT_APPROVED", "PAYMENT_REJECTED", "DEBT_OVERDUE"] },
-    "subject": { "type": "string" },
-    "body": { "type": "string" },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "body": {
+      "type": "object",
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
     "channel": { "type": "string", "enum": ["EMAIL", "WHATSAPP", "SMS"] },
     "status": { "type": "string", "enum": ["PENDING", "SENT", "FAILED", "CANCELLED"] },
     "sentAt": { "type": "string", "format": "date-time" },

@@ -7,8 +7,26 @@
     "email": { "type": "string" },
     "passwordHash": { "type": "string" },
     "passwordUpdatedAt": { "type": "string", "format": "date-time" },
-    "fullName": { "type": "string" },
-    "phone": { "type": "string" },
+    "fullName": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "phone": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
     "active": { "type": "boolean" },
     "emailVerified": { "type": "boolean" },
     "lastLoginAt": { "type": "string", "format": "date-time" },

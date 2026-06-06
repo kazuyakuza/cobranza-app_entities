@@ -6,9 +6,37 @@
     "id": { "type": "string", "format": "uuid" },
     "companyId": { "type": "string", "format": "uuid" },
     "clientCode": { "type": "string" },
-    "fullName": { "type": "string" },
-    "email": { "type": "string" },
-    "phone": { "type": "string" },
+    "fullName": {
+      "type": "object",
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "email": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "emailHash": { "type": ["string", "null"] },
+    "phone": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
     "location": {
       "type": "object",
       "properties": {
@@ -27,7 +55,17 @@
       },
       "required": ["address"]
     },
-    "taxId": { "type": "string" },
+    "taxId": {
+      "type": ["object", "null"],
+      "properties": {
+        "encryptedData": { "type": "string" },
+        "keyName": { "type": "string" },
+        "algorithm": { "type": "string" },
+        "version": { "type": "integer" }
+      },
+      "required": ["encryptedData", "keyName"]
+    },
+    "taxIdHash": { "type": ["string", "null"] },
     "extraData": { "type": "object" },
     "active": { "type": "boolean" },
     "notes": { "type": "string" },

@@ -2,6 +2,7 @@ import type { UUID } from '../../types/common';
 import { NotificationType } from '../../enums/notification-type.enum';
 import { NotificationChannel } from '../../enums/notification-channel.enum';
 import { NotificationStatus } from '../../enums/notification-status.enum';
+import type { EncryptedValue } from '../../types/encrypted';
 
 /**
  * Notification sent to a user or client.
@@ -23,19 +24,19 @@ export interface Notification {
   notificationTemplateId?: UUID;
 
   /** Destination email / phone / WhatsApp. */
-  to: string;
+  to: EncryptedValue;
 
   /** Sender (e.g., no-reply@conciliador.app). */
-  from?: string;
+  from?: EncryptedValue | null;
 
   /** Type of notification. */
   type: NotificationType;
 
   /** Final subject. */
-  subject: string;
+  subject: EncryptedValue;
 
   /** Final content (HTML or text). */
-  body: string;
+  body: EncryptedValue;
 
   /** Delivery channel. */
   channel: NotificationChannel;

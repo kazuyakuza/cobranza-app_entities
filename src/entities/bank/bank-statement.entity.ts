@@ -3,6 +3,7 @@ import { Bank } from '../../enums/bank.enum';
 import { BankStatementFormat } from '../../enums/bank-statement-format.enum';
 import { BankStatementStatus } from '../../enums/bank-statement-status.enum';
 import type { BaseEntity } from '../../interfaces/base-entity.interface';
+import type { EncryptedValue } from '../../types/encrypted';
 
 /**
  * Uploaded bank statement (process-only).
@@ -36,5 +37,5 @@ export interface BankStatement extends BaseEntity {
   totalTransactions?: number;
 
   /** Notes (useful for parsing errors). */
-  notes?: string;
+  notes?: EncryptedValue | null;
 }
