@@ -2,7 +2,7 @@
 
 ## Objective
 
-Rewrite `README.md` to replace base-template content with project-specific documentation for the **Cobranza App – Entities Library** (`@cobranza-app/entities`).
+Rewrite `README.md` to replace base-template content with project-specific documentation for the **Cobranza App – Entities Library** (`@cobranza-apps/entities`).
 
 ## Source Material
 
@@ -13,13 +13,13 @@ Rewrite `README.md` to replace base-template content with project-specific docum
 | `.agent/project-info/product.md` | Problem statement, vision, target users, core goals, entity groups, key flows |
 | `.agent/project-info/tech.md` | Stack, package details, dev setup, build commands, consumption pattern |
 | `.agent/project-info/architecture.md` | Package structure, design patterns, naming conventions, critical paths |
-| `package.json` | Package name (`@cobranza-app/entities`), version (`0.0.1`), description |
+| `package.json` | Package name (`@cobranza-apps/entities`), version (`0.0.1`), description |
 
 ## Keep / Remove / Add Matrix
 
 | Section | Action | Notes |
 |---------|--------|-------|
-| Title + description | **Replace** | Change from "Base Project for AI Agent Driven Development" to "@cobranza-app/entities — Cobranza App Entities Library" |
+| Title + description | **Replace** | Change from "Base Project for AI Agent Driven Development" to "@cobranza-apps/entities — Cobranza App Entities Library" |
 | Attention AI Agents note | **Keep** | Retain the note pointing to `AGENTS.md`. Minor wording cleanup allowed |
 | Compatibility | **Remove** | Too base-template-specific (Kilo Code plugin compatibility) |
 | Prerequisites | **Remove** | Too base-template-specific (Kilo Code plugin prerequisite) |
@@ -40,7 +40,7 @@ Rewrite `README.md` to replace base-template content with project-specific docum
 
 ### 1. Title & Description
 
-**Heading**: `# @cobranza-app/entities — Cobranza App Entities Library`
+**Heading**: `# @cobranza-apps/entities — Cobranza App Entities Library`
 
 **Description paragraph**:
 Central data model definitions (entities, enums, types) for the **Cobranza App** system — a multi-tenant SaaS for debt management and payment reconciliation. This package serves as the **Single Source of Truth (SSOT)** for all data models across the ecosystem.
@@ -137,13 +137,13 @@ Central data model definitions (entities, enums, types) for the **Cobranza App**
 > Install the package via npm:
 >
 > ```bash
-> npm install @cobranza-app/entities
+> npm install @cobranza-apps/entities
 > ```
 >
 > Import directly into your project:
 >
 > ```typescript
-> import { Client, Debt, DebtStatus, Currency } from '@cobranza-app/entities';
+> import { Client, Debt, DebtStatus, Currency } from '@cobranza-apps/entities';
 > ```
 >
 > The library exports only TypeScript interfaces, types, and enums — no runtime code, no side effects.
@@ -231,7 +231,7 @@ Keep as-is: `---` + `*Note: This workflow is actively maintained...*`
 
 ## Verification Checklist
 
-- [ ] Title reads `@cobranza-app/entities — Cobranza App Entities Library`
+- [ ] Title reads `@cobranza-apps/entities — Cobranza App Entities Library`
 - [ ] No "Compatibility" section
 - [ ] No "Prerequisites" section
 - [ ] About section has project-specific description and core principles

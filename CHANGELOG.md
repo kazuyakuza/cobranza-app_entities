@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release of `@cobranza-app/entities`.
+- Initial release of `@cobranza-apps/entities`.
 - Core shared types: `UUID`, `Money`, `Decimal`, `JsonData`, `DateString`.
 - Base interfaces: `BaseEntity`, `SoftDeletable`.
 - 21 domain entities organized into 9 modules:
@@ -30,5 +30,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Strict TypeScript configuration (`strict: true`) with declaration file generation.
 - ESLint and Prettier setup for code quality.
 
-[Unreleased]: https://github.com/cobranza-app/entities/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/cobranza-app/entities/releases/tag/v0.1.0
+[Unreleased]: https://github.com/cobranza-apps/entities/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/cobranza-apps/entities/releases/tag/v0.1.0

@@ -10,7 +10,8 @@
 ## Pre-Analysis: Current State
 
 ### Already Done (from TODO-0)
-- `package.json` with name `@cobranza-app/entities`, version `0.0.1`, private
+
+- `package.json` with name `@cobranza-apps/entities`, version `0.0.1`, private
 - `tsconfig.json` with `strict: true`, `declaration: true`, `declarationMap: true`
 - Folder structure created (all entity subdirectories, enums, types, interfaces)
 - All 12 enum files exist with correct string values (debt-status, payment-status, payment-attempt-status, bank-statement-status, bank-transaction-status, notification-type, notification-channel, currency, debt-schedule-frequency, calculation-type, match-method, invoice-status)
@@ -21,6 +22,7 @@
 - Git branch: `main`, clean (only TODO file modified)
 
 ### Gaps (Needs Work)
+
 1. **Missing enum**: `NotificationStatus` (PENDING, SENT, FAILED, CANCELLED) — referenced in TODO but not created
 2. **Missing types in common.ts**: `Decimal`, `JsonData` type for JSONB fields
 3. **All entity interface files**: None of the 20 entity `.entity.ts` files exist — only barrel `index.ts` stubs
@@ -32,6 +34,7 @@
 9. **No JSDoc** on existing types/interfaces/enums
 
 ### Constraints (from project rules)
+
 - Max 200 lines/file (ideally 125 non-blank/non-comment), max 50 lines/method, max 2 params/method, max 2 nesting levels
 - String enums only (not numeric)
 - Plain interfaces only (no decorators, no runtime logic)
@@ -43,6 +46,7 @@
 ## Global Plan Steps
 
 ### Step 2: Git Feature Branch Setup
+
 - **Sub-agent**: implementer
 - **Actions**:
   1. Commit unstaged `.agent/todos/20260604/20260604-todo-1.md` with message `"chore: start TODO-1 — entities library implementation"`
@@ -50,6 +54,7 @@
   3. Switch to `feat/implement-entities`
 
 ### Step 3: Version Update
+
 - **Sub-agent**: implementer
 - **Actions**:
   1. Bump version in `package.json` from `0.0.1` to `0.1.0` (minor — adding all entity definitions)
@@ -60,6 +65,7 @@
 ### Task 1: Project Setup (ESLint + Prettier)
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Install ESLint + Prettier, create configs, add lint scripts to package.json
 - Generate detailed plan at `.kilo/plans/20260605-task-1-setup.md`
 
@@ -78,6 +84,7 @@
 ### Task 2: Core Types & Base Interfaces (Enhance Existing)
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Enhance `src/types/common.ts`, `src/interfaces/base-entity.interface.ts`, ensure `src/enums/index.ts` barrel is complete. Add JSDoc.
 - Generate detailed plan at `.kilo/plans/20260605-task-2-core-types.md`
 
@@ -96,6 +103,7 @@
 ### Task 3: Enums Definition (Complete Missing)
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Create `NotificationStatus` enum (PENDING, SENT, FAILED, CANCELLED). Verify all TODOs enum list is complete. Add JSDoc to all enums.
 - Generate detailed plan at `.kilo/plans/20260605-task-3-enums.md`
 
@@ -114,6 +122,7 @@
 ### Task 4: Entities Implementation (All 20 Entities)
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Implement all 20 entity interface files across 9 domain directories. Include JSDoc on every property.
 - Entities by domain:
   - **company/**: Company, CompanyPlan, User, Role, CompanyUser
@@ -142,6 +151,7 @@
 ### Task 5: Organization & Exports (Populate Barrels)
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Populate all barrel index.ts files (domain-level and entity-subfolder-level). Update root `src/index.ts` to re-export everything. Ensure clean import paths.
 - Generate detailed plan at `.kilo/plans/20260605-task-5-exports.md`
 
@@ -160,6 +170,7 @@
 ### Task 6: Documentation (README, CHANGELOG, CONTRIBUTING)
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Update README.md with usage examples, create CHANGELOG.md, create CONTRIBUTING.md (AI-agent-usable). Add JSDoc to all entities/properties.
 - Generate detailed plan at `.kilo/plans/20260605-task-6-docs.md`
 
@@ -178,6 +189,7 @@
 ### Task 7: Quality & Testing
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Configure Jest/Vitest with ts-jest, write enum value tests, write type compatibility tests, run `tsc --noEmit`, verify no circular deps.
 - Generate detailed plan at `.kilo/plans/20260605-task-7-quality.md`
 
@@ -196,6 +208,7 @@
 ### Task 8: Extra (NestJS/Angular Examples + OpenAPI)
 
 #### 4.1 Analysis & Planning → architect
+
 - Scope: Create `docs/usage-nestjs.md`, `docs/usage-angular.md` with real code examples. Create `docs/openapi-examples.md` with Swagger decorator examples.
 - Generate detailed plan at `.kilo/plans/20260605-task-8-extra.md`
 
@@ -212,6 +225,7 @@
 ---
 
 ### Step 5: TODO File Completion
+
 - **Sub-agent**: implementer
 - **Actions**:
   1. Rename `.agent/todos/20260604/20260604-todo-1.md` → `.agent/todos/20260604/20260604-todo-1-DONE.md`

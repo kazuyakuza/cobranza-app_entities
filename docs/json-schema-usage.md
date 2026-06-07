@@ -1,6 +1,6 @@
 # JSON Schema Usage Guide
 
-`@cobranza-app/entities` ships 22 JSON Schema (Draft-07) files alongside its TypeScript interfaces. Each schema lives in `src/schemas/` and provides a runtime contract for validation, dynamic form generation, OpenAPI spec generation, and AI-agent integrations.
+`@cobranza-apps/entities` ships 22 JSON Schema (Draft-07) files alongside its TypeScript interfaces. Each schema lives in `src/schemas/` and provides a runtime contract for validation, dynamic form generation, OpenAPI spec generation, and AI-agent integrations.
 
 This guide covers:
 
@@ -86,10 +86,10 @@ node scripts/fix-schema-formats.js src/schemas/debt.schema.json
 
 ```typescript
 // Individual named imports
-import { debtSchema, clientSchema } from '@cobranza-app/entities';
+import { debtSchema, clientSchema } from '@cobranza-apps/entities';
 
 // Grouped access by domain
-import { schemas } from '@cobranza-app/entities';
+import { schemas } from '@cobranza-apps/entities';
 const debtValidationSchema = schemas.debt.debt;
 const clientValidationSchema = schemas.client.client;
 ```
@@ -102,7 +102,7 @@ Use JSON Schema properties to build `FormGroup` definitions with Angular's `Reac
 
 ```typescript
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { schemas } from '@cobranza-app/entities';
+import { schemas } from '@cobranza-apps/entities';
 
 interface JsonSchemaObject {
   properties: Record<string, { format?: string; type?: string; enum?: string[] }>;
@@ -139,7 +139,7 @@ npm install ajv
 
 ```typescript
 import Ajv from 'ajv';
-import { schemas } from '@cobranza-app/entities';
+import { schemas } from '@cobranza-apps/entities';
 
 const ajv = new Ajv({ allErrors: true });
 const validateDebt = ajv.compile(schemas.debt.debt);
@@ -162,7 +162,7 @@ NestJS Swagger can consume JSON Schemas to produce OpenAPI specifications. Regis
 
 ```typescript
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { schemas } from '@cobranza-app/entities';
+import { schemas } from '@cobranza-apps/entities';
 
 const config = new DocumentBuilder()
   .setTitle('Cobranza API')
@@ -185,8 +185,8 @@ For decorator-based DTO documentation, reference the schema properties in `@ApiP
 
 ```typescript
 import { ApiProperty } from '@nestjs/swagger';
-import { DebtStatus, Currency } from '@cobranza-app/entities';
-import type { Debt as DebtInterface, UUID, Decimal } from '@cobranza-app/entities';
+import { DebtStatus, Currency } from '@cobranza-apps/entities';
+import type { Debt as DebtInterface, UUID, Decimal } from '@cobranza-apps/entities';
 
 export class Debt implements DebtInterface {
   @ApiProperty({ format: 'uuid', description: 'Primary key' })
@@ -208,7 +208,7 @@ JSON Schemas define the contract; `class-validator` decorators implement runtime
 
 ```typescript
 import { IsEnum, IsUUID, IsString, IsOptional, IsDateString } from 'class-validator';
-import { DebtStatus, Currency } from '@cobranza-app/entities';
+import { DebtStatus, Currency } from '@cobranza-apps/entities';
 
 export class CreateDebtRequest {
   @IsUUID()
@@ -259,7 +259,7 @@ Reference: [`docs/usage-nestjs.md`](docs/usage-nestjs.md) — Section 3 (Validat
 JSON Schemas provide structured contracts for LLM-based agents. Use them directly as function-calling parameter definitions:
 
 ```typescript
-import { schemas } from '@cobranza-app/entities';
+import { schemas } from '@cobranza-apps/entities';
 
 const createDebtTool = {
   type: 'function',
@@ -328,16 +328,16 @@ All examples in one place for quick reference:
 
 ```typescript
 // Individual schema import
-import { debtSchema } from '@cobranza-app/entities';
+import { debtSchema } from '@cobranza-apps/entities';
 
 // Grouped schemas object — access by domain and entity name
-import { schemas } from '@cobranza-app/entities';
+import { schemas } from '@cobranza-apps/entities';
 const debt = schemas.debt.debt;
 const client = schemas.client.client;
 const company = schemas.company.company;
 
 // TypeScript types alongside schemas
-import { Debt, CreateDebtDto, DebtStatus } from '@cobranza-app/entities';
+import { Debt, CreateDebtDto, DebtStatus } from '@cobranza-apps/entities';
 ```
 
 Reference: `src/schemas/index.ts` for the `schemas` object structure, `src/index.ts` for root barrel re-exports.

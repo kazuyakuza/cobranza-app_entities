@@ -1,6 +1,6 @@
 # OpenAPI / Swagger Decorator Examples
 
-How to extend `@cobranza-app/entities` interfaces with NestJS Swagger/OpenAPI decorators to generate rich API documentation. The library itself contains no decorators, so all Swagger annotations are added in the consuming project.
+How to extend `@cobranza-apps/entities` interfaces with NestJS Swagger/OpenAPI decorators to generate rich API documentation. The library itself contains no decorators, so all Swagger annotations are added in the consuming project.
 
 ## 1. Extending an Entity with `@ApiProperty()`
 
@@ -8,7 +8,7 @@ Create a class that **implements** the library interface and add `@ApiProperty()
 
 ```typescript
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Debt as DebtInterface, DebtStatus, Currency, UUID, Decimal } from '@cobranza-app/entities';
+import { Debt as DebtInterface, DebtStatus, Currency, UUID, Decimal } from '@cobranza-apps/entities';
 
 export class Debt implements DebtInterface {
   @ApiProperty({ format: 'uuid', description: 'Primary key' })
@@ -62,7 +62,7 @@ Annotate create/update DTOs with `@ApiProperty()` and `@ApiPropertyOptional()` f
 
 ```typescript
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { DebtStatus, Currency, UUID, Decimal } from '@cobranza-app/entities';
+import { DebtStatus, Currency, UUID, Decimal } from '@cobranza-apps/entities';
 
 export class CreateDebtDto {
   @ApiProperty({ format: 'uuid', description: 'Company ID' })
@@ -110,7 +110,7 @@ import {
   ApiParam,
   ApiQuery,
 } from '@nestjs/swagger';
-import { Debt, DebtStatus, UUID } from '@cobranza-app/entities';
+import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
 
 @ApiTags('Debts')
 @Controller('debts')
@@ -154,7 +154,7 @@ To render enums properly in Swagger UI, use `enumName` alongside `enum`:
 
 ```typescript
 import { ApiProperty } from '@nestjs/swagger';
-import { DebtStatus } from '@cobranza-app/entities';
+import { DebtStatus } from '@cobranza-apps/entities';
 
 export class DebtFiltersDto {
   @ApiProperty({

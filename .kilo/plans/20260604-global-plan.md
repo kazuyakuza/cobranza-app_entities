@@ -175,7 +175,7 @@
 #### 4.1 Analysis & Planning
 
 - **Agent**: architect
-- Plan: create root `package.json` with name `@cobranza-app/entities`, TypeScript config (`tsconfig.json`), devDependencies (`typescript`, `@types/node`), build scripts, and npm configuration.
+- Plan: create root `package.json` with name `@cobranza-apps/entities`, TypeScript config (`tsconfig.json`), devDependencies (`typescript`, `@types/node`), build scripts, and npm configuration.
 
 #### 4.2 Implementation
 

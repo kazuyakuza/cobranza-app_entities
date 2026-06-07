@@ -1,13 +1,13 @@
 # Encryption Usage Guide
 
-Practical patterns for encrypting, decrypting, and hashing sensitive data in microservices that consume `@cobranza-app/entities`.
+Practical patterns for encrypting, decrypting, and hashing sensitive data in microservices that consume `@cobranza-apps/entities`.
 
 ---
 
 ## 1. Importing Encryption Types
 
 ```typescript
-import { EncryptedValue, Client, Company, BankTransaction } from '@cobranza-app/entities';
+import { EncryptedValue, Client, Company, BankTransaction } from '@cobranza-apps/entities';
 ```
 
 ## 2. Encrypting Data in a Microservice
@@ -56,7 +56,7 @@ function encryptValue(plainText: string, config: EncryptionConfig): EncryptedVal
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { Client, EncryptedValue } from '@cobranza-app/entities';
+import { Client, EncryptedValue } from '@cobranza-apps/entities';
 
 @Injectable()
 export class ClientEncryptionService {
@@ -125,7 +125,7 @@ function decryptValue(encrypted: EncryptedValue): string {
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { Client } from '@cobranza-app/entities';
+import { Client } from '@cobranza-apps/entities';
 
 @Injectable()
 export class ClientDecryptionService {
@@ -232,7 +232,7 @@ Map `EncryptedValue` fields as `jsonb` (PostgreSQL) or `json` (MySQL) columns in
 
 ```typescript
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Client, EncryptedValue } from '@cobranza-app/entities';
+import { Client, EncryptedValue } from '@cobranza-apps/entities';
 
 @Entity()
 export class ClientEntity implements Client {

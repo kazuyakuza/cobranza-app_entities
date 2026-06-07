@@ -10,7 +10,7 @@ Replace current minimal content with expanded configuration:
 
 ```json
 {
-  "name": "@cobranza-app/entities",
+  "name": "@cobranza-apps/entities",
   "version": "0.0.1",
   "private": true,
   "description": "Central data model definitions for the Cobranza App system",

@@ -1,6 +1,6 @@
 # NestJS Usage Examples
 
-Integration patterns for consuming `@cobranza-app/entities` in a NestJS microservice. These examples go beyond the basic TypeORM entity extension shown in the main README.
+Integration patterns for consuming `@cobranza-apps/entities` in a NestJS microservice. These examples go beyond the basic TypeORM entity extension shown in the main README.
 
 ## 1. Importing Entities in a NestJS Controller
 
@@ -8,7 +8,7 @@ Use library types directly in controller signatures for type-safe request handli
 
 ```typescript
 import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
-import { Debt, DebtStatus, UUID } from '@cobranza-app/entities';
+import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
 
 @Controller('debts')
 export class DebtController {
@@ -39,7 +39,7 @@ export class DebtController {
 Derive DTO types from library interfaces to stay in sync with the canonical model while excluding auto-generated or audit fields:
 
 ```typescript
-import { Debt, Client, UUID, Decimal, Currency } from '@cobranza-app/entities';
+import { Debt, Client, UUID, Decimal, Currency } from '@cobranza-apps/entities';
 
 type AuditFields = 'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy';
 
@@ -58,7 +58,7 @@ DTOs defined as TypeScript types have no runtime impact. In the consuming NestJS
 
 ```typescript
 import { IsEnum, IsUUID, IsString, IsOptional, IsDateString } from 'class-validator';
-import { DebtStatus, Currency } from '@cobranza-app/entities';
+import { DebtStatus, Currency } from '@cobranza-apps/entities';
 
 export class CreateDebtRequest {
   @IsUUID()
@@ -108,7 +108,7 @@ The service layer returns library interfaces, keeping the contract aligned with 
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { Debt, DebtStatus, UUID } from '@cobranza-app/entities';
+import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
 
 @Injectable()
 export class DebtService {
@@ -136,7 +136,7 @@ export class DebtService {
 Filter debts using enum values:
 
 ```typescript
-import { Debt, DebtStatus } from '@cobranza-app/entities';
+import { Debt, DebtStatus } from '@cobranza-apps/entities';
 
 function filterOverdueDebts(debts: Debt[]): Debt[] {
   return debts.filter(hasOverdueStatus);
@@ -155,7 +155,7 @@ Inject `Repository<DebtEntity>` where `DebtEntity` is a TypeORM class that **imp
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Debt, DebtStatus, UUID } from '@cobranza-app/entities';
+import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
 import { DebtEntity } from './debt.entity';
 
 @Injectable()

@@ -8,10 +8,12 @@
 ## Overview
 
 This task produces two documentation deliverables:
+
 1. A new **Encryption** section in the main `README.md` summarizing which entities have encrypted fields, how encryption works across microservices, and the hash-column pattern for searchable fields.
 2. A new `/docs/encryption-usage-guide.md` file with copy-paste-ready code examples for encrypting, decrypting, and hashing in consuming microservices.
 
 Both documents must be consistent with:
+
 - The `EncryptedValue` interface in `src/types/encrypted.ts`
 - The `Location` interface in `src/types/location.ts`
 - The entity files updated in Tasks 2–3
@@ -36,7 +38,7 @@ Sensitive fields in this library are stored as `EncryptedValue` objects rather t
 ### EncryptedValue Type
 
 ```typescript
-import { EncryptedValue } from '@cobranza-app/entities';
+import { EncryptedValue } from '@cobranza-apps/entities';
 
 const encrypted: EncryptedValue = {
   encryptedData: 'U2FsdGVkX1+vupppZksvRf5pq5g5XjFRlipTg9+MvKLJmzJ...',
@@ -81,6 +83,7 @@ Fields that must support exact-match queries (e.g., tax ID lookup, email uniquen
 | `BankTransaction.reference` | `BankTransaction.referenceHash` | Reference search and matching |
 
 For implementation details, see [`docs/encryption-usage-guide.md`](docs/encryption-usage-guide.md).
+
 ```
 
 ### 1.3 Exact Changes
@@ -99,14 +102,14 @@ For implementation details, see [`docs/encryption-usage-guide.md`](docs/encrypti
 ```markdown
 # Encryption Usage Guide
 
-Practical patterns for encrypting, decrypting, and hashing sensitive data in microservices that consume `@cobranza-app/entities`.
+Practical patterns for encrypting, decrypting, and hashing sensitive data in microservices that consume `@cobranza-apps/entities`.
 
 ---
 
 ## 1. Importing Encryption Types
 
 ```typescript
-import { EncryptedValue, Client, Company, BankTransaction } from '@cobranza-app/entities';
+import { EncryptedValue, Client, Company, BankTransaction } from '@cobranza-apps/entities';
 ```
 
 ## 2. Encrypting Data in a Microservice
@@ -151,7 +154,7 @@ function encryptValue(plainText: string, config: EncryptionConfig): EncryptedVal
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { Client, EncryptedValue } from '@cobranza-app/entities';
+import { Client, EncryptedValue } from '@cobranza-apps/entities';
 
 @Injectable()
 export class ClientEncryptionService {
@@ -210,7 +213,7 @@ function decryptValue(encrypted: EncryptedValue): string {
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { Client } from '@cobranza-app/entities';
+import { Client } from '@cobranza-apps/entities';
 
 @Injectable()
 export class ClientDecryptionService {
@@ -315,7 +318,7 @@ Map `EncryptedValue` fields as `jsonb` (PostgreSQL) or `json` (MySQL) columns in
 
 ```typescript
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Client, EncryptedValue } from '@cobranza-app/entities';
+import { Client, EncryptedValue } from '@cobranza-apps/entities';
 
 @Entity()
 export class ClientEntity implements Client {
@@ -395,6 +398,7 @@ ENCRYPTION_KEY_BANK_DATA=<base64-or-hex-key>
 
 - [`security-encryption-policy.md`](security-encryption-policy.md) — Policy-level encryption rules and decisions
 - [`README.md`](../README.md) — Library overview and entity list
+
 ```
 
 ### 2.2 Content Notes
