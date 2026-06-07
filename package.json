@@ -1,13 +1,10 @@
 {
   "name": "@cobranza-apps/entities",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Central data model definitions for the Cobranza App system",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "clean": "rm -rf dist",

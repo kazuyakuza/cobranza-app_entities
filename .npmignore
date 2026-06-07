@@ -7,13 +7,17 @@ __tests__/
 
 # Development configs
 tsconfig.json
+tsconfig.build.json
 .prettierrc
+.prettierignore
 .eslintrc*
+.eslintignore
 .editorconfig
 .github/
 .vscode/
 .idea/
 *.config.js
+.nvmrc
 
 # Git
 .git/
@@ -36,9 +40,6 @@ coverage/
 .nyc_output/
 .DS_Store
 
-# Build output
-dist/
-
 # Documentation and examples
 docs/how-to-set-up-git.md
 docs/how-to-write-todo-files.md
@@ -59,6 +60,7 @@ azure-pipelines.yml
 .cache/
 
 # AI Agent
+.kilocodeignore
 .kilo/
 .agent/
 !.agent/project-info/data-model-brief.md
@@ -67,4 +69,4 @@ azure-pipelines.yml
 
 # Tokens and secrets
 .git-credentials
-.npmrc
+.npmrc*
