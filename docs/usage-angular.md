@@ -1,6 +1,6 @@
 # Angular Usage Examples
 
-Integration patterns for consuming `@cobranza-app/entities` in an Angular application. These examples go beyond the basic `fetch`-based service shown in the main README.
+Integration patterns for consuming `@cobranza-apps/entities` in an Angular application. These examples go beyond the basic `fetch`-based service shown in the main README.
 
 ## 1. Typed Angular Service with HttpClient
 
@@ -10,7 +10,7 @@ Use Angular's `HttpClient` (not `fetch`) for proper injection, interceptors, and
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Debt, Client, UUID, DebtStatus } from '@cobranza-app/entities';
+import { Debt, Client, UUID, DebtStatus } from '@cobranza-apps/entities';
 
 type CreateDebtPayload = Omit<Debt, 'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy' | 'debtCode'>;
 type UpdateDebtPayload = Partial<CreateDebtPayload>;
@@ -44,7 +44,7 @@ Inject the typed service into a component and leverage `async` pipe for subscrip
 ```typescript
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Debt, DebtStatus, UUID } from '@cobranza-app/entities';
+import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
 import { DebtApiService } from './debt-api.service';
 
 @Component({
@@ -77,7 +77,7 @@ export class DebtListComponent implements OnInit {
 Filter overdue debts in component logic using the enum:
 
 ```typescript
-import { Debt, DebtStatus } from '@cobranza-app/entities';
+import { Debt, DebtStatus } from '@cobranza-apps/entities';
 
 function filterOverdue(debts: Debt[]): Debt[] {
   return debts.filter(isDebtOverdue);
@@ -95,7 +95,7 @@ Build type-safe `FormGroup` controls mapped to library entity fields:
 ```typescript
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Client, UUID } from '@cobranza-app/entities';
+import { Client, UUID } from '@cobranza-apps/entities';
 
 type ClientFormPayload = Omit<Client, 'id' | 'createdAt' | 'updatedAt' | 'updatedBy' | 'clientCode'>;
 
@@ -146,7 +146,7 @@ The `ClientFormPayload` type derived via `Omit<Client, ...>` ensures you never s
 Use library enums to drive dropdowns, badge colors, and conditional UI logic:
 
 ```typescript
-import { DebtStatus } from '@cobranza-app/entities';
+import { DebtStatus } from '@cobranza-apps/entities';
 
 const debtStatusOptions = Object.values(DebtStatus).map((value) => ({
   label: value,
@@ -167,7 +167,7 @@ Template for a status dropdown:
 Badge color map for Angular Material:
 
 ```typescript
-import { DebtStatus } from '@cobranza-app/entities';
+import { DebtStatus } from '@cobranza-apps/entities';
 
 const statusColorMap: Record<DebtStatus, string> = {
   [DebtStatus.PENDING]: 'warn',
@@ -185,7 +185,7 @@ function getStatusColor(status: DebtStatus): string {
 Guard for button visibility:
 
 ```typescript
-import { DebtStatus } from '@cobranza-app/entities';
+import { DebtStatus } from '@cobranza-apps/entities';
 
 function canCancelDebt(status: DebtStatus): boolean {
   return status === DebtStatus.PENDING || status === DebtStatus.OVERDUE;
@@ -200,7 +200,7 @@ Type route parameters using the library's `UUID` alias instead of raw `string`:
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { UUID, Debt } from '@cobranza-app/entities';
+import { UUID, Debt } from '@cobranza-apps/entities';
 import { DebtApiService } from './debt-api.service';
 
 @Component({

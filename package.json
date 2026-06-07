@@ -1,5 +1,5 @@
 {
-  "name": "@cobranza-app/entities",
+  "name": "@cobranza-apps/entities",
   "version": "0.3.1",
   "description": "Central data model definitions for the Cobranza App system",
   "main": "./dist/index.js",
@@ -39,7 +39,7 @@
   "keywords": [
     "typescript",
     "entities",
-    "cobranza-app",
+    "cobranza-apps",
     "types",
     "interfaces",
     "enums"

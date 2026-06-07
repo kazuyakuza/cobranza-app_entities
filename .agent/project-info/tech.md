@@ -16,7 +16,7 @@
 
 ### package.json
 
-- **Name**: `@cobranza-app/entities`
+- **Name**: `@cobranza-apps/entities`
 - **Initial Version**: `0.0.1`
 - **Private**: `true` (will be set to `false` when ready to publish)
 - **Entry Point**: `src/index.ts` (source) → `dist/index.js` (compiled)
@@ -87,13 +87,13 @@ npm publish --access public
 Consuming projects install the library via npm:
 
 ```bash
-npm install @cobranza-app/entities
+npm install @cobranza-apps/entities
 ```
 
 Then import directly:
 
 ```typescript
-import { Client, Debt, DebtStatus, Currency } from '@cobranza-app/entities';
+import { Client, Debt, DebtStatus, Currency } from '@cobranza-apps/entities';
 ```
 
 The library exports only TypeScript interfaces, types, and enums — no runtime code, no side effects.

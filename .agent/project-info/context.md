@@ -9,7 +9,7 @@
 The repository currently contains:
 
 - Project info files: `brief.md`, `data-model-brief.md`, `entities-definition.csv`, `entities-relationship-diagram-overview.md`, `instructions.md`, `product.md`, `architecture.md`, `tech.md`, `context.md`.
-- Root `package.json` with name `@cobranza-app/entities` and version `0.0.1`.
+- Root `package.json` with name `@cobranza-apps/entities` and version `0.0.1`.
 - `src/` directory with only `.gitkeep` (no source code yet).
 - `tsconfig.json` configured with strict mode.
 - No `node_modules/` yet.

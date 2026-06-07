@@ -16,7 +16,7 @@ Review of `JSON-SCHEMA-USAGE.md` against implementation plan (`.kilo/plans/20260
 **Issue**: The import combines type-only exports (`Debt` interface, `UUID` type alias, `Decimal` type alias) with runtime value exports (`DebtStatus` enum, `Currency` enum):
 
 ```typescript
-import { Debt as DebtInterface, DebtStatus, Currency, UUID, Decimal } from '@cobranza-app/entities';
+import { Debt as DebtInterface, DebtStatus, Currency, UUID, Decimal } from '@cobranza-apps/entities';
 ```
 
 In projects using `verbatimModuleSyntax` or strict `isolatedModules`, TypeScript will emit an error for importing type-only symbols with a regular import statement.
@@ -24,8 +24,8 @@ In projects using `verbatimModuleSyntax` or strict `isolatedModules`, TypeScript
 **Fix**: Split into runtime and type-only imports:
 
 ```typescript
-import { DebtStatus, Currency } from '@cobranza-app/entities';
-import type { Debt as DebtInterface, UUID, Decimal } from '@cobranza-app/entities';
+import { DebtStatus, Currency } from '@cobranza-apps/entities';
+import type { Debt as DebtInterface, UUID, Decimal } from '@cobranza-apps/entities';
 ```
 
 ---
@@ -86,6 +86,7 @@ const group: Record<string, any> = {};
 **Issue**: The implementation plan specified a "Notes" column (5 columns: Domain | Entity | File Name | Schema Title | Notes). The document has only 4 columns, omitting Notes.
 
 **Fix**: Add a Notes column with relevant annotations. Suggested entries:
+
 - `CompanyUser` — "Does not extend BaseEntity"
 - `PaymentProof` — "Only has createdAt/createdBy, no updatedAt"
 - `PaymentMatch` — "Does not extend BaseEntity; has matchedAt instead of createdAt"

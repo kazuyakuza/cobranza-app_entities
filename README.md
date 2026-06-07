@@ -1,4 +1,4 @@
-# @cobranza-app/entities — Cobranza App Entities Library
+# @cobranza-apps/entities — Cobranza App Entities Library
 
 Central data model definitions (entities, enums, types) for the **Cobranza App** system — a multi-tenant SaaS for debt management and payment reconciliation. This package serves as the **Single Source of Truth (SSOT)** for all data models across the ecosystem.
 
@@ -46,7 +46,7 @@ Sensitive fields in this library are stored as `EncryptedValue` objects rather t
 ### EncryptedValue Type
 
 ```typescript
-import { EncryptedValue } from '@cobranza-app/entities';
+import { EncryptedValue } from '@cobranza-apps/entities';
 
 const encrypted: EncryptedValue = {
   encryptedData: 'U2FsdGVkX1+vupppZksvRf5pq5g5XjFRlipTg9+MvKLJmzJ...',
@@ -121,7 +121,7 @@ Each entity has companion DTOs for API layer communication. They are co-located 
 DTOs use TypeScript utility types (`Omit`, `Partial`, `extends`) for type-safe, zero-overhead abstractions. Import them alongside entities:
 
 ```typescript
-import { Client, CreateClientDto, UpdateClientDto } from '@cobranza-app/entities';
+import { Client, CreateClientDto, UpdateClientDto } from '@cobranza-apps/entities';
 
 // Creating a new client
 const payload: CreateClientDto = {
@@ -145,9 +145,9 @@ Each entity has a companion JSON Schema (Draft-07) file for runtime validation, 
 Schemas are located in `src/schemas/` and are exported individually and as a grouped `schemas` object:
 
 ```typescript
-import { debtSchema, clientSchema } from '@cobranza-app/entities';
+import { debtSchema, clientSchema } from '@cobranza-apps/entities';
 // or grouped access
-import { schemas } from '@cobranza-app/entities';
+import { schemas } from '@cobranza-apps/entities';
 const debtValidationSchema = schemas.debt.debt;
 ```
 
@@ -187,13 +187,13 @@ Zero runtime dependencies. The library exports only TypeScript interfaces, types
 Install the package via npm:
 
 ```bash
-npm install @cobranza-app/entities
+npm install @cobranza-apps/entities
 ```
 
 Import directly into your project:
 
 ```typescript
-import { Client, Debt, DebtStatus, Currency } from '@cobranza-app/entities';
+import { Client, Debt, DebtStatus, Currency } from '@cobranza-apps/entities';
 ```
 
 The library exports only TypeScript interfaces, types, and enums — no runtime code, no side effects.
@@ -201,7 +201,7 @@ The library exports only TypeScript interfaces, types, and enums — no runtime 
 ### Basic Import
 
 ```typescript
-import { Client, Debt, DebtStatus, Currency } from '@cobranza-app/entities';
+import { Client, Debt, DebtStatus, Currency } from '@cobranza-apps/entities';
 ```
 
 ### Extending an Entity in NestJS
@@ -210,7 +210,7 @@ Because the library exports plain interfaces, you can extend them with NestJS de
 
 ```typescript
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Debt as DebtBase } from '@cobranza-app/entities';
+import { Debt as DebtBase } from '@cobranza-apps/entities';
 
 @Entity()
 export class Debt implements DebtBase {
@@ -253,7 +253,7 @@ export class Debt implements DebtBase {
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Client, Debt } from '@cobranza-app/entities';
+import { Client, Debt } from '@cobranza-apps/entities';
 
 @Injectable({ providedIn: 'root' })
 export class DebtService {
@@ -276,7 +276,7 @@ export class DebtService {
 ### Working with Enums
 
 ```typescript
-import { DebtStatus, PaymentStatus, Currency } from '@cobranza-app/entities';
+import { DebtStatus, PaymentStatus, Currency } from '@cobranza-apps/entities';
 
 function canCancelDebt(status: DebtStatus): boolean {
   return status === DebtStatus.PENDING || status === DebtStatus.OVERDUE;

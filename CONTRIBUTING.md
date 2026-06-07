@@ -1,4 +1,4 @@
-# Contributing to @cobranza-app/entities
+# Contributing to @cobranza-apps/entities
 
 This document provides precise, step-by-step instructions for adding or modifying entities, enums, types, and interfaces in this library. It is designed to be consumed by both human developers and AI coding agents.
 
@@ -95,6 +95,7 @@ export interface NewEntityName extends BaseEntity {
 ```
 
 Rules:
+
 - Import types using `import type` when the import is used only as a type.
 - Extend `BaseEntity` if the entity requires audit fields.
 - Add `deletedAt?: Date` and `deletedBy?: string` only if the entity supports soft delete.
@@ -185,7 +186,7 @@ Execute the commands in [Build and Validation Workflow](#build-and-validation-wo
 - Consumer import path:
 
 ```typescript
-import { Client, Debt, DebtStatus } from '@cobranza-app/entities';
+import { Client, Debt, DebtStatus } from '@cobranza-apps/entities';
 ```
 
 ---

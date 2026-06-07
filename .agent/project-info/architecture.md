@@ -2,11 +2,11 @@
 
 ## System Overview
 
-The **Entities Library** (`@cobranza-app/entities`) is a standalone TypeScript package that serves as the Single Source of Truth for data models across the entire Cobranza App ecosystem. It is not a deployable service — it is a published npm package consumed by multiple projects.
+The **Entities Library** (`@cobranza-apps/entities`) is a standalone TypeScript package that serves as the Single Source of Truth for data models across the entire Cobranza App ecosystem. It is not a deployable service — it is a published npm package consumed by multiple projects.
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                  @cobranza-app/entities              │
+│                  @cobranza-apps/entities              │
 │              (This Repository — SSOT)               │
 │                                                     │
 │  ┌──────────┐  ┌──────────┐  ┌──────────────────┐  │
@@ -102,7 +102,7 @@ src/
 Every folder contains an `index.ts` barrel file that re-exports all public symbols. Consumers import from the root:
 
 ```typescript
-import { Client, DebtStatus } from '@cobranza-app/entities';
+import { Client, DebtStatus } from '@cobranza-apps/entities';
 ```
 
 ### Base Entity Interface
@@ -187,7 +187,7 @@ Every major entity includes a `companyId` field referencing `Company.id`. This d
 
 ### Import Path
 
-Consumer → `npm install @cobranza-app/entities` → barrel re-exports → individual entity/enum/type.
+Consumer → `npm install @cobranza-apps/entities` → barrel re-exports → individual entity/enum/type.
 
 ### Build Path
 
