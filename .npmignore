@@ -16,7 +16,7 @@ tsconfig.build.json
 .github/
 .vscode/
 .idea/
-*.config.js
+*.config.*
 .nvmrc
 
 # Git
@@ -62,7 +62,7 @@ azure-pipelines.yml
 # AI Agent
 .kilocodeignore
 .kilo/
-.agent/
+.agent/**/*
 !.agent/project-info/data-model-brief.md
 !.agent/project-info/entities-definition.csv
 !.agent/project-info/entities-relationship-diagram-overview.md
