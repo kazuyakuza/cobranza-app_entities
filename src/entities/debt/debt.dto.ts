@@ -17,4 +17,4 @@ export type UpdateDebtDto = Partial<CreateDebtDto>;
 /**
  * Full Debt shape returned by the API.
  */
-export interface DebtResponse extends Debt {}
+export type DebtResponse = Debt;

@@ -21,4 +21,4 @@ export type UpdateNotificationDto = Partial<CreateNotificationDto>;
  * Full Notification shape returned by the API.
  * Microservices may extend or remap this for decrypted responses.
  */
-export interface NotificationResponse extends Notification {}
+export type NotificationResponse = Notification;

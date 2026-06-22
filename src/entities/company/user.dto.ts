@@ -24,4 +24,4 @@ export type UpdateUserDto = Partial<CreateUserDto>;
  * Full User shape returned by the API.
  * Microservices may extend or remap this for decrypted responses.
  */
-export interface UserResponse extends User {}
+export type UserResponse = User;

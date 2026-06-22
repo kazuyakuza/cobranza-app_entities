@@ -24,4 +24,4 @@ export type UpdateDebtScheduleDto = Partial<CreateDebtScheduleDto>;
 /**
  * Full DebtSchedule shape returned by the API.
  */
-export interface DebtScheduleResponse extends DebtSchedule {}
+export type DebtScheduleResponse = DebtSchedule;

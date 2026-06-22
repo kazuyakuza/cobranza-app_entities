@@ -16,4 +16,4 @@ export type UpdatePaymentDto = Partial<CreatePaymentDto>;
 /**
  * Full Payment shape returned by the API.
  */
-export interface PaymentResponse extends Payment {}
+export type PaymentResponse = Payment;

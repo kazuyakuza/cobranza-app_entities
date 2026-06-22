@@ -16,4 +16,4 @@ export type UpdateCompanyMonthlySummaryDto = Partial<CreateCompanyMonthlySummary
 /**
  * Full CompanyMonthlySummary shape returned by the API.
  */
-export interface CompanyMonthlySummaryResponse extends CompanyMonthlySummary {}
+export type CompanyMonthlySummaryResponse = CompanyMonthlySummary;

@@ -20,4 +20,4 @@ export type UpdateBankTransactionDto = Partial<CreateBankTransactionDto>;
  * Full BankTransaction shape returned by the API.
  * Microservices may extend or remap this for decrypted responses.
  */
-export interface BankTransactionResponse extends BankTransaction {}
+export type BankTransactionResponse = BankTransaction;

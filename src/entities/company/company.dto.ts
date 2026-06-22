@@ -21,4 +21,4 @@ export type UpdateCompanyDto = Partial<CreateCompanyDto>;
  * Full Company shape returned by the API.
  * Microservices may extend or remap this for decrypted responses.
  */
-export interface CompanyResponse extends Company {}
+export type CompanyResponse = Company;

@@ -17,4 +17,4 @@ export type UpdateReceiptTemplateDto = Partial<CreateReceiptTemplateDto>;
 /**
  * Full ReceiptTemplate shape returned by the API.
  */
-export interface ReceiptTemplateResponse extends ReceiptTemplate {}
+export type ReceiptTemplateResponse = ReceiptTemplate;

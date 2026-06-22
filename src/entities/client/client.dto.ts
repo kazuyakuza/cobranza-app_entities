@@ -20,4 +20,4 @@ export type UpdateClientDto = Partial<CreateClientDto>;
  * Full Client shape returned by the API.
  * Microservices may extend or remap this for decrypted responses.
  */
-export interface ClientResponse extends Client {}
+export type ClientResponse = Client;

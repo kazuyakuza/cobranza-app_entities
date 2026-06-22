@@ -24,4 +24,4 @@ export type UpdateBankStatementDto = Partial<CreateBankStatementDto>;
  * Full BankStatement shape returned by the API.
  * Microservices may extend or remap this for decrypted responses.
  */
-export interface BankStatementResponse extends BankStatement {}
+export type BankStatementResponse = BankStatement;

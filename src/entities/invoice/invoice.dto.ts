@@ -16,4 +16,4 @@ export type UpdateInvoiceDto = Partial<CreateInvoiceDto>;
 /**
  * Full Invoice shape returned by the API.
  */
-export interface InvoiceResponse extends Invoice {}
+export type InvoiceResponse = Invoice;

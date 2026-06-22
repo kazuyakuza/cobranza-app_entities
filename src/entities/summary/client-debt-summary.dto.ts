@@ -17,4 +17,4 @@ export type UpdateClientDebtSummaryDto = Partial<CreateClientDebtSummaryDto>;
 /**
  * Full ClientDebtSummary shape returned by the API.
  */
-export interface ClientDebtSummaryResponse extends ClientDebtSummary {}
+export type ClientDebtSummaryResponse = ClientDebtSummary;

@@ -14,4 +14,4 @@ export type UpdatePaymentMatchDto = Partial<CreatePaymentMatchDto>;
 /**
  * Full PaymentMatch shape returned by the API.
  */
-export interface PaymentMatchResponse extends PaymentMatch {}
+export type PaymentMatchResponse = PaymentMatch;

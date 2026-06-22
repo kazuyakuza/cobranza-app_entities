@@ -21,4 +21,4 @@ export type UpdatePaymentProofDto = Partial<CreatePaymentProofDto>;
  * Full PaymentProof shape returned by the API.
  * Microservices may extend or remap this for decrypted responses.
  */
-export interface PaymentProofResponse extends PaymentProof {}
+export type PaymentProofResponse = PaymentProof;

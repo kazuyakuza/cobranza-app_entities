@@ -16,4 +16,4 @@ export type UpdateNotificationTemplateDto = Partial<CreateNotificationTemplateDt
 /**
  * Full NotificationTemplate shape returned by the API.
  */
-export interface NotificationTemplateResponse extends NotificationTemplate {}
+export type NotificationTemplateResponse = NotificationTemplate;

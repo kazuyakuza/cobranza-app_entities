@@ -13,4 +13,4 @@ export type UpdateCompanyPlanDto = Partial<CreateCompanyPlanDto>;
 /**
  * Full CompanyPlan shape returned by the API.
  */
-export interface CompanyPlanResponse extends CompanyPlan {}
+export type CompanyPlanResponse = CompanyPlan;

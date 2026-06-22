@@ -13,4 +13,4 @@ export type UpdateCompanyUserDto = Partial<CreateCompanyUserDto>;
 /**
  * Full CompanyUser shape returned by the API.
  */
-export interface CompanyUserResponse extends CompanyUser {}
+export type CompanyUserResponse = CompanyUser;

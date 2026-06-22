@@ -13,4 +13,4 @@ export type UpdateRoleDto = Partial<CreateRoleDto>;
 /**
  * Full Role shape returned by the API.
  */
-export interface RoleResponse extends Role {}
+export type RoleResponse = Role;
