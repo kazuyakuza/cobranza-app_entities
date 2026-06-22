@@ -1,6 +1,6 @@
 {
   "name": "@cobranza-apps/entities",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Central data model definitions for the Cobranza App system",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
