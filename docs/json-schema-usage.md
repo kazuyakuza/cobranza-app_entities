@@ -13,7 +13,7 @@ This guide covers:
 
 ### Prerequisites
 
-- Node.js >= 20
+- Node.js >= 22
 - TypeScript >= 5.x
 - `resolveJsonModule: true` in the consuming project's `tsconfig.json`
 

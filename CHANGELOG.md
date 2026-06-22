@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.4] - 2026-06-22
+
+### Changed
+
+- Bumped `prettier` from `^3.8.3` to `^3.8.4`.
+- Bumped `@types/node` from `^20.0.0` to `^22.0.0`.
+- Replaced `@typescript-eslint/eslint-plugin` + `@typescript-eslint/parser` (`^7.18.0`) with unified `typescript-eslint` `^8.61.1`.
+- Bumped `dpdm` from `^3.15.1` to `^4.2.0`.
+- Bumped `typescript` from `^5.4.0` to `^5.9.0`.
+- Migrated `eslint` from `^8.57.1` to `^9.39.4` with flat config (`eslint.config.mjs` replaces `.eslintrc.json` + `.eslintignore`).
+- Bumped `eslint-config-prettier` from `^9.1.2` to `^10.1.8`.
+- Bumped `vitest` from `^1.6.1` to `^4.1.9`.
+- Added `@eslint/js` `^9.39.4` for flat config recommended rules.
+- Raised `engines.node` from `>=20` to `>=22`.
+
+### Removed
+
+- `.eslintrc.json` and `.eslintignore` (replaced by `eslint.config.mjs`).
+
 ## [0.1.0] - 2026-06-05
 
 ### Added
@@ -30,5 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Strict TypeScript configuration (`strict: true`) with declaration file generation.
 - ESLint and Prettier setup for code quality.
 
-[Unreleased]: https://github.com/cobranza-apps/entities/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/cobranza-apps/entities/compare/v0.3.4...HEAD
+[0.3.4]: https://github.com/cobranza-apps/entities/compare/v0.1.0...v0.3.4
 [0.1.0]: https://github.com/cobranza-apps/entities/releases/tag/v0.1.0

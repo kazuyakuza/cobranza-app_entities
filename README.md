@@ -177,7 +177,7 @@ const debtValidationSchema = schemas.debt.debt;
 | Technology | Purpose |
 |------------|---------|
 | **TypeScript** >= 5.x | Strict-mode type definitions |
-| **Node.js** >= 20.x LTS | Build tooling runtime |
+| **Node.js** >= 22.x LTS | Build tooling runtime |
 | **npm** >= 10.x | Package manager and publish tool |
 
 Zero runtime dependencies. The library exports only TypeScript interfaces, types, and enums — no services, no side effects, no network calls.
