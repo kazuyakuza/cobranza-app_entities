@@ -10,7 +10,9 @@ It is **EXTREMELY IMPORTANT** that all AI agents follow this workflow step by st
 
 ### 1. Task Origin
 
-- **Chat**: If a task is shared in chat (unless user indicates a TODO file), create new TODO file in `.agent/todos/<YYYYMMDD>/<YYYYMMDD>-todo-<number>.md` with the request.
+- **Chat**: When user share in chat
+  - a TODO file, proceed.
+  - a task, create new TODO file in `.agent/todos/<YYYYMMDD>/<YYYYMMDD>-todo-<number>.md` with the request.
 - **TODO File**: Primary source is `.agent/todos` directory; process files in chronological/numerical order; skip files with `-DONE` suffix.
 - **TODO File Format**:
   - **Line Items**: Each line is a task.
@@ -23,10 +25,12 @@ It is **EXTREMELY IMPORTANT** that all AI agents follow this workflow step by st
   - **Other Formats**: Ask user for clarification.
 - **Plan Agent**:
   1. Receives requests, creates/reads TODO file.
-  2. Generates a global plan file for steps 2–6 where **each TODO task gets its own 4.1–4.6 cycle**; do not question this and add 4.x cycle per task. Include a pre-analysis when tasks include complex implementations and/or crucial tech decisions.
-  3. Do NOT call `plan_exit`. Do not question this and proceed in this way:
-      - auto-approve if request or TODO file includes "Don't request me to approve plans".
-      - or present the global plan to the user using the `question` tool: include path to global plan; and include options "Approve Global and task Plans", "Approve Global Plan", "Reject Global Plan", "Custom Response".
+  2. Generates a global plan file for steps 2–6 where **each TODO task gets its own 4.1–4.6 cycle**; do not question this and add 4.x cycle per task. Include a global and per task pre-analysis.
+  3. Do **NOT** call `plan_exit`. Do not question this and you **MUST** proceed in this way:
+      - auto-approve global plan **ONLY** if request or TODO file includes string: "Don't request me to approve plans".
+      - otherwise you **MUST** present the global plan to the user using the `question` tool, including global plan file path and options:
+        - "Approve Global and Tasks Plans": execute 4.1 step per task, but auto-approve the per task plan.
+        - "Approve Global Plan": execute 4.1 step per task, and present user per task plan for approval.
   4. After approval, delegates steps to sub-agents via `task` tool, including relevant context (TODO path, task description, plan path, constraints, etc) in each prompt.
 - **Ask Agent**: Handles user communication; called by Plan Agent via `task` tool.
 
@@ -61,7 +65,7 @@ Assigns to implementer sub-agent (`subagent_type: "implementer"`).
 - **Compliance Self-Check**: Before any 4.x sub-step, verify you are the Plan Agent orchestrating via `task` tool, the sub-step uses the correct `subagent_type`, and the task maps 1:1 to a single TODO item. If not, stop and re-read this workflow.
 - Process TODO tasks in file order. Before a new task, commit pending changes.
 - On failures: pause and invoke Ask Agent for user intervention.
-- **Context Passing**: when delegating via `task` tool, include relevant context (TODO path, task description, plan path, constraints, etc) in the prompt. Sub-agents read project context files independently.
+- **Context Passing**: on delegating via `task` tool, include relevant context (TODO file path, task description, plan path, constraints, global/task pre-analysis, etc) in the prompt. Sub-agents read project context files independently.
 
 #### Sub-Task Prompt Requirements
 
@@ -72,7 +76,7 @@ SUB-AGENT TASK — SINGLE DISCRETE STEP
 - You are executing exactly ONE step of a larger Critical Workflow plan.
 - Do ONLY what is described below. Do NOT execute subsequent steps.
 - Do NOT read or expand scope to the global plan for other tasks.
-- Prefer mcp tools, like vscode-mcp-server_* and Bifrost_*. Tools over bash for code operations. Reserve bash for git/npm/builds/tests.
+- Tools preference: .kilo/rules/tool-selection-priority.md.
 - Follow [Gitignore Compliance Rule](../.kilo/rules/gitignore-compliance.md)
 - The subagent_type parameter MUST match the type specified in the workflow step description for this step.
 - Signal completion with a clear summary: what was done, what was NOT done.
@@ -85,11 +89,11 @@ Assign to architect sub-agent (`subagent_type: "architect"`).
 
 - Identify task ambiguities; analyze project status; research required techs, frameworks, libs, dependencies, and/or APIs.
 - Generate implementation plan:
-  1. Think high-level approach to implement 1 TODO task, including steps for: git handling, code writing, console cmds (if required), test build (if exists), code review, unit test (if testing suite exists), docs updates.
-  2. Use approach to define extensive implementation plan with tiny, detailed steps; include clear file names/paths, structure, code snippets, terminal cmd details, etc.
+  1. Think high-level approach to implement the TODO task, including steps for: git handling, code writing, console cmds (if required), test build (if exists), code review, unit test (if testing suite exists), docs updates.
+  2. Use the high-level approach to define an extensive and complete implementation plan, composed by very tiny and very detailed steps; include clear file names/paths, structure, code snippets, terminal cmd details, etc.
   3. [CRITICAL] Save to `.kilo/plans/<YYYYMMDD>-<plan-name>.md`.
   4. Compare to original task; redo if incorrect. Otherwise, return plan path.
-- **Plan Agent presents plan to user for approval**.
+- **Plan Agent present plan to user for approval**.
   - NEVER call `plan_exit`. Instead, use `question` tool.
   - Auto-approve if request or TODO file includes "Don't request me to approve plans".
   - If feedback/rejection: re-do and re-present.
@@ -99,7 +103,7 @@ Assign to architect sub-agent (`subagent_type: "architect"`).
 
 Assign to implementer sub-agent (`subagent_type: "implementer"`).
 
-- Follow detailed steps from the implementation plan; check plan between steps.
+- Follow steps from the implementation plan; check plan between steps.
 - IMPORTANT: commit w/meaningful messages.
 
 #### 4.3. Code Review
@@ -120,7 +124,7 @@ Assign to docs-specialist sub-agent (`subagent_type: "docs-specialist"`).
 
 #### 4.5. Verification
 
-Assign to implementer sub-agent (`subagent_type: "implementer"`).
+Assign to architect sub-agent (`subagent_type: "architect"`).
 
 - Check implementation plan adherence; commit unstaged files.
 
@@ -182,7 +186,7 @@ Each entry is a separate `task` tool invocation with the appropriate `subagent_t
 - Task 1: 4.2 Implementation => implementer
 - Task 1: 4.3 Code Review => code-reviewer; 4.3-fix => implementer
 - Task 1: 4.4 Documentation => docs-specialist
-- Task 1: 4.5 Verification => implementer
+- Task 1: 4.5 Verification => architect
 - Task 1: 4.6 Task Completion => implementer
 - (repeat 4.1–4.6 for each remaining task)
 - Step 5: TODO File Completion => implementer
