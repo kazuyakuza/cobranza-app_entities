@@ -188,6 +188,21 @@ CANCELLED -> Voided/cancelled by the Company."
 ,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
 ,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
+,ReceiptTemplate,,,,Configurable template used to generate Receipts
+,,companyId,UUID,Yes,
+,,name,string,Yes,Internal template name
+,,subject,string,Yes,Subject (email or display)
+,,bodyHtml,string,Yes,"HTML with placeholders ({{client_name}} {{total_amount}} {{due_date}} etc.)"
+,,isDefault,boolean,Yes,Default: false
+,,active,boolean,Yes,Default: true
+,,id,UUID,Yes,PK
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
+,,,,,
 ,PaymentProof,,,,Proof of payment uploaded by the Client
 ,,companyId,UUID,Yes,
 ,,clientId,UUID,Yes,
@@ -236,6 +251,26 @@ REJECTED -> Rejected (manual or automatic)"
 ,,currency,Currency,Yes,
 ,,paymentDate,Date,Yes,Effective payment date
 ,,status,PaymentStatus,Yes,"`'CONFIRMED'` `'REFUNDED'`"
+,,notes,string,No,
+,,id,UUID,Yes,PK
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
+,,,,,
+,Receipt,,,,Receipt / Promissory note (formal representation visible to the client)
+,,companyId,UUID,Yes,
+,,clientId,UUID,Yes,
+,,debtId,UUID,Yes,
+,,receiptTemplateId,UUID,No,Template used to generate this receipt
+,,receiptNumber,string,Yes,Human-readable number
+,,issueDate,Date,Yes,
+,,dueDate,Date,Yes,
+,,totalAmount,Decimal,Yes,
+,,currency,Currency,Yes,"'ARS' 'USD'"
+,,status,InvoiceStatus,Yes,"'PENDING' 'PAID' 'PARTIALLY_PAID' 'OVERDUE' 'CANCELLED'"
 ,,notes,string,No,
 ,,id,UUID,Yes,PK
 ,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
