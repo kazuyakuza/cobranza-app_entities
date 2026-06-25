@@ -5,7 +5,7 @@ import type { CompanyMonthlySummary } from './company-monthly-summary.entity';
  */
 export type CreateCompanyMonthlySummaryDto = Omit<
   CompanyMonthlySummary,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
 >;
 
 /**

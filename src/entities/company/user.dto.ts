@@ -11,7 +11,16 @@ import type { User } from './user.entity';
  */
 export type CreateUserDto = Omit<
   User,
-  'id' | 'createdAt' | 'updatedAt' | 'passwordHash' | 'passwordUpdatedAt' | 'lastLoginAt'
+  | 'id'
+  | 'createdAt'
+  | 'createdBy'
+  | 'updatedAt'
+  | 'updatedBy'
+  | 'deletedAt'
+  | 'deletedBy'
+  | 'passwordHash'
+  | 'passwordUpdatedAt'
+  | 'lastLoginAt'
 >;
 
 /**

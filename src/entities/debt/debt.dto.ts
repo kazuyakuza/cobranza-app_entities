@@ -6,7 +6,7 @@ import type { Debt } from './debt.entity';
  */
 export type CreateDebtDto = Omit<
   Debt,
-  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
 >;
 
 /**

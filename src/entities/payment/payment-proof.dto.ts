@@ -9,7 +9,10 @@ import type { PaymentProof } from './payment-proof.entity';
  * that accept plain strings for fields that will be encrypted at the
  * service layer.
  */
-export type CreatePaymentProofDto = Omit<PaymentProof, 'id' | 'createdAt' | 'createdBy'>;
+export type CreatePaymentProofDto = Omit<
+  PaymentProof,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;
 
 /**
  * Fields allowed when updating a PaymentProof.

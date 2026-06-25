@@ -8,7 +8,10 @@ import type { BankTransaction } from './bank-transaction.entity';
  * that accept plain strings for fields that will be encrypted at the
  * service layer.
  */
-export type CreateBankTransactionDto = Omit<BankTransaction, 'id' | 'createdAt' | 'updatedAt'>;
+export type CreateBankTransactionDto = Omit<
+  BankTransaction,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;
 
 /**
  * Fields allowed when updating a BankTransaction.

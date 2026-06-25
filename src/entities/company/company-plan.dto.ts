@@ -3,7 +3,10 @@ import type { CompanyPlan } from './company-plan.entity';
 /**
  * Fields required to create a CompanyPlan.
  */
-export type CreateCompanyPlanDto = Omit<CompanyPlan, 'id' | 'createdAt' | 'updatedAt'>;
+export type CreateCompanyPlanDto = Omit<
+  CompanyPlan,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;
 
 /**
  * Fields allowed when updating a CompanyPlan.

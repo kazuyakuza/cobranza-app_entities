@@ -3,7 +3,10 @@ import type { Role } from './role.entity';
 /**
  * Fields required to create a Role.
  */
-export type CreateRoleDto = Omit<Role, 'id' | 'createdAt'>;
+export type CreateRoleDto = Omit<
+  Role,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;
 
 /**
  * Fields allowed when updating a Role.

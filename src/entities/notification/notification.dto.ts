@@ -2,14 +2,24 @@ import type { Notification } from './notification.entity';
 
 /**
  * Fields required to create a Notification.
- * Omits system-generated `sentAt`.
+ * Omits the system-managed BaseEntity audit fields and the system-generated `sentAt`.
  *
  * Note: This DTO represents the canonical entity shape after encryption.
  * Consuming microservices should define their own API-level input DTOs
  * that accept plain strings for fields that will be encrypted at the
  * service layer.
  */
-export type CreateNotificationDto = Omit<Notification, 'id' | 'createdAt' | 'sentAt'>;
+export type CreateNotificationDto = Omit<
+  Notification,
+  | 'id'
+  | 'createdAt'
+  | 'createdBy'
+  | 'updatedAt'
+  | 'updatedBy'
+  | 'deletedAt'
+  | 'deletedBy'
+  | 'sentAt'
+>;
 
 /**
  * Fields allowed when updating a Notification.

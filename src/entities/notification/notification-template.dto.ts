@@ -5,7 +5,7 @@ import type { NotificationTemplate } from './notification-template.entity';
  */
 export type CreateNotificationTemplateDto = Omit<
   NotificationTemplate,
-  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
 >;
 
 /**

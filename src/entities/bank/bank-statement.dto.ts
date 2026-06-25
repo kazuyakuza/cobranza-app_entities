@@ -11,7 +11,14 @@ import type { BankStatement } from './bank-statement.entity';
  */
 export type CreateBankStatementDto = Omit<
   BankStatement,
-  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy' | 'totalTransactions'
+  | 'id'
+  | 'createdAt'
+  | 'createdBy'
+  | 'updatedAt'
+  | 'updatedBy'
+  | 'deletedAt'
+  | 'deletedBy'
+  | 'totalTransactions'
 >;
 
 /**

@@ -8,7 +8,10 @@ import type { Client } from './client.entity';
  * that accept plain strings for fields that will be encrypted at the
  * service layer.
  */
-export type CreateClientDto = Omit<Client, 'id' | 'createdAt' | 'updatedAt' | 'updatedBy'>;
+export type CreateClientDto = Omit<
+  Client,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;
 
 /**
  * Fields allowed when updating a Client.

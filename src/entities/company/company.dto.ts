@@ -2,14 +2,17 @@ import type { Company } from './company.entity';
 
 /**
  * Fields required to create a new Company.
- * Omits system-generated `id`, `createdAt`, and `updatedAt`.
+ * Omits the system-managed BaseEntity audit fields (`id`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`).
  *
  * Note: This DTO represents the canonical entity shape after encryption.
  * Consuming microservices should define their own API-level input DTOs
  * that accept plain strings for fields that will be encrypted at the
  * service layer.
  */
-export type CreateCompanyDto = Omit<Company, 'id' | 'createdAt' | 'updatedAt'>;
+export type CreateCompanyDto = Omit<
+  Company,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;
 
 /**
  * Fields allowed when updating a Company.

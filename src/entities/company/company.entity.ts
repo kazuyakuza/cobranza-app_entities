@@ -7,7 +7,6 @@ import type { BaseEntity } from '../../interfaces/base-entity.interface';
  * SaaS client company (the main tenant).
  */
 export interface Company extends BaseEntity {
-
   /** Slug unique (`acme-servicios`, `lopez-contador`). Will be used in URLs. */
   friendlyUrl: string;
 

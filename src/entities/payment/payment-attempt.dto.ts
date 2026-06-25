@@ -6,7 +6,17 @@ import type { PaymentAttempt } from './payment-attempt.entity';
  */
 export type CreatePaymentAttemptDto = Omit<
   PaymentAttempt,
-  'id' | 'createdAt' | 'updatedAt' | 'reviewedBy' | 'reviewedAt' | 'amount' | 'currency'
+  | 'id'
+  | 'createdAt'
+  | 'createdBy'
+  | 'updatedAt'
+  | 'updatedBy'
+  | 'deletedAt'
+  | 'deletedBy'
+  | 'reviewedBy'
+  | 'reviewedAt'
+  | 'amount'
+  | 'currency'
 >;
 
 /**

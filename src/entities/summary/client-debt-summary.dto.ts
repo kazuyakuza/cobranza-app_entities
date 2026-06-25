@@ -6,7 +6,17 @@ import type { ClientDebtSummary } from './client-debt-summary.entity';
  */
 export type CreateClientDebtSummaryDto = Omit<
   ClientDebtSummary,
-  'id' | 'updatedAt' | 'lastPaymentId' | 'lastDebtId' | 'lastPaymentDate' | 'lastDebtDate'
+  | 'id'
+  | 'createdAt'
+  | 'createdBy'
+  | 'updatedAt'
+  | 'updatedBy'
+  | 'deletedAt'
+  | 'deletedBy'
+  | 'lastPaymentId'
+  | 'lastDebtId'
+  | 'lastPaymentDate'
+  | 'lastDebtDate'
 >;
 
 /**

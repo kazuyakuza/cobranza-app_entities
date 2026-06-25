@@ -5,7 +5,7 @@ import type { Payment } from './payment.entity';
  */
 export type CreatePaymentDto = Omit<
   Payment,
-  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
 >;
 
 /**

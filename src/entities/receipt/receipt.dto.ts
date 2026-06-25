@@ -5,7 +5,7 @@ import type { Receipt } from './receipt.entity';
  */
 export type CreateReceiptDto = Omit<
   Receipt,
-  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
 >;
 
 /**

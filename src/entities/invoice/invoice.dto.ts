@@ -5,7 +5,7 @@ import type { Invoice } from './invoice.entity';
  */
 export type CreateInvoiceDto = Omit<
   Invoice,
-  'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy'
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
 >;
 
 /**

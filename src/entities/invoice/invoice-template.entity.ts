@@ -1,7 +1,6 @@
 import type { UUID } from '../../types/common';
 import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
-
 /**
  * Template configurable by Company.
  */

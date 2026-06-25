@@ -3,7 +3,10 @@ import type { CompanyUser } from './company-user.entity';
 /**
  * Fields required to create a CompanyUser relationship.
  */
-export type CreateCompanyUserDto = Omit<CompanyUser, 'id' | 'createdAt' | 'updatedAt'>;
+export type CreateCompanyUserDto = Omit<
+  CompanyUser,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;
 
 /**
  * Fields allowed when updating a CompanyUser relationship.
