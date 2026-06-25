@@ -368,8 +368,8 @@ The JSON Schema type system maps from TypeScript as follows:
 | company | Company | `company.schema.json` | Company | |
 | company | CompanyPlan | `company-plan.schema.json` | CompanyPlan | |
 | company | User | `user.schema.json` | User | |
-| company | Role | `role.schema.json` | Role | Minimal schema: id, name, description, createdAt only |
-| company | CompanyUser | `company-user.schema.json` | CompanyUser | Does not extend BaseEntity |
+| company | Role | `role.schema.json` | Role | |
+| company | CompanyUser | `company-user.schema.json` | CompanyUser | |
 | client | Client | `client.schema.json` | Client | |
 | debt | Debt | `debt.schema.json` | Debt | |
 | debt | DebtSchedule | `debt-schedule.schema.json` | DebtSchedule | |
@@ -377,12 +377,12 @@ The JSON Schema type system maps from TypeScript as follows:
 | invoice | InvoiceTemplate | `invoice-template.schema.json` | InvoiceTemplate | |
 | receipt | Receipt | `receipt.schema.json` | Receipt | |
 | receipt | ReceiptTemplate | `receipt-template.schema.json` | ReceiptTemplate | |
-| payment | PaymentProof | `payment-proof.schema.json` | PaymentProof | Only has createdAt/createdBy, no updatedAt |
+| payment | PaymentProof | `payment-proof.schema.json` | PaymentProof | |
 | payment | PaymentAttempt | `payment-attempt.schema.json` | PaymentAttempt | |
 | payment | Payment | `payment.schema.json` | Payment | |
 | bank | BankStatement | `bank-statement.schema.json` | BankStatement | |
 | bank | BankTransaction | `bank-transaction.schema.json` | BankTransaction | |
-| bank | PaymentMatch | `payment-match.schema.json` | PaymentMatch | Does not extend BaseEntity; has matchedAt instead of createdAt |
+| bank | PaymentMatch | `payment-match.schema.json` | PaymentMatch | |
 | notification | Notification | `notification.schema.json` | Notification | |
 | notification | NotificationTemplate | `notification-template.schema.json` | NotificationTemplate | |
 | summary | ClientDebtSummary | `client-debt-summary.schema.json` | ClientDebtSummary | |
