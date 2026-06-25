@@ -107,24 +107,15 @@ import { Client, DebtStatus } from '@cobranza-apps/entities';
 
 ### Base Entity Interface
 
-All entities that require audit fields implement `BaseEntity`:
+All entities implement `BaseEntity`, which includes audit and soft-delete fields:
 
 ```typescript
 interface BaseEntity {
   id: string;          // UUID
   createdAt: Date;
-  updatedAt: Date;
-  createdBy?: string;  // UUID (User)
+  createdBy: string;   // UUID (User)
+  updatedAt?: Date;
   updatedBy?: string;  // UUID (User)
-}
-```
-
-### Soft-Deletable Interface
-
-Entities that support soft deletion implement `SoftDeletable`:
-
-```typescript
-interface SoftDeletable {
   deletedAt?: Date;
   deletedBy?: string;  // UUID (User)
 }

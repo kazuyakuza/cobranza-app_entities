@@ -31,8 +31,8 @@ Before changing any file, verify that your change respects these hard constraint
 | **Strict TypeScript** | `strict: true` is enabled. Do not use `any`. |
 | **String enums only** | All enums must be string enums (`export enum X { FOO = 'FOO' }`). Numeric enums are forbidden. |
 | **Multi-tenancy** | Every major entity must include `companyId: string`. |
-| **Audit fields** | Entities requiring audit must extend `BaseEntity` (includes `createdAt`, `updatedAt`, `createdBy?`, `updatedBy?`). |
-| **Soft delete** | Entities supporting soft delete must include `deletedAt?: Date` and `deletedBy?: string`. |
+| **Audit fields** | All entities extend `BaseEntity`, which includes `id`, `createdAt`, `createdBy` (required), `updatedAt?`, `updatedBy?`, `deletedAt?`, `deletedBy?`. |
+| **Soft delete** | Soft-delete fields (`deletedAt?`, `deletedBy?`) are part of `BaseEntity` and available on all entities. |
 | **Max file size** | Source files must not exceed 200 lines (excluding blanks and comments), ideally under 125 active lines. |
 | **Max method size** | Function/method bodies must not exceed 50 lines. |
 | **Max arguments** | Methods must have at most 2 parameters; use object types for more. |
@@ -97,8 +97,7 @@ export interface NewEntityName extends BaseEntity {
 Rules:
 
 - Import types using `import type` when the import is used only as a type.
-- Extend `BaseEntity` if the entity requires audit fields.
-- Add `deletedAt?: Date` and `deletedBy?: string` only if the entity supports soft delete.
+- Extend `BaseEntity` (all entities do — it provides `id`, `createdAt`, `createdBy`, `updatedAt?`, `updatedBy?`, `deletedAt?`, `deletedBy?`).
 - Use shared types from `src/types/common.ts` (`UUID`, `Money`, `Decimal`, `JsonData`, `DateString`) instead of raw primitives when applicable.
 - Use shared enums from `src/enums/` for enumerated fields.
 - Every property must have a JSDoc comment (see [JSDoc Requirements](#jsdoc-requirements)).

@@ -16,7 +16,7 @@ By centralizing entity definitions in one versioned TypeScript package, we ensur
 
 - **TypeScript First** — All definitions are in modern TypeScript with strict mode.
 - **Multi-Tenancy Ready** — Every major entity includes `companyId` for tenant isolation.
-- **Audit & Soft Delete** — Standard audit fields (`createdAt`, `updatedAt`, `deletedAt`, `createdBy`, `updatedBy`) built into every entity.
+- **Audit & Soft Delete** — Standard audit and soft-delete fields (`createdAt`, `createdBy`, `updatedAt?`, `updatedBy?`, `deletedAt?`, `deletedBy?`) built into `BaseEntity`.
 - **Extensibility** — Entities are designed to be extended in consuming projects without modifying the library.
 - **Consistency** — Clear naming conventions, detailed JSDoc comments, and organized barrel exports.
 
@@ -34,8 +34,7 @@ The library provides shared type aliases and base interfaces used across all dom
 
 | Interface | Description |
 |-----------|-------------|
-| `BaseEntity` | Base interface with `id`, `createdAt`, `updatedAt`, `createdBy?`, `updatedBy?` |
-| `SoftDeletable` | Mixin interface with `deletedAt?`, `deletedBy?` for soft-delete support |
+| `BaseEntity` | Base interface with `id`, `createdAt`, `createdBy` (required), `updatedAt?`, `updatedBy?`, `deletedAt?`, `deletedBy?` (optional) |
 | `EncryptedValue` | Container for encrypted fields (`encryptedData`, `keyName`, `algorithm?`, `version?`) |
 | `Location` | Geographic location (`address`, `city`, `state`, `country`, `zipCode`, `coordinates?`) |
 

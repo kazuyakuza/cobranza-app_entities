@@ -106,8 +106,8 @@ The library exports only TypeScript interfaces, types, and enums — no runtime 
 | **Zero runtime dependencies** | `dependencies` in `package.json` must remain empty. All tooling belongs in `devDependencies`. |
 | **Strict TypeScript** | `strict: true` must be enabled in `tsconfig.json`. No `any` types. |
 | **Multi-Tenancy types** | All major entity interfaces must include `companyId: string` for tenant isolation. |
-| **Audit fields** | Entities requiring audit must extend `BaseEntity` interface with `createdAt`, `updatedAt`, `createdBy`, `updatedBy`. |
-| **Soft delete** | Entities supporting soft delete must include `deletedAt?: Date` and `deletedBy?: string`. |
+| **Audit fields** | All entities extend `BaseEntity`, which includes `id`, `createdAt`, `createdBy` (required), `updatedAt?`, `updatedBy?`, `deletedAt?`, `deletedBy?`. |
+| **Soft delete** | Soft-delete fields (`deletedAt?`, `deletedBy?`) are part of `BaseEntity` and available on all entities. |
 | **Naming conventions** | Follow the naming table in [Architecture](./architecture.md#naming-conventions). |
 | **Max file size** | Source files must not exceed 200 lines (excluding blanks and comments), ideally under 125 active lines. |
 | **Max method size** | Function/method bodies must not exceed 50 lines. |
