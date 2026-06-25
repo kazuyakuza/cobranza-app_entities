@@ -19,6 +19,7 @@ describe('Debt entity', () => {
       issueDate: new Date('2026-01-01'),
       status: DebtStatus.PENDING,
       createdAt: new Date(),
+      createdBy: 'user-uuid',
       updatedAt: new Date(),
     } satisfies Debt;
 
@@ -39,6 +40,7 @@ describe('Payment entity', () => {
       paymentDate: new Date('2026-06-01'),
       status: PaymentStatus.CONFIRMED,
       createdAt: new Date(),
+      createdBy: 'user-uuid',
       updatedAt: new Date(),
     } satisfies Payment;
 

@@ -1,7 +1,8 @@
 import { UUID } from '../types/common';
 
 /**
- * Base entity interface that defines common fields shared by most domain entities.
+ * Base entity interface that defines common fields shared by all domain entities.
+ * Every entity supports soft deletion via `deletedAt` / `deletedBy`.
  */
 export interface BaseEntity {
   /** Primary key identifier. */
@@ -10,20 +11,15 @@ export interface BaseEntity {
   /** Timestamp when the entity was created. */
   createdAt: Date;
 
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
-
   /** UUID of the user who created this entity. */
-  createdBy?: UUID;
+  createdBy: UUID;
+
+  /** Timestamp when the entity was last updated. */
+  updatedAt?: Date;
 
   /** UUID of the user who last updated this entity. */
   updatedBy?: UUID;
-}
 
-/**
- * Mixin interface for entities that support soft deletion.
- */
-export interface SoftDeletable {
   /** Timestamp when the entity was soft-deleted. */
   deletedAt?: Date;
 

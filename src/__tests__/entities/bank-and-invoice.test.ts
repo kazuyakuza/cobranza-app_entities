@@ -18,6 +18,7 @@ describe('BankStatement entity', () => {
       fileName: 'stmt.csv',
       status: BankStatementStatus.UPLOADED,
       createdAt: new Date(),
+      createdBy: 'user-uuid',
       updatedAt: new Date(),
     } satisfies BankStatement;
 
@@ -40,6 +41,7 @@ describe('Invoice entity', () => {
       currency: Currency.ARS,
       status: InvoiceStatus.PENDING,
       createdAt: new Date(),
+      createdBy: 'user-uuid',
       updatedAt: new Date(),
     } satisfies Invoice;
 

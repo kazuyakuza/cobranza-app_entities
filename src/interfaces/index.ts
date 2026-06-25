@@ -1,1 +1,1 @@
-export { BaseEntity, SoftDeletable } from './base-entity.interface';
+export { BaseEntity } from './base-entity.interface';
