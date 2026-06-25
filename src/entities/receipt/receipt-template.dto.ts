@@ -2,7 +2,7 @@ import type { ReceiptTemplate } from './receipt-template.entity';
 
 /**
  * Fields required to create a ReceiptTemplate.
- * Omits `BaseEntity` and `SoftDeletable` audit fields.
+ * Omits `BaseEntity` audit fields.
  */
 export type CreateReceiptTemplateDto = Omit<
   ReceiptTemplate,

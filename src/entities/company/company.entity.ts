@@ -1,14 +1,12 @@
-import type { UUID } from '../../types/common';
 import type { JsonData } from '../../types/common';
 import type { Location } from '../../types/location';
 import type { EncryptedValue } from '../../types/encrypted';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * SaaS client company (the main tenant).
  */
-export interface Company {
-  /** Primary key identifier. */
-  id: UUID;
+export interface Company extends BaseEntity {
 
   /** Slug unique (`acme-servicios`, `lopez-contador`). Will be used in URLs. */
   friendlyUrl: string;
@@ -45,10 +43,4 @@ export interface Company {
 
   /** General company settings. */
   settings?: JsonData;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
 }

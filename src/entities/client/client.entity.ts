@@ -2,14 +2,12 @@ import type { UUID } from '../../types/common';
 import type { JsonData } from '../../types/common';
 import type { Location } from '../../types/location';
 import type { EncryptedValue } from '../../types/encrypted';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * End client / debtor of a Company.
  */
-export interface Client {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface Client extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 
@@ -45,13 +43,4 @@ export interface Client {
 
   /** Internal notes. */
   notes?: string;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
-
-  /** ID of the User who made the last modification. */
-  updatedBy?: UUID;
 }

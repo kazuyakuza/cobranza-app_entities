@@ -1,14 +1,12 @@
 import type { UUID } from '../../types/common';
 import type { Decimal } from '../../types/common';
 import { Currency } from '../../enums/currency.enum';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Pricing configuration (% commission, etc.).
  */
-export interface CompanyPlan {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface CompanyPlan extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 
@@ -35,10 +33,4 @@ export interface CompanyPlan {
 
   /** Additional notes. */
   notes?: string;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
 }

@@ -1,14 +1,12 @@
 import type { UUID } from '../../types/common';
 import type { Decimal } from '../../types/common';
 import { MatchMethod } from '../../enums/match-method.enum';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Record of successful matching.
  */
-export interface PaymentMatch {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface PaymentMatch extends BaseEntity {
   /** Reference to the payment attempt. */
   paymentAttemptId: UUID;
 

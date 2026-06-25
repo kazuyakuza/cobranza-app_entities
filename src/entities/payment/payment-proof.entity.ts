@@ -1,13 +1,11 @@
 import type { UUID } from '../../types/common';
 import type { EncryptedValue } from '../../types/encrypted';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Proof of payment uploaded by the Client.
  */
-export interface PaymentProof {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface PaymentProof extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 
@@ -25,10 +23,4 @@ export interface PaymentProof {
 
   /** Additional notes entered by the client when uploading. */
   notes?: EncryptedValue | null;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** ID of the Client or System who created this proof. */
-  createdBy?: UUID;
 }

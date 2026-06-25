@@ -11,6 +11,7 @@ describe('Company entity', () => {
       contact: { encryptedData: 'encrypted-contact', keyName: 'test-key' },
       active: true,
       createdAt: new Date(),
+      createdBy: 'user-uuid',
       updatedAt: new Date(),
     } satisfies Company;
 
@@ -28,6 +29,7 @@ describe('Client entity', () => {
       fullName: { encryptedData: 'encrypted-fullName', keyName: 'test-key' },
       active: true,
       createdAt: new Date(),
+      createdBy: 'user-uuid',
       updatedAt: new Date(),
     } satisfies Client;
 

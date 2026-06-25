@@ -3,14 +3,12 @@ import type { Decimal } from '../../types/common';
 import { Currency } from '../../enums/currency.enum';
 import { BankTransactionStatus } from '../../enums/bank-transaction-status.enum';
 import type { EncryptedValue } from '../../types/encrypted';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Parsed transactions from the statement.
  */
-export interface BankTransaction {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface BankTransaction extends BaseEntity {
   /** Reference to the bank statement. */
   bankStatementId: UUID;
 
@@ -43,10 +41,4 @@ export interface BankTransaction {
 
   /** Status of the transaction. */
   status: BankTransactionStatus;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
 }

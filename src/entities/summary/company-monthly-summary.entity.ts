@@ -1,14 +1,12 @@
 import type { UUID } from '../../types/common';
 import type { Decimal } from '../../types/common';
 import { Currency } from '../../enums/currency.enum';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * For SaaS billing.
  */
-export interface CompanyMonthlySummary {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface CompanyMonthlySummary extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 
@@ -29,10 +27,4 @@ export interface CompanyMonthlySummary {
 
   /** `'ARS'` or `'USD'`. */
   currency: Currency;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
 }

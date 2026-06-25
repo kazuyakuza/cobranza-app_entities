@@ -3,14 +3,12 @@ import { NotificationType } from '../../enums/notification-type.enum';
 import { NotificationChannel } from '../../enums/notification-channel.enum';
 import { NotificationStatus } from '../../enums/notification-status.enum';
 import type { EncryptedValue } from '../../types/encrypted';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Notification sent to a user or client.
  */
-export interface Notification {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface Notification extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 
@@ -46,7 +44,4 @@ export interface Notification {
 
   /** Timestamp when the notification was sent. */
   sentAt?: Date;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
 }

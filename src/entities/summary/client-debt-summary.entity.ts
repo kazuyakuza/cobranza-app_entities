@@ -2,14 +2,12 @@ import type { UUID } from '../../types/common';
 import type { Decimal } from '../../types/common';
 import { Currency } from '../../enums/currency.enum';
 import { ClientDebtSummaryStatus } from '../../enums/client-debt-summary-status.enum';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Current balance, total debt, etc. (can be a materialized view).
  */
-export interface ClientDebtSummary {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface ClientDebtSummary extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 
@@ -42,7 +40,4 @@ export interface ClientDebtSummary {
 
   /** Status of the summary. */
   status: ClientDebtSummaryStatus;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
 }

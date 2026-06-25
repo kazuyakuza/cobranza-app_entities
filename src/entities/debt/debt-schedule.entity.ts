@@ -4,12 +4,12 @@ import { Currency } from '../../enums/currency.enum';
 import { DebtScheduleFrequency } from '../../enums/debt-schedule-frequency.enum';
 import { CalculationType } from '../../enums/calculation-type.enum';
 import type { BaseEntity } from '../../interfaces/base-entity.interface';
-import type { SoftDeletable } from '../../interfaces/base-entity.interface';
+
 
 /**
  * Recurring / scheduled debt.
  */
-export interface DebtSchedule extends BaseEntity, SoftDeletable {
+export interface DebtSchedule extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 

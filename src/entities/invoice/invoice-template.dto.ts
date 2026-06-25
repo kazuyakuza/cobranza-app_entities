@@ -2,7 +2,7 @@ import type { InvoiceTemplate } from './invoice-template.entity';
 
 /**
  * Fields required to create an InvoiceTemplate.
- * Omits `BaseEntity` and `SoftDeletable` audit fields.
+ * Omits `BaseEntity` audit fields.
  */
 export type CreateInvoiceTemplateDto = Omit<
   InvoiceTemplate,

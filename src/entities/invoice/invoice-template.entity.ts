@@ -1,11 +1,11 @@
 import type { UUID } from '../../types/common';
 import type { BaseEntity } from '../../interfaces/base-entity.interface';
-import type { SoftDeletable } from '../../interfaces/base-entity.interface';
+
 
 /**
  * Template configurable by Company.
  */
-export interface InvoiceTemplate extends BaseEntity, SoftDeletable {
+export interface InvoiceTemplate extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 

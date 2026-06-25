@@ -1,13 +1,10 @@
-import type { UUID } from '../../types/common';
 import type { EncryptedValue } from '../../types/encrypted';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Any person with an account in the system (Company users + future End Users with login).
  */
-export interface User {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface User extends BaseEntity {
   /** Globally unique email. */
   email: string;
 
@@ -31,10 +28,4 @@ export interface User {
 
   /** Timestamp of the last login. */
   lastLoginAt?: Date;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
 }

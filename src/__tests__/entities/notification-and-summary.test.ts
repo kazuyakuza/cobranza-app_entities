@@ -19,6 +19,7 @@ describe('Notification entity', () => {
       channel: NotificationChannel.EMAIL,
       status: NotificationStatus.SENT,
       createdAt: new Date(),
+      createdBy: 'user-uuid',
     } satisfies Notification;
 
     expect(notification.channel).toBe(NotificationChannel.EMAIL);
@@ -37,6 +38,8 @@ describe('ClientDebtSummary entity', () => {
       balance: '3000.00',
       currency: Currency.ARS,
       status: ClientDebtSummaryStatus.NORMAL,
+      createdAt: new Date(),
+      createdBy: 'user-uuid',
       updatedAt: new Date(),
     } satisfies ClientDebtSummary;
 

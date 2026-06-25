@@ -1,12 +1,10 @@
 import type { UUID } from '../../types/common';
+import type { BaseEntity } from '../../interfaces/base-entity.interface';
 
 /**
  * Many-to-many relationship between User and Company + specific role within the company.
  */
-export interface CompanyUser {
-  /** Primary key identifier. */
-  id: UUID;
-
+export interface CompanyUser extends BaseEntity {
   /** Reference to the company. */
   companyId: UUID;
 
@@ -18,10 +16,4 @@ export interface CompanyUser {
 
   /** Whether the relationship is active. Default: true. */
   active: boolean;
-
-  /** Timestamp when the entity was created. */
-  createdAt: Date;
-
-  /** Timestamp when the entity was last updated. */
-  updatedAt: Date;
 }
