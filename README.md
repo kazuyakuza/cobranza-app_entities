@@ -113,7 +113,7 @@ Each entity has companion DTOs for API layer communication. They are co-located 
 
 | DTO Type | Purpose |
 |----------|---------|
-| `CreateXxxDto` | Required fields for entity creation (omits `id`, audit timestamps, and system-managed fields) |
+| `CreateXxxDto` | Required fields for entity creation (omits all `BaseEntity` fields: `id`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`) |
 | `UpdateXxxDto` | Optional fields for entity updates (`Partial<CreateXxxDto>`) |
 | `XxxResponse` | Full entity shape returned by API responses (extends the entity interface) |
 
@@ -252,7 +252,7 @@ export class Debt implements DebtBase {
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Client, Debt } from '@cobranza-apps/entities';
+import { Client, Debt, CreateClientDto } from '@cobranza-apps/entities';
 
 @Injectable({ providedIn: 'root' })
 export class DebtService {
@@ -261,7 +261,7 @@ export class DebtService {
     return response.json();
   }
 
-  async createClient(payload: Omit<Client, 'id' | 'createdAt' | 'updatedAt'>): Promise<Client> {
+  async createClient(payload: CreateClientDto): Promise<Client> {
     const response = await fetch('/api/clients', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
