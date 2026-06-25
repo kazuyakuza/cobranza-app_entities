@@ -1,311 +1,377 @@
 ,entity,property,type,required,comments
 ,Company,,,,SaaS client company (the main tenant)
+,,friendlyUrl,string,Yes,Slug unique (`acme-servicios` `lopez-contador`). Will be used in URLs
+,,name,string,Yes,Trade name / brand name
+,,businessName,EncryptedValue | null,No,Legal business name
+,,taxId,EncryptedValue | null,No,"Tax ID (e.g. CUIT RUC etc.)"
+,,taxIdHash,string,No,Hash of tax_id for indexed search/lookup
+,,contact,EncryptedValue | null,No,Optional (Task 5). Email or contact info. EncryptedValue or null.
+,,contactHash,string,No,Hash of contact for indexed search/lookup
+,,phone,EncryptedValue | null,No,Contact phone
+,,location,Location,No,Physical location of the company
+,,logoUrl,string,No,Logo URL
+,,active,boolean,Yes,Default: true
+,,settings,JsonData,No,General company settings
 ,,id,UUID,Yes,PK
-,,friendly_url,String,Yes,"Slug unique (`acme-servicios`, `lopez-contador`). Will be used in URLs"
-,,name,String,Yes,Trade name / brand name
-,,business_name,JSONB,No,Legal business name. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,tax_id,JSONB,No,Tax ID (e.g., CUIT, RUC, etc.). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,tax_id_hash,String,No,Hash of tax_id for indexed search/lookup
-,,contact,JSONB,No,Email or contact information to be displayed to the end client. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,contact_hash,String,No,Hash of contact for indexed search/lookup
-,,phone,JSONB,No,Contact phone. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,location,JSONB,No,Physical location { address: { addressLine1: string; addressLine2?: string; }; city?: string; state?: string; zipCode?: string; country?: string; }
-,,logo_url,String,No,Logo URL
-,,active,Boolean,Yes,Default: true
-,,settings,JSONB,No,General company settings
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
-,CompanyPlan,,,,"Pricing configuration (% commission, etc.)"
+,CompanyPlan,,,,Pricing configuration (% commission etc.)
+,,companyId,UUID,Yes,
+,,commissionRate,Decimal,Yes,E.g. 0.085 = 8.5% (total)
+,,saasPercentage,Decimal,Yes,Percentage retained by the platform
+,,intermediaryPercentage,Decimal,No,If there is an intermediary
+,,currency,Currency,Yes,"`'ARS'` `'USD'`"
+,,active,boolean,Yes,Default: true
+,,validFrom,Date,Yes,
+,,validUntil,Date,No,"Null = undefined (no end date)"
+,,notes,string,No,
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,commission_rate,"Decimal(5,4)",Yes,E.g., 0.085 = 8.5% (total)
-,,saas_percentage,"Decimal(5,4)",Yes,Percentage retained by the platform
-,,intermediary_percentage,"Decimal(5,4)",No,If there is an intermediary
-,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
-,,active,Boolean,Yes,Default: true
-,,valid_from,Date,Yes,
-,,valid_until,Date,No,Null = undefined (no end date)
-,,notes,Text,No,
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,User,,,,Any person with an account in the system (Company users + future End Users with login)
+,,email,string,Yes,Globally unique
+,,passwordHash,string,No,Hashed password
+,,passwordUpdatedAt,Date,No,Date of last password change
+,,fullName,EncryptedValue | null,No,"Optional (can be completed later). EncryptedValue or null."
+,,phone,EncryptedValue | null,No,"Optional phone number. EncryptedValue or null."
+,,active,boolean,Yes,Default: true
+,,emailVerified,boolean,Yes,Default: false
+,,lastLoginAt,Date,No,Timestamp of last login
 ,,id,UUID,Yes,PK
-,,email,String,Yes,Globally unique
-,,password_hash,String,No,
-,,password_updated_at,Timestamp,No,Date of last password change
-,,full_name,JSONB,No,Optional (can be completed later). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,phone,JSONB,No,EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,active,Boolean,Yes,Default: true
-,,email_verified,Boolean,Yes,Default: false
-,,last_login_at,Timestamp,No,
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
-,Role,,,,"Roles (company_admin, company_operator, end_user, super_admin, etc.)"
+,Role,,,,Roles (company_admin company_operator end_user super_admin etc.)
+,,name,string,Yes,"E.g. `company_admin` `company_operator` `end_user` `super_admin`"
+,,description,string,No,Role description
 ,,id,UUID,Yes,PK
-,,name,String,Yes,"E.g., `company_admin`, `company_operator`, `end_user`, `super_admin`"
-,,description,String,No,
-,,created_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,CompanyUser,,,,Many-to-many relationship between User and Company + specific role within the company
+,,companyId,UUID,Yes,
+,,userId,UUID,Yes,
+,,roleId,UUID,Yes,
+,,active,boolean,Yes,Default: true
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,user_id,UUID (FK),Yes,
-,,role_id,UUID (FK),Yes,
-,,active,Boolean,Yes,Default: true
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,Client,,,,End client / debtor of a Company
+,,companyId,UUID,Yes,
+,,clientCode,string,Yes,"Unique code per Company (e.g. `CLI-00042`)"
+,,fullName,EncryptedValue | null,No,Optional (Task 5). EncryptedValue or null.
+,,email,EncryptedValue | null,No,"Highly recommended. EncryptedValue or null."
+,,emailHash,string,No,Hash of email for indexed search/lookup
+,,phone,EncryptedValue | null,No,"Optional phone number. EncryptedValue or null."
+,,location,Location,No,Physical location of the client
+,,taxId,EncryptedValue | null,No,"National ID / Tax ID of the end client (e.g. DNI CUIT). EncryptedValue or null."
+,,taxIdHash,string,No,Hash of tax_id for indexed search/lookup
+,,extraData,JsonData,No,"Custom fields (e.g. `{ ""dni"": ""..."" ""category"": ""..."" }`)"
+,,active,boolean,Yes,Default: true
+,,notes,string,No,Internal notes
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_code,String,Yes,Unique code per Company (e.g., `CLI-00042`)
-,,full_name,JSONB,No,Full name of the debtor. Optional; may be completed later. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,email,JSONB,No,Highly recommended. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,email_hash,String,No,Hash of email for indexed search/lookup
-,,phone,JSONB,No,EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,location,JSONB,No,{ address: { addressLine1: string; addressLine2?: string; }; city?: string; state?: string; zipCode?: string; country?: string; }
-,,tax_id,JSONB,No,National ID / Tax ID of the end client (e.g., DNI, CUIT). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,tax_id_hash,String,No,Hash of tax_id for indexed search/lookup
-,,extra_data,JSONB,No,"Custom fields (e.g., `{ ""dni"": ""..."", ""category"": ""..."" }`)"
-,,active,Boolean,Yes,Default: true
-,,notes,Text,No,Internal notes
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,updated_by,UUID,No,ID of the User who made the last modification
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,Debt,,,,Individual debt
-,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_id,UUID (FK),Yes,
-,,debt_schedule_id,UUID (FK),No,Reference if the debt was automatically generated from a schedule
-,,debt_code,String,Yes,Human-readable code (e.g., `DEUD-2026-0042`)
-,,description,String,No,Debt concept / description. Optional.
-,,total_amount,"Decimal(12,2)",Yes,Original amount
-,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
-,,due_date,Date,Yes,Due date
-,,issue_date,Date,Yes,Issue date
-,,daily_interest_rate,"Decimal(5,4)",No,Daily interest rate after due date (e.g., 0.0050 = 0.5% daily). Null = no interest
-,,status,Enum,Yes,"PENDING -> Active debt, not yet overdue.
+,,companyId,UUID,Yes,
+,,clientId,UUID,Yes,
+,,debtScheduleId,UUID,No,Reference if the debt was automatically generated from a schedule
+,,debtCode,string,Yes,"Human-readable code (e.g. `DEUD-2026-0042`)"
+,,description,string,No,Optional (Task 5). Debt concept / description.
+,,totalAmount,Decimal,Yes,Original amount
+,,currency,Currency,Yes,"`'ARS'` `'USD'`"
+,,dueDate,Date,Yes,Due date
+,,issueDate,Date,Yes,Issue date
+,,dailyInterestRate,Decimal,No,"Daily interest rate after due date (e.g. 0.0050 = 0.5% daily). Null = no interest"
+,,status,DebtStatus,Yes,"PENDING -> Active debt not yet overdue.
 OVERDUE -> Overdue and unpaid (daily interest may be applied).
 PARTIALLY_PAID -> Partially paid.
 PAID -> Fully paid.
 CANCELLED -> Voided/cancelled by the Company."
-,,notes,Text,No,
-,,extra_data,JSONB,No,
-,,invoice_template_id,UUID (FK),No,Invoice/receipt template to use
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,
-,,updated_by,UUID,No,
+,,notes,string,No,
+,,extraData,JsonData,No,
+,,invoiceTemplateId,UUID,No,Invoice/receipt template to use
+,,id,UUID,Yes,PK
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,DebtSchedule,,,,Recurring / scheduled debt
+,,companyId,UUID,Yes,
+,,groupId,UUID,No,UUID to group multiple DebtSchedules created in bulk (allows group editing)
+,,clientId,UUID,Yes,
+,,name,string,Yes,Name of the recurrence
+,,description,string,No,
+,,amount,Decimal,Yes,Base amount
+,,currency,Currency,Yes,"`'ARS'` `'USD'`"
+,,frequency,DebtScheduleFrequency,Yes,"`'WEEKLY'` `'MONTHLY'` `'BIMONTHLY'` `'QUARTERLY'` `'YEARLY'`"
+,,dayOfMonth,string,Yes,"E.g. `15` -> day 15 of the month. `2L` -> 2nd Monday `4V` -> 4th Friday `1D` -> 1st Sunday etc."
+,,calculationType,CalculationType,Yes,"`'FIXED'` `'FORMULA'`"
+,,calculationFormula,string,No,For dynamic calculations
+,,dailyInterestRate,Decimal,No,Daily rate after due date (inheritable by generated debts)
+,,active,boolean,Yes,Default: true
+,,startDate,Date,Yes,
+,,endDate,Date,No,"Null = undefined (no end date)"
+,,lastGeneratedDate,Date,No,
+,,invoiceTemplateId,UUID,No,Default template for generated debts
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,group_id,UUID,No,UUID to group multiple DebtSchedules created in bulk (allows group editing)
-,,client_id,UUID (FK),Yes,
-,,name,String,Yes,Name of the recurrence
-,,description,String,No,
-,,amount,"Decimal(12,2)",Yes,Base amount
-,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
-,,frequency,Enum,Yes,"`'WEEKLY'`, `'MONTHLY'`, `'BIMONTHLY'`, `'QUARTERLY'`, `'YEARLY'`"
-,,day_of_month,String,Yes,"E.g., `15` → day 15 of the month.<br>E.g., `2L` → 2nd Monday, `4V` → 4th Friday, `1D` → 1st Sunday, etc."
-,,calculation_type,Enum,Yes,"`'FIXED'`, `'FORMULA'`"
-,,calculation_formula,String,No,For dynamic calculations
-,,daily_interest_rate,"Decimal(5,4)",No,Daily rate after due date (inheritable by generated debts)
-,,active,Boolean,Yes,Default: true
-,,start_date,Date,Yes,
-,,end_date,Date,No,Null = undefined (no end date)
-,,last_generated_date,Date,No,
-,,invoice_template_id,UUID (FK),No,Default template for generated debts
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,
-,,updated_by,UUID,No,
-,,deleted_at,Timestamp,No,
-,,deleted_by,UUID,No,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,Invoice,,,,Invoice / Promissory note (formal representation visible to the client)
+,,companyId,UUID,Yes,
+,,clientId,UUID,Yes,
+,,debtId,UUID,Yes,
+,,invoiceTemplateId,UUID,No,Template used to generate this invoice
+,,invoiceNumber,string,Yes,Human-readable number
+,,issueDate,Date,Yes,
+,,dueDate,Date,Yes,
+,,totalAmount,Decimal,Yes,
+,,currency,Currency,Yes,
+,,status,InvoiceStatus,Yes,"`'PENDING'` `'PAID'` `'PARTIALLY_PAID'` `'OVERDUE'` `'CANCELLED'`"
+,,notes,string,No,
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_id,UUID (FK),Yes,
-,,debt_id,UUID (FK),Yes,
-,,invoice_template_id,UUID (FK),No,Template used to generate this invoice
-,,invoice_number,String,Yes,Human-readable number
-,,issue_date,Date,Yes,
-,,due_date,Date,Yes,
-,,total_amount,"Decimal(12,2)",Yes,
-,,currency,Enum,Yes,
-,,status,Enum,Yes,"`'PENDING'`, `'PAID'`, `'PARTIALLY_PAID'`, `'OVERDUE'`, `'CANCELLED'`"
-,,notes,Text,No,
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,
-,,updated_by,UUID,No,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,InvoiceTemplate,,,,Template configurable by Company
+,,companyId,UUID,Yes,
+,,name,string,Yes,Internal template name
+,,subject,string,Yes,Subject (email or display)
+,,bodyHtml,string,Yes,"HTML with placeholders (`{{client_name}}` `{{total_amount}}` `{{due_date}}` etc.)"
+,,isDefault,boolean,Yes,Default: false
+,,active,boolean,Yes,Default: true
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,name,String,Yes,Internal template name
-,,subject,String,Yes,Subject (email or display)
-,,body_html,Text,Yes,"HTML with placeholders (`{{client_name}}`, `{{total_amount}}`, `{{due_date}}`, etc.)"
-,,is_default,Boolean,Yes,Default: false
-,,active,Boolean,Yes,Default: true
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,
-,,updated_by,UUID,No,
-,,deleted_at,Timestamp,No,
-,,deleted_by,UUID,No,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,PaymentProof,,,,Proof of payment uploaded by the Client
+,,companyId,UUID,Yes,
+,,clientId,UUID,Yes,
+,,fileUrl,string,Yes,URL of the uploaded proof
+,,fileName,string,Yes,Original file name
+,,fileType,string,No,"MIME type (image/jpeg application/pdf etc.)"
+,,notes,EncryptedValue | null,No,"Additional notes entered by the client when uploading. EncryptedValue or null."
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_id,UUID (FK),Yes,
-,,file_url,String,Yes,URL of the uploaded proof
-,,file_name,String,Yes,Original file name
-,,file_type,String,No,"MIME type (image/jpeg, application/pdf, etc.)"
-,,notes,JSONB,No,Additional notes entered by the client when uploading. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,created_at,Timestamp,Yes,
-,,created_by,UUID,No,(Client or System)
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,PaymentAttempt,,,,Payment attempt (intermediate state)
-,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_id,UUID (FK),Yes,
-,,payment_proof_id,UUID (FK),Yes,
-,,debt_id,UUID (FK),Yes,**Required**: The client must indicate which debt the proof corresponds to
-,,amount,"Decimal(12,2)",No,Auto-filled if the proof parsing is successful
-,,currency,Enum,No,"`'ARS'`, `'USD'` — Filled if parsing is successful"
-,,status,Enum,Yes,"UPLOADED -> Proof just uploaded
+,,companyId,UUID,Yes,
+,,clientId,UUID,Yes,
+,,paymentProofId,UUID,Yes,
+,,debtId,UUID,Yes,**Required**: The client must indicate which debt the proof corresponds to
+,,amount,Decimal,No,Auto-filled if the proof parsing is successful
+,,currency,Currency,No,"`'ARS'` `'USD'` — Filled if parsing is successful"
+,,status,PaymentAttemptStatus,Yes,"UPLOADED -> Proof just uploaded
 PARSE_FAILED -> Automatic file processing failed
 PENDING_VALIDATION -> Awaiting review or bank matching
 MATCHED -> Automatically matched with bank transaction
 APPROVED -> Manually approved by the Company
 REJECTED -> Rejected (manual or automatic)"
-,,rejection_reason,String,No,Rejection reason (used mainly by Company User when manually rejecting)
-,,reviewed_by,UUID,No,Company user who reviewed
-,,reviewed_at,Timestamp,No,
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
+,,rejectionReason,string,No,Rejection reason (used mainly by Company User when manually rejecting)
+,,reviewedBy,UUID,No,Company user who reviewed
+,,reviewedAt,Date,No,Timestamp when the attempt was reviewed
+,,id,UUID,Yes,PK
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,Payment,,,,Confirmed payment (final record)
+,,companyId,UUID,Yes,
+,,clientId,UUID,Yes,
+,,debtId,UUID,Yes,Debt to which the payment is applied
+,,paymentAttemptId,UUID,No,Payment origin (if it comes from a proof)
+,,amount,Decimal,Yes,Amount paid
+,,currency,Currency,Yes,
+,,paymentDate,Date,Yes,Effective payment date
+,,status,PaymentStatus,Yes,"`'CONFIRMED'` `'REFUNDED'`"
+,,notes,string,No,
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_id,UUID (FK),Yes,
-,,debt_id,UUID (FK),Yes,Debt to which the payment is applied
-,,payment_attempt_id,UUID (FK),No,Payment origin (if it comes from a proof)
-,,amount,"Decimal(12,2)",Yes,Amount paid
-,,currency,Enum,Yes,
-,,payment_date,Date,Yes,Effective payment date
-,,status,Enum,Yes,"`'CONFIRMED'`, `'REFUNDED'`"
-,,notes,Text,No,
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,
-,,updated_by,UUID,No,User who modified the payment (usually Company User)
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,BankStatement,,,,Uploaded bank statement (process-only)
+,,companyId,UUID,Yes,
+,,bank,Bank,Yes,"E.g. `'GALICIA'` `'BBVA'` `'SANTANDER'` `'BRUBANK'` `'MERCADOPAGO'` etc."
+,,format,BankStatementFormat,Yes,"E.g. `'PDF_TEXT'` `'PDF_TABLA'` `'EXCEL'` `'CSV'` `'API'` — Defines which parser to use"
+,,fileUrl,string,Yes,URL of the uploaded statement
+,,fileName,string,Yes,Original file name
+,,periodFrom,Date,No,Start of the statement period
+,,periodTo,Date,No,End of the statement period
+,,status,BankStatementStatus,Yes,"`'UPLOADED'` `'PARSING'` `'PROCESSED'` `'FAILED'` `'MANUALLY_REVIEWED'`"
+,,totalTransactions,number,No,Number of detected transactions
+,,notes,EncryptedValue | null,No,"Notes (useful for parsing errors). EncryptedValue or null."
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,bank,Enum,Yes,"E.g., `'GALICIA'`, `'BBVA'`, `'SANTANDER'`, `'BRUBANK'`, `'MERCADOPAGO'`, etc."
-,,format,Enum,Yes,"E.g., `'PDF_TEXT'`, `'PDF_TABLA'`, `'EXCEL'`, `'CSV'`, `'API'` — Defines which parser to use"
-,,file_url,String,Yes,URL of the uploaded statement
-,,file_name,String,Yes,Original file name
-,,**period_from**,Date,No,Start of the statement period
-,,**period_to**,Date,No,End of the statement period
-,,status,Enum,Yes,"`'UPLOADED'`, `'PARSING'`, `'PROCESSED'`, `'FAILED'`, `'MANUALLY_REVIEWED'`"
-,,total_transactions,Integer,No,Number of detected transactions
-,,notes,JSONB,No,Notes (useful for parsing errors). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,User who uploaded the statement
-,,**updated_by**,UUID,No,User who modified (e.g., for manual corrections)
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,BankTransaction,,,,Parsed transactions from the statement
+,,bankStatementId,UUID,Yes,
+,,companyId,UUID,Yes,
+,,clientId,UUID,No,"Client detected automatically or manually from the transfer data"
+,,transactionDate,Date,Yes,Transaction date
+,,amount,Decimal,Yes,Amount
+,,currency,Currency,Yes,"`'ARS'` `'USD'`"
+,,description,EncryptedValue,Yes,Full bank description (EncryptedValue — non-nullable)
+,,reference,EncryptedValue | null,No,"Reference / operation / CBU / alias number. EncryptedValue or null."
+,,referenceHash,string,No,Hash of reference for indexed search/lookup
+,,balanceAfter,Decimal,No,Balance after
+,,status,BankTransactionStatus,Yes,"`'UNMATCHED'` `'MATCHED'` `'IGNORED'`"
 ,,id,UUID,Yes,PK
-,,bank_statement_id,UUID (FK),Yes,
-,,company_id,UUID (FK),Yes,
-,,**client_id**,UUID (FK),No,Client detected automatically or manually from the transfer data
-,,transaction_date,Date,Yes,Transaction date
-,,amount,"Decimal(12,2)",Yes,Amount
-,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
-,,description,JSONB,Yes,Full bank description. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,reference,JSONB,No,Reference / operation / CBU / alias number. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,reference_hash,String,No,Hash of reference for indexed search/lookup
-,,balance_after,"Decimal(12,2)",No,Balance after
-,,status,Enum,Yes,"`'UNMATCHED'`, `'MATCHED'`, `'IGNORED'`"
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,PaymentMatch,,,,Record of successful matching
+,,paymentAttemptId,UUID,Yes,
+,,bankTransactionId,UUID,Yes,
+,,companyId,UUID,Yes,
+,,matchedAmount,Decimal,Yes,Amount used for the match (allows partial matches)
+,,confidenceScore,Decimal,No,"Automatic match score (0.00 - 100.00)"
+,,matchedBy,MatchMethod,Yes,"`'AUTOMATIC'` `'MANUAL'`"
+,,matchedAt,Date,Yes,Timestamp when the match was made
+,,notes,string,No,"Match notes (e.g. ""match by amount + reference"")"
 ,,id,UUID,Yes,PK
-,,payment_attempt_id,UUID (FK),Yes,
-,,bank_transaction_id,UUID (FK),Yes,
-,,company_id,UUID (FK),Yes,
-,,matched_amount,"Decimal(12,2)",Yes,Amount used for the match (allows partial matches)
-,,confidence_score,"Decimal(5,2)",No,Automatic match score (0.00 - 100.00)
-,,matched_by,Enum,Yes,"`'AUTOMATIC'`, `'MANUAL'`"
-,,matched_at,Timestamp,Yes,
-,,notes,Text,No,"Match notes (e.g., ""match by amount + reference"")"
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
-,Notification,,,,
+,Notification,,,,System notifications sent to Clients or Company Users
+,,companyId,UUID,Yes,
+,,clientId,UUID,No,
+,,userId,UUID,No,Recipient user (Company or End User)
+,,notificationTemplateId,UUID,No,Template used (if applicable)
+,,to,EncryptedValue,Yes,"Destination email / phone / WhatsApp (EncryptedValue — non-nullable)"
+,,from,EncryptedValue | null,No,"Sender (e.g. no-reply@conciliador.app). EncryptedValue or null."
+,,type,NotificationType,Yes,"`'PAYMENT_UPLOADED'` `'PAYMENT_APPROVED'` `'PAYMENT_REJECTED'` `'DEBT_OVERDUE'` etc."
+,,subject,EncryptedValue,Yes,Final subject (EncryptedValue — non-nullable)
+,,body,EncryptedValue,Yes,Final content — HTML or text (EncryptedValue — non-nullable)
+,,channel,NotificationChannel,Yes,"`'EMAIL'` `'WHATSAPP'` `'SMS'`"
+,,status,NotificationStatus,Yes,"`'PENDING'` `'SENT'` `'FAILED'` `'CANCELLED'`"
+,,sentAt,Date,No,Timestamp when the notification was sent (domain field NOT audit)
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_id,UUID (FK),No,
-,,user_id,UUID (FK),No,Recipient user (Company or End User)
-,,notification_template_id,UUID (FK),No,Template used (if applicable)
-,,to,JSONB,Yes,Destination email / phone / WhatsApp. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,from,JSONB,No,Sender (e.g., no-reply@conciliador.app). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,type,Enum,Yes,"`'PAYMENT_UPLOADED'`, `'PAYMENT_APPROVED'`, `'PAYMENT_REJECTED'`, `'DEBT_OVERDUE'`, etc."
-,,subject,JSONB,Yes,Final subject. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,body,JSONB,Yes,Final content (HTML or text). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
-,,channel,Enum,Yes,"`'EMAIL'`, `'WHATSAPP'`, `'SMS'`"
-,,status,Enum,Yes,"`'PENDING'`, `'SENT'`, `'FAILED'`, `'CANCELLED'`"
-,,sent_at,Timestamp,No,
-,,created_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
-,NotificationTemplate,,,,
+,NotificationTemplate,,,,Configurable template for Notifications
+,,companyId,UUID,Yes,
+,,name,string,Yes,Internal name
+,,type,NotificationType,Yes,Same as `Notification.type`
+,,subject,string,Yes,Subject with placeholders
+,,bodyPlain,string,No,Plain text version (for WhatsApp/SMS)
+,,bodyHtml,string,Yes,HTML version (for email)
+,,channel,NotificationChannel,Yes,"`'EMAIL'` `'WHATSAPP'` `'SMS'`"
+,,isDefault,boolean,Yes,Default: false
+,,active,boolean,Yes,Default: true
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,name,String,Yes,Internal name
-,,type,Enum,Yes,Same as `Notification.type`
-,,subject,String,Yes,Subject with placeholders
-,,body_plain,Text,No,Plain text version (for WhatsApp/SMS)
-,,body_html,Text,Yes,HTML version (for email)
-,,channel,Enum,Yes,"`'EMAIL'`, `'WHATSAPP'`, `'SMS'`"
-,,is_default,Boolean,Yes,Default: false
-,,active,Boolean,Yes,Default: true
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
-,,created_by,UUID,No,
-,,updated_by,UUID,No,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
-,ClientDebtSummary,,,,"Current balance, total debt, etc. (can be a materialized view)"
+,ClientDebtSummary,,,,"Current balance total debt etc. (can be a materialized view)"
+,,companyId,UUID,Yes,
+,,clientId,UUID,Yes,
+,,totalDebt,Decimal,Yes,
+,,totalPaid,Decimal,Yes,
+,,balance,Decimal,Yes,
+,,currency,Currency,Yes,
+,,lastPaymentId,UUID,No,Reference to the last confirmed payment
+,,lastDebtId,UUID,No,Reference to the last generated debt
+,,lastPaymentDate,Date,No,
+,,lastDebtDate,Date,No,
+,,status,ClientDebtSummaryStatus,Yes,"`'NORMAL'` `'OVERDUE'` `'INACTIVE'`"
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,client_id,UUID (FK),Yes,
-,,total_debt,"Decimal(14,2)",Yes,
-,,total_paid,"Decimal(14,2)",Yes,
-,,balance,"Decimal(14,2)",Yes,
-,,currency,Enum,Yes,
-,,last_payment_id,UUID (FK),No,Reference to the last confirmed payment
-,,last_debt_id,UUID (FK),No,Reference to the last generated debt
-,,last_payment_date,Date,No,
-,,last_debt_date,Date,No,
-,,status,Enum,Yes,"`'NORMAL'`, `'OVERDUE'`, `'INACTIVE'`"
-,,updated_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional
 ,,,,,
 ,CompanyMonthlySummary,,,,For SaaS billing
+,,companyId,UUID,Yes,
+,,year,number,Yes,
+,,month,number,Yes,(1-12)
+,,totalDebtsGenerated,Decimal,Yes,Total amount of generated debts
+,,totalPaymentsReceived,Decimal,Yes,Total amount of confirmed payments
+,,commissionEarned,Decimal,Yes,Commission earned by the platform
+,,currency,Currency,Yes,
 ,,id,UUID,Yes,PK
-,,company_id,UUID (FK),Yes,
-,,year,Integer,Yes,
-,,month,Integer,Yes,(1-12)
-,,total_debts_generated,"Decimal(14,2)",Yes,Total amount of generated debts
-,,total_payments_received,"Decimal(14,2)",Yes,Total amount of confirmed payments
-,,commission_earned,"Decimal(14,2)",Yes,Commission earned by the platform
-,,currency,Enum,Yes,
-,,created_at,Timestamp,Yes,
-,,updated_at,Timestamp,Yes,
+,,createdAt,Date,Yes,BaseEntity inherited — provided by persistence layer
+,,createdBy,UUID,Yes,BaseEntity inherited — UUID of creating user
+,,updatedAt,Date,No,BaseEntity inherited — optional
+,,updatedBy,UUID,No,BaseEntity inherited — optional
+,,deletedAt,Date,No,BaseEntity inherited — soft-delete marker
+,,deletedBy,UUID,No,BaseEntity inherited — optional

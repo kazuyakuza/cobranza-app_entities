@@ -107,6 +107,18 @@ Entities are organized into 9 domain modules:
 
 All entities are plain TypeScript interfaces. They contain no decorators or runtime logic, making them safe to import into any framework.
 
+### Entity Audit & Optionality Notes
+
+- All entities inherit the standard audit fields from `BaseEntity` (see
+  [Architecture](.agent/project-info/architecture.md)). They are not redeclared
+  per entity.
+- The following fields are intentionally optional (Task 5):
+  - `Company.contact` — may be omitted; nullable when present.
+  - `Client.fullName` — optional; may be completed later.
+  - `Debt.description` — optional debt concept.
+- For the authoritative per-entity property list (types, required flags, comments),
+  see [`entities-definition.csv`](.agent/project-info/entities-definition.csv).
+
 ## DTOs (Data Transfer Objects)
 
 Each entity has companion DTOs for API layer communication. They are co-located with their entity files and exported through the same barrel exports.

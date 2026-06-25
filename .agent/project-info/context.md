@@ -15,6 +15,7 @@ The repository currently contains:
 - No `node_modules/` yet.
 - `.npmrc.sample` file exists.
 - `README.md` rewritten with project-specific content for Cobranza App Entities Library.
+- Task 3 (CSV + docs sync) in progress: `entities-definition.csv` and related docs (data-model-brief, architecture, context, README) being aligned with the BaseEntity migration and Task-5 optionality changes.
 
 ## Recent Changes
 
@@ -27,11 +28,15 @@ The repository currently contains:
 - `README.md` rewritten with project-specific content; all cross-reference links verified.
 - Defined `src/` folder structure with barrel exports, 12 enum files, types, and interfaces.
 - Configured package.json with build scripts and devDependencies; created tsconfig.json; TypeScript compiles successfully.
+- Synced `entities-definition.csv` to reflect BaseEntity audit block (id/createdAt/createdBy required; updatedAt/updatedBy/deletedAt/deletedBy optional), camelCase property names, and TypeScript type vocabulary.
+- Reflected Task-5 optionality (`Company.contact`, `Client.fullName`, `Debt.description` optional) in CSV and docs.
+- Updated `data-model-brief.md` (BaseEntity audit subsection + optionality note), `architecture.md` (BaseEntity snippet + naming row), and `README.md` (optionality note).
 
 ## Immediate Next Steps
 
 1. **Update README** — Replace base template content with Cobranza App Entities Library specifics.
-2. **Implement entities** — Begin writing TypeScript entity interfaces based on the data model definitions.
+2. **Implement entities** — Begin writing TypeScript entity interfaces based on the data model definitions. (Already done for all 22 entities; remaining work is Task 6: changelog.)
+6. **Task 6 — Changelog**: Write the detailed changelog entry for the BaseEntity refactor + optionality changes.
 
 ## Known Issues
 

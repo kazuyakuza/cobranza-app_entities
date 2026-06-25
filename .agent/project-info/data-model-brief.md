@@ -54,6 +54,29 @@ All main entities are scoped to a `company_id` (multi-tenancy). The model suppor
 - **ClientDebtSummary**: Summary table (can be a materialized view) with current balance per Client.
 
 - **CompanyMonthlySummary**: Monthly aggregation used for billing the Company (commissions).
+- **Optionality (Task 5):** `Company.contact`, `Client.fullName`, and
+  `Debt.description` are optional fields (nullable where applicable).
+
+## **2.x Standard Audit Fields (`BaseEntity`)**
+
+Every entity in the model extends the `BaseEntity` interface defined in
+`src/interfaces/base-entity.interface.ts`. The library inherits these fields on all
+entities; they are not redeclared per entity:
+
+| Field         | Type | Required | Purpose                                  |
+|---------------|------|----------|------------------------------------------|
+| `id`          | UUID | Yes      | Primary key (persistence-assigned)        |
+| `createdAt`   | Date | Yes      | Creation timestamp                        |
+| `createdBy`   | UUID | Yes      | UUID of the creating user                 |
+| `updatedAt`   | Date | No       | Last update timestamp (null until updated) |
+| `updatedBy`   | UUID | No       | UUID of the last modifying user            |
+| `deletedAt`   | Date | No       | Soft-delete marker                         |
+| `deletedBy`   | UUID | No       | UUID of the user who soft-deleted          |
+
+> Some entities previously lacked `createdAt` / `createdBy` (e.g. `PaymentMatch`,
+> `ClientDebtSummary`) — these are now required per `BaseEntity`. Consumers that
+> generate these entities must supply `createdBy`; persistence layers supply `id`
+> and `createdAt`.
 
 ## **3. Main System Flows**
 

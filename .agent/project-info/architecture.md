@@ -107,17 +107,19 @@ import { Client, DebtStatus } from '@cobranza-apps/entities';
 
 ### Base Entity Interface
 
-All entities implement `BaseEntity`, which includes audit and soft-delete fields:
+All entities implement `BaseEntity`, which includes audit and soft-delete fields.
+Definition lives in `src/interfaces/base-entity.interface.ts`:
 
 ```typescript
+import { UUID } from '../types/common';
 interface BaseEntity {
-  id: string;          // UUID
-  createdAt: Date;
-  createdBy: string;   // UUID (User)
-  updatedAt?: Date;
-  updatedBy?: string;  // UUID (User)
-  deletedAt?: Date;
-  deletedBy?: string;  // UUID (User)
+  id: UUID;          // PK
+  createdAt: Date;   // required
+  createdBy: UUID;   // required — UUID of creating user
+  updatedAt?: Date;  // optional
+  updatedBy?: UUID;  // optional
+  deletedAt?: Date;  // soft-delete marker
+  deletedBy?: UUID;  // optional
 }
 ```
 
@@ -173,6 +175,7 @@ Every major entity includes a `companyId` field referencing `Company.id`. This d
 | Enum values | UPPER_SNAKE_CASE | `PARTIALLY_PAID` |
 | Primary keys | `id` (UUID) | `id: string` |
 | Foreign keys | camelCase with `Id` suffix | `companyId`, `clientId` |
+| Entity properties (CSV + code) | camelCase | `companyId`, `createdAt`, `taxIdHash` |
 
 ## Critical Paths
 
