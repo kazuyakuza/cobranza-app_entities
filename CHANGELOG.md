@@ -49,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release of `@cobranza-apps/entities`.
 - Core shared types: `UUID`, `Money`, `Decimal`, `JsonData`, `DateString`.
 - Base interfaces: `BaseEntity`, `SoftDeletable`.
-- 21 domain entities organized into 9 modules:
+- 22 domain entities organized into 9 modules:
   - **company**: `Company`, `CompanyPlan`, `CompanyUser`, `Role`, `User`
   - **client**: `Client`
   - **debt**: `Debt`, `DebtSchedule`
