@@ -21,8 +21,8 @@ export interface Debt extends BaseEntity {
   /** Human-readable code (e.g., `DEUD-2026-0042`). */
   debtCode: string;
 
-  /** Debt concept / description. */
-  description: string;
+  /** Debt concept / description. Optional. */
+  description?: string;
 
   /** Original amount. */
   totalAmount: Decimal;

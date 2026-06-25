@@ -28,7 +28,7 @@
     },
     "taxIdHash": { "type": ["string", "null"] },
     "contact": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -76,7 +76,6 @@
     "id",
     "friendlyUrl",
     "name",
-    "contact",
     "active",
     "createdAt",
     "updatedAt"

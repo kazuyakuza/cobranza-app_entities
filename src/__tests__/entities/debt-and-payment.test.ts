@@ -26,6 +26,25 @@ describe('Debt entity', () => {
     expect(debt.currency).toBe(Currency.ARS);
     expect(debt.status).toBe(DebtStatus.PENDING);
   });
+
+  it('allows omitting optional description field', () => {
+    const debt: Debt = {
+      id: 'debt-uuid-2',
+      companyId: 'comp-uuid',
+      clientId: 'client-uuid',
+      debtCode: 'DEUD-2026-0043',
+      totalAmount: '500.00',
+      currency: Currency.ARS,
+      dueDate: new Date('2026-12-31'),
+      issueDate: new Date('2026-01-01'),
+      status: DebtStatus.PENDING,
+      createdAt: new Date(),
+      createdBy: 'user-uuid',
+      updatedAt: new Date(),
+    };
+
+    expect(debt.description).toBeUndefined();
+  });
 });
 
 describe('Payment entity', () => {

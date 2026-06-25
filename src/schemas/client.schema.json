@@ -7,7 +7,7 @@
     "companyId": { "type": "string", "format": "uuid" },
     "clientCode": { "type": "string" },
     "fullName": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -77,7 +77,6 @@
     "id",
     "companyId",
     "clientCode",
-    "fullName",
     "active",
     "createdAt",
     "updatedAt"

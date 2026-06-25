@@ -18,6 +18,20 @@ describe('Company entity', () => {
     expect(company.friendlyUrl).toBe('acme-servicios');
     expect(company.active).toBe(true);
   });
+
+  it('allows omitting optional contact field', () => {
+    const company: Company = {
+      id: 'comp-uuid-2',
+      friendlyUrl: 'no-contact-co',
+      name: 'No Contact Co',
+      active: true,
+      createdAt: new Date(),
+      createdBy: 'user-uuid',
+      updatedAt: new Date(),
+    };
+
+    expect(company.contact).toBeUndefined();
+  });
 });
 
 describe('Client entity', () => {
@@ -35,5 +49,19 @@ describe('Client entity', () => {
 
     expect(client.clientCode).toBe('CLI-00042');
     expect(client.fullName.encryptedData).toBe('encrypted-fullName');
+  });
+
+  it('allows omitting optional fullName field', () => {
+    const client: Client = {
+      id: 'client-uuid-2',
+      companyId: 'comp-uuid',
+      clientCode: 'CLI-00043',
+      active: true,
+      createdAt: new Date(),
+      createdBy: 'user-uuid',
+      updatedAt: new Date(),
+    };
+
+    expect(client.fullName).toBeUndefined();
   });
 });

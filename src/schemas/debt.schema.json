@@ -28,7 +28,6 @@
     "companyId",
     "clientId",
     "debtCode",
-    "description",
     "totalAmount",
     "currency",
     "dueDate",

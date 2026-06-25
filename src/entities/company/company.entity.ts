@@ -23,8 +23,8 @@ export interface Company extends BaseEntity {
   /** Hash of taxId for indexed search/lookup. */
   taxIdHash?: string | null;
 
-  /** Email or contact information to be displayed to the end client. */
-  contact: EncryptedValue;
+  /** Email or contact information to be displayed to the end client. Optional. */
+  contact?: EncryptedValue | null;
 
   /** Hash of contact for indexed search/lookup. */
   contactHash?: string | null;

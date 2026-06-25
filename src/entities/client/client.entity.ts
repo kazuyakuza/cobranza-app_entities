@@ -14,8 +14,8 @@ export interface Client extends BaseEntity {
   /** Unique code per Company (e.g., `CLI-00042`). */
   clientCode: string;
 
-  /** Full name of the debtor. */
-  fullName: EncryptedValue;
+  /** Full name of the debtor. Optional; may be completed later. */
+  fullName?: EncryptedValue | null;
 
   /** Email. Highly recommended. */
   email?: EncryptedValue | null;

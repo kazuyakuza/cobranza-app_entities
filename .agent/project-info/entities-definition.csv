@@ -6,7 +6,7 @@
 ,,business_name,JSONB,No,Legal business name. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,tax_id,JSONB,No,Tax ID (e.g., CUIT, RUC, etc.). EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,tax_id_hash,String,No,Hash of tax_id for indexed search/lookup
-,,contact,JSONB,Yes,Email or contact information to be displayed to the end client. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,contact,JSONB,No,Email or contact information to be displayed to the end client. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,contact_hash,String,No,Hash of contact for indexed search/lookup
 ,,phone,JSONB,No,Contact phone. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,location,JSONB,No,Physical location { address: { addressLine1: string; addressLine2?: string; }; city?: string; state?: string; zipCode?: string; country?: string; }
@@ -62,7 +62,7 @@
 ,,id,UUID,Yes,PK
 ,,company_id,UUID (FK),Yes,
 ,,client_code,String,Yes,Unique code per Company (e.g., `CLI-00042`)
-,,full_name,JSONB,Yes,Full name of the debtor. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
+,,full_name,JSONB,No,Full name of the debtor. Optional; may be completed later. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,email,JSONB,No,Highly recommended. EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
 ,,email_hash,String,No,Hash of email for indexed search/lookup
 ,,phone,JSONB,No,EncryptedValue: { encryptedData: string; keyName: string; algorithm?: string; version?: number; }
@@ -82,7 +82,7 @@
 ,,client_id,UUID (FK),Yes,
 ,,debt_schedule_id,UUID (FK),No,Reference if the debt was automatically generated from a schedule
 ,,debt_code,String,Yes,Human-readable code (e.g., `DEUD-2026-0042`)
-,,description,String,Yes,Debt concept / description
+,,description,String,No,Debt concept / description. Optional.
 ,,total_amount,"Decimal(12,2)",Yes,Original amount
 ,,currency,Enum,Yes,"`'ARS'`, `'USD'`"
 ,,due_date,Date,Yes,Due date
