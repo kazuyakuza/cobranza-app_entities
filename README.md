@@ -222,8 +222,8 @@ export class Debt implements DebtBase {
   @Column()
   clientId: string;
 
-  @Column()
-  description: string;
+  @Column({ nullable: true })
+  description?: string;
 
   @Column('decimal')
   totalAmount: string;

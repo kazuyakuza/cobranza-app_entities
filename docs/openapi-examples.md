@@ -20,12 +20,12 @@ export class Debt implements DebtInterface {
   @ApiProperty({ format: 'uuid', description: 'Client who owes the debt' })
   clientId: UUID;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     type: String,
     description: 'Debt concept / description',
     example: 'Monthly service fee — June 2026',
   })
-  description: string;
+  description?: string;
 
   @ApiProperty({
     type: String,
@@ -71,8 +71,8 @@ export class CreateDebtDto {
   @ApiProperty({ format: 'uuid', description: 'Client ID' })
   clientId: UUID;
 
-  @ApiProperty({ description: 'Debt concept / description', example: 'Service fee' })
-  description: string;
+  @ApiPropertyOptional({ description: 'Debt concept / description', example: 'Service fee' })
+  description?: string;
 
   @ApiProperty({
     type: String,

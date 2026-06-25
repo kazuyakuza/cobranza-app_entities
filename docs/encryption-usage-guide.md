@@ -168,7 +168,7 @@ Searchable encrypted fields require a parallel hash column. The hash is computed
 
 ```typescript
 interface ClientCreateInput {
-  fullName: string;
+  fullName?: string;
   taxId?: string;
   email?: string;
   phone?: string;
@@ -177,9 +177,11 @@ interface ClientCreateInput {
 function buildClientPayload(
   input: ClientCreateInput,
 ): Record<string, unknown> {
-  const payload: Record<string, unknown> = {
-    fullName: encryptValue(input.fullName, { keyName: 'client_pii_key' }),
-  };
+  const payload: Record<string, unknown> = {};
+
+  if (input.fullName) {
+    payload.fullName = encryptValue(input.fullName, { keyName: 'client_pii_key' });
+  }
 
   if (input.taxId) {
     payload.taxId = encryptValue(input.taxId, { keyName: 'client_pii_key' });
@@ -245,8 +247,8 @@ export class ClientEntity implements Client {
   @Column()
   clientCode: string;
 
-  @Column({ type: 'jsonb' })
-  fullName: EncryptedValue;
+  @Column({ type: 'jsonb', nullable: true })
+  fullName: EncryptedValue | null;
 
   @Column({ type: 'jsonb', nullable: true })
   email: EncryptedValue | null;
@@ -274,7 +276,7 @@ The library's `CreateXxxDto` types reflect the **canonical encrypted entity shap
 ```typescript
 // API-level input DTO (in the consuming microservice)
 export class CreateClientRequest {
-  fullName: string;
+  fullName?: string;
   taxId?: string;
   email?: string;
   phone?: string;

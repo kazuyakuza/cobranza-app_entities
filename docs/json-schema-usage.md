@@ -217,8 +217,9 @@ export class CreateDebtRequest {
   @IsUUID()
   clientId!: string;
 
+  @IsOptional()
   @IsString()
-  description!: string;
+  description?: string;
 
   @IsString()
   totalAmount!: string;

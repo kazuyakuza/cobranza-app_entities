@@ -116,7 +116,7 @@ type ClientFormPayload = Omit<Client, 'id' | 'createdAt' | 'updatedAt' | 'update
 })
 export class ClientFormComponent {
   form: FormGroup = this.fb.group({
-    fullName: ['', Validators.required],
+    fullName: [''],
     email: ['', Validators.email],
     phone: [''],
     taxId: [''],
