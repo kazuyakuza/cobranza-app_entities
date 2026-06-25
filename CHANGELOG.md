@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-06-25
+
+### Changed
+
+- Merged the `SoftDeletable` interface into `BaseEntity`: `deletedAt` and `deletedBy` audit fields are now part of `BaseEntity`, removing the need for a separate soft-delete interface.
+- Inverted `BaseEntity` audit-field optionality: `createdBy` is now required, while `updatedAt` and `updatedBy` are now optional.
+- Refactored all 22 domain entities to extend the consolidated `BaseEntity`.
+- Made `Company.contact`, `Client.fullName`, and `Debt.description` optional to reflect updated data-model constraints.
+- Standardized all DTO definitions to omit every `BaseEntity` field (`id`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`).
+- Regenerated JSON schemas for all entities to reflect the merged audit block and revised optionality.
+- Updated the test suite to match the refactored entity contracts.
+- Aligned `entities-definition.csv` with the merged `BaseEntity` audit block and revised property optionality.
+- Refreshed project documentation (data-model brief, architecture, and README) to describe the consolidated `BaseEntity` model.
+
+### Removed
+
+- The standalone `SoftDeletable` interface; its fields are now inherited through `BaseEntity`.
+
 ## [0.3.4] - 2026-06-22
 
 ### Changed
@@ -47,5 +65,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Strict TypeScript configuration (`strict: true`) with declaration file generation.
 - ESLint and Prettier setup for code quality.
 
+[0.4.0]: https://github.com/cobranza-apps/entities/compare/v0.3.4...v0.4.0
 [0.3.4]: https://github.com/cobranza-apps/entities/compare/v0.1.0...v0.3.4
 [0.1.0]: https://github.com/cobranza-apps/entities/releases/tag/v0.1.0
