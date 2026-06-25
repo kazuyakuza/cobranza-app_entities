@@ -70,7 +70,11 @@
     "active": { "type": "boolean" },
     "settings": { "type": "object" },
     "createdAt": { "type": "string", "format": "date-time" },
-    "updatedAt": { "type": "string", "format": "date-time" }
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
   },
   "required": [
     "id",
@@ -78,6 +82,6 @@
     "name",
     "active",
     "createdAt",
-    "updatedAt"
+    "createdBy"
   ]
 }

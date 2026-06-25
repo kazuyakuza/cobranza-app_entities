@@ -52,7 +52,12 @@
     "channel": { "type": "string", "enum": ["EMAIL", "WHATSAPP", "SMS"] },
     "status": { "type": "string", "enum": ["PENDING", "SENT", "FAILED", "CANCELLED"] },
     "sentAt": { "type": "string", "format": "date-time" },
-    "createdAt": { "type": "string", "format": "date-time" }
+    "createdAt": { "type": "string", "format": "date-time" },
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
   },
   "required": [
     "id",
@@ -63,6 +68,7 @@
     "body",
     "channel",
     "status",
-    "createdAt"
+    "createdAt",
+    "createdBy"
   ]
 }

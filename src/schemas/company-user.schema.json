@@ -9,7 +9,11 @@
     "roleId": { "type": "string", "format": "uuid" },
     "active": { "type": "boolean" },
     "createdAt": { "type": "string", "format": "date-time" },
-    "updatedAt": { "type": "string", "format": "date-time" }
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
   },
   "required": [
     "id",
@@ -18,6 +22,6 @@
     "roleId",
     "active",
     "createdAt",
-    "updatedAt"
+    "createdBy"
   ]
 }

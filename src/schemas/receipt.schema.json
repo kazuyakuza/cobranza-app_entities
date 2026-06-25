@@ -16,9 +16,11 @@
     "status": { "type": "string", "enum": ["PENDING", "PAID", "PARTIALLY_PAID", "OVERDUE", "CANCELLED"] },
     "notes": { "type": "string" },
     "createdAt": { "type": "string", "format": "date-time" },
-    "updatedAt": { "type": "string", "format": "date-time" },
     "createdBy": { "type": "string", "format": "uuid" },
-    "updatedBy": { "type": "string", "format": "uuid" }
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
   },
   "required": [
     "id",
@@ -32,6 +34,6 @@
     "currency",
     "status",
     "createdAt",
-    "updatedAt"
+    "createdBy"
   ]
 }

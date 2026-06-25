@@ -11,7 +11,13 @@
     "confidenceScore": { "type": "string" },
     "matchedBy": { "type": "string", "enum": ["AUTOMATIC", "MANUAL"] },
     "matchedAt": { "type": "string", "format": "date-time" },
-    "notes": { "type": "string" }
+    "notes": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
   },
   "required": [
     "id",
@@ -20,6 +26,8 @@
     "companyId",
     "matchedAmount",
     "matchedBy",
-    "matchedAt"
+    "matchedAt",
+    "createdAt",
+    "createdBy"
   ]
 }

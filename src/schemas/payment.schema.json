@@ -14,9 +14,11 @@
     "status": { "type": "string", "enum": ["CONFIRMED", "REFUNDED"] },
     "notes": { "type": "string" },
     "createdAt": { "type": "string", "format": "date-time" },
-    "updatedAt": { "type": "string", "format": "date-time" },
     "createdBy": { "type": "string", "format": "uuid" },
-    "updatedBy": { "type": "string", "format": "uuid" }
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
   },
   "required": [
     "id",
@@ -28,6 +30,6 @@
     "paymentDate",
     "status",
     "createdAt",
-    "updatedAt"
+    "createdBy"
   ]
 }

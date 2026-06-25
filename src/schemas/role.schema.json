@@ -6,11 +6,17 @@
     "id": { "type": "string", "format": "uuid" },
     "name": { "type": "string" },
     "description": { "type": "string" },
-    "createdAt": { "type": "string", "format": "date-time" }
+    "createdAt": { "type": "string", "format": "date-time" },
+    "createdBy": { "type": "string", "format": "uuid" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "updatedBy": { "type": "string", "format": "uuid" },
+    "deletedAt": { "type": "string", "format": "date-time" },
+    "deletedBy": { "type": "string", "format": "uuid" }
   },
   "required": [
     "id",
     "name",
-    "createdAt"
+    "createdAt",
+    "createdBy"
   ]
 }
