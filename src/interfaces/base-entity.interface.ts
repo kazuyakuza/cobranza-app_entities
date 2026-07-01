@@ -26,3 +26,14 @@ export interface BaseEntity {
   /** UUID of the user who performed the soft deletion. */
   deletedBy?: UUID;
 }
+
+/**
+ * Type alias that picks only the BaseEntity audit fields.
+ * Intended for use in DTO Omit clauses that only need to exclude
+ * the standard audit trail (id, createdAt, createdBy, updatedAt,
+ * updatedBy, deletedAt, deletedBy).
+ */
+export type BaseAuditFields = Pick<
+  BaseEntity,
+  'id' | 'createdAt' | 'createdBy' | 'updatedAt' | 'updatedBy' | 'deletedAt' | 'deletedBy'
+>;

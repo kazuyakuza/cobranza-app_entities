@@ -1,8 +1,7 @@
 import type { Notification } from './notification.entity';
 
 /**
- * Fields required to create a Notification.
- * Omits the system-managed BaseEntity audit fields and the system-generated `sentAt`.
+ * Broad DTO: omits only the BaseEntity audit fields.
  *
  * Note: This DTO represents the canonical entity shape after encryption.
  * Consuming microservices should define their own API-level input DTOs
@@ -18,7 +17,6 @@ export type CreateNotificationDto = Omit<
   | 'updatedBy'
   | 'deletedAt'
   | 'deletedBy'
-  | 'sentAt'
 >;
 
 /**

@@ -1,1 +1,1 @@
-export { BaseEntity } from './base-entity.interface';
+export { BaseEntity, BaseAuditFields } from './base-entity.interface';

@@ -1,8 +1,7 @@
 import type { BankStatement } from './bank-statement.entity';
 
 /**
- * Fields required to create a BankStatement.
- * Omits audit and derived fields.
+ * Broad DTO: omits only the BaseEntity audit fields.
  *
  * Note: This DTO represents the canonical entity shape after encryption.
  * Consuming microservices should define their own API-level input DTOs
@@ -18,7 +17,6 @@ export type CreateBankStatementDto = Omit<
   | 'updatedBy'
   | 'deletedAt'
   | 'deletedBy'
-  | 'totalTransactions'
 >;
 
 /**

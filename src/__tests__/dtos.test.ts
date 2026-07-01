@@ -40,9 +40,8 @@ type ExcludesAudit<T> = true extends HasKey<T, AuditKeys> ? false : true;
 type Assert<T extends true> = T;
 
 describe('Create DTOs exclude BaseEntity audit fields (Option B)', () => {
-  it('company + bank statement dtos omit audit (totalTransactions omitted too)', () => {
+  it('company + bank statement dtos omit only BaseEntity audit fields', () => {
     type _c = Assert<ExcludesAudit<CreateCompanyDto>>;
-    type _t = Assert<OmitsKey<CreateBankStatementDto, 'totalTransactions'>>;
     expect(true).toBe(true);
   });
 

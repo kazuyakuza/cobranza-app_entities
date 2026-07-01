@@ -1,8 +1,7 @@
 import type { PaymentAttempt } from './payment-attempt.entity';
 
 /**
- * Fields required to create a PaymentAttempt.
- * Omits audit and auto-filled fields managed by the system.
+ * Broad DTO: omits only the BaseEntity audit fields.
  */
 export type CreatePaymentAttemptDto = Omit<
   PaymentAttempt,
@@ -13,10 +12,6 @@ export type CreatePaymentAttemptDto = Omit<
   | 'updatedBy'
   | 'deletedAt'
   | 'deletedBy'
-  | 'reviewedBy'
-  | 'reviewedAt'
-  | 'amount'
-  | 'currency'
 >;
 
 /**

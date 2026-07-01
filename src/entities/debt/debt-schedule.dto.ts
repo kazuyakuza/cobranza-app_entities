@@ -1,8 +1,7 @@
 import type { DebtSchedule } from './debt-schedule.entity';
 
 /**
- * Fields required to create a DebtSchedule.
- * Omits `BaseEntity` and system-managed fields.
+ * Broad DTO: omits only the BaseEntity audit fields.
  */
 export type CreateDebtScheduleDto = Omit<
   DebtSchedule,
@@ -13,7 +12,6 @@ export type CreateDebtScheduleDto = Omit<
   | 'updatedBy'
   | 'deletedAt'
   | 'deletedBy'
-  | 'lastGeneratedDate'
 >;
 
 /**

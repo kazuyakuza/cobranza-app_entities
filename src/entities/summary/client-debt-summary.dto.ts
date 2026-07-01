@@ -1,8 +1,7 @@
 import type { ClientDebtSummary } from './client-debt-summary.entity';
 
 /**
- * Fields required to create a ClientDebtSummary.
- * Omits derived and audit fields.
+ * Broad DTO: omits only the BaseEntity audit fields.
  */
 export type CreateClientDebtSummaryDto = Omit<
   ClientDebtSummary,
@@ -13,10 +12,6 @@ export type CreateClientDebtSummaryDto = Omit<
   | 'updatedBy'
   | 'deletedAt'
   | 'deletedBy'
-  | 'lastPaymentId'
-  | 'lastDebtId'
-  | 'lastPaymentDate'
-  | 'lastDebtDate'
 >;
 
 /**

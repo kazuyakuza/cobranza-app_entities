@@ -1,8 +1,7 @@
 import type { PaymentMatch } from './payment-match.entity';
 
 /**
- * Fields required to create a PaymentMatch.
- * Omits system-generated `matchedAt`.
+ * Broad DTO: omits only the BaseEntity audit fields.
  */
 export type CreatePaymentMatchDto = Omit<
   PaymentMatch,
@@ -13,7 +12,6 @@ export type CreatePaymentMatchDto = Omit<
   | 'updatedBy'
   | 'deletedAt'
   | 'deletedBy'
-  | 'matchedAt'
 >;
 
 /**

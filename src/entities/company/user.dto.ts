@@ -1,8 +1,7 @@
 import type { User } from './user.entity';
 
 /**
- * Fields required to create a User.
- * Omits system-managed identity and audit fields.
+ * Broad DTO: omits only the BaseEntity audit fields.
  *
  * Note: This DTO represents the canonical entity shape after encryption.
  * Consuming microservices should define their own API-level input DTOs
@@ -18,9 +17,6 @@ export type CreateUserDto = Omit<
   | 'updatedBy'
   | 'deletedAt'
   | 'deletedBy'
-  | 'passwordHash'
-  | 'passwordUpdatedAt'
-  | 'lastLoginAt'
 >;
 
 /**
