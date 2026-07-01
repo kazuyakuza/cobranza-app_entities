@@ -55,7 +55,7 @@ export class DebtController {
 Derive DTO types from library interfaces to stay in sync with the canonical model while excluding auto-generated or audit fields:
 
 ```typescript
-import { CreateDebtDto, CreateClientDto, BaseAuditFields } from '@cobranza-apps/entities';
+import { CreateDebtDto, CreateClientDto } from '@cobranza-apps/entities';
 
 type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
 export type UpdateDebtDto = Partial<ApiCreateDebtDto>;
@@ -71,7 +71,7 @@ DTOs defined as TypeScript types have no runtime impact. In the consuming NestJS
 
 ```typescript
 import { IsEnum, IsUUID, IsString, IsOptional, IsDateString } from 'class-validator';
-import { CreateDebtDto } from '@cobranza-apps/entities';
+import { CreateDebtDto, Currency } from '@cobranza-apps/entities';
 
 type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
 
@@ -124,7 +124,7 @@ The service layer returns library interfaces, keeping the contract aligned with 
 
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
+import { Debt, DebtStatus, UUID, CreateDebtDto } from '@cobranza-apps/entities';
 
 @Injectable()
 export class DebtService {

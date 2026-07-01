@@ -147,9 +147,10 @@ import { Client, CreateClientDto, UpdateClientDto } from '@cobranza-apps/entitie
 
 // Creating a new client
 const payload: CreateClientDto = {
-  name: 'Acme Corp',
-  email: 'billing@acme.com',
+  clientCode: 'CLI-00001',
   companyId: '550e8400-e29b-41d4-a716-446655440000',
+  active: true,
+  fullName: 'Acme Corp',
 };
 
 // Updating an existing client
