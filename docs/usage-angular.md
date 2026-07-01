@@ -10,10 +10,10 @@ Use Angular's `HttpClient` (not `fetch`) for proper injection, interceptors, and
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Debt, Client, UUID, DebtStatus } from '@cobranza-apps/entities';
+import { CreateDebtDto, Debt, UUID } from '@cobranza-apps/entities';
 
-type CreateDebtPayload = Omit<Debt, 'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy' | 'debtCode'>;
-type UpdateDebtPayload = Partial<CreateDebtPayload>;
+type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
+type ApiUpdateDebtDto = Partial<ApiCreateDebtDto>;
 
 @Injectable({ providedIn: 'root' })
 export class DebtApiService {
@@ -25,17 +25,17 @@ export class DebtApiService {
     return this.http.get<Debt[]>(`${this.apiUrl}?clientId=${clientId}`);
   }
 
-  createDebt(payload: CreateDebtPayload): Observable<Debt> {
+  createDebt(payload: ApiCreateDebtDto): Observable<Debt> {
     return this.http.post<Debt>(this.apiUrl, payload);
   }
 
-  updateDebt(id: UUID, payload: UpdateDebtPayload): Observable<Debt> {
+  updateDebt(id: UUID, payload: ApiUpdateDebtDto): Observable<Debt> {
     return this.http.patch<Debt>(`${this.apiUrl}/${id}`, payload);
   }
 }
 ```
 
-All method signatures use library types (`Debt`, `UUID`, `DebtStatus`) ensuring the frontend stays in sync with the SSOT.
+All method signatures use library DTOs (`CreateDebtDto`, `ApiCreateDebtDto`) and types (`Debt`, `UUID`) ensuring the frontend stays in sync with the SSOT. Server-reserved fields (`debtCode`, `status`) are narrowed out of the payload type, so the compiler rejects any attempt to send them.
 
 ## 2. Using Entities in an Angular Component
 
@@ -95,9 +95,9 @@ Build type-safe `FormGroup` controls mapped to library entity fields:
 ```typescript
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Client, UUID } from '@cobranza-apps/entities';
+import { CreateClientDto } from '@cobranza-apps/entities';
 
-type ClientFormPayload = Omit<Client, 'id' | 'createdAt' | 'updatedAt' | 'updatedBy' | 'clientCode'>;
+type ApiCreateClientDto = Omit<CreateClientDto, 'clientCode'>;
 
 @Component({
   selector: 'app-client-form',
@@ -126,8 +126,8 @@ export class ClientFormComponent {
 
   constructor(private fb: FormBuilder) {}
 
-  getPayload(): ClientFormPayload {
-    return this.form.value as ClientFormPayload;
+  getPayload(): ApiCreateClientDto {
+    return this.form.value as ApiCreateClientDto;
   }
 
   onSubmit(): void {
@@ -139,7 +139,7 @@ export class ClientFormComponent {
 }
 ```
 
-The `ClientFormPayload` type derived via `Omit<Client, ...>` ensures you never send audit fields to the API.
+The `ApiCreateClientDto` type derived via `Omit<CreateClientDto, 'clientCode'>` ensures you never send audit fields nor the server-generated `clientCode` to the API.
 
 ## 4. Enum-Driven UI Patterns
 
@@ -227,3 +227,137 @@ export class DebtDetailComponent implements OnInit {
 ```
 
 Using `UUID` consistently across routing and services eliminates `any` from parameter chains.
+
+## 6. class-transformer + class-validator in Angular
+
+For forms that must be validated and transformed before HTTP submission, use `class-transformer` and `class-validator` together with the library DTOs. A form class **implements** the narrowed library DTO type so the compiler guarantees shape parity, while runtime decorators enforce field-level rules.
+
+### Installation
+
+```bash
+npm install class-transformer class-validator
+```
+
+These libraries require decorator metadata. Ensure `tsconfig.json` (or `tsconfig.app.json`) has:
+
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+```
+
+And, if not already present, import the reflect-metadata polyfill once at app bootstrap (e.g., `main.ts`):
+
+```typescript
+import 'reflect-metadata';
+```
+
+### Form class implementing `Omit<CreateDebtDto, 'debtCode' | 'status'>`
+
+`CreateDebtDto` is a type alias (a structural `Omit`), not a runtime class, so it cannot be passed directly to `plainToInstance`. Instead, declare a local class that both **implements** the narrowed DTO type (for compile-time shape safety) and carries validation decorators:
+
+```typescript
+import { plainToInstance } from 'class-transformer';
+import {
+  IsUUID,
+  IsEnum,
+  IsNumber,
+  IsDateString,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
+import {
+  CreateDebtDto,
+  Currency,
+  Debt,
+  DebtStatus,
+  UUID,
+  JsonData,
+} from '@cobranza-apps/entities';
+
+type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
+
+export class CreateDebtForm implements ApiCreateDebtDto {
+  @IsUUID()
+  companyId!: UUID;
+
+  @IsUUID()
+  clientId!: UUID;
+
+  @IsUUID()
+  @IsOptional()
+  debtScheduleId?: UUID;
+
+  @IsString()
+  @IsOptional()
+  description?: string;
+
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Min(0)
+  totalAmount!: number;
+
+  @IsEnum(Currency)
+  currency!: Currency;
+
+  @IsDateString()
+  dueDate!: Date;
+
+  @IsDateString()
+  issueDate!: Date;
+
+  @IsNumber({ maxDecimalPlaces: 4 })
+  @IsOptional()
+  dailyInterestRate?: number;
+
+  @IsString()
+  @IsOptional()
+  notes?: string;
+
+  @IsOptional()
+  extraData?: JsonData;
+
+  @IsUUID()
+  @IsOptional()
+  invoiceTemplateId?: UUID;
+}
+```
+
+Note: `status` and `debtCode` are intentionally absent — `implements ApiCreateDebtDto` would error if they were added, because they are excluded from the narrowed DTO. This is exactly the compile-time guarantee we want.
+
+### Service: validate then submit
+
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { validate, ValidationError } from 'class-validator';
+import { plainToInstance } from 'class-transformer';
+import { Debt } from '@cobranza-apps/entities';
+
+export class DebtFormValidationError extends Error {
+  constructor(readonly errors: ValidationError[]) {
+    super('Debt form validation failed');
+    this.name = 'DebtFormValidationError';
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class DebtSubmissionService {
+  constructor(private http: HttpClient) {}
+
+  async submitDebt(formValue: Record<string, unknown>): Promise<Observable<Debt>> {
+    const instance = plainToInstance(CreateDebtForm, formValue);
+    const errors = await validate(instance);
+    if (errors.length > 0) {
+      throw new DebtFormValidationError(errors);
+    }
+    return this.http.post<Debt>('/api/debts', instance);
+  }
+}
+```
+
+The component calls `submitDebt(form.getRawValue())`; validation runs before any HTTP call, and the posted body is guaranteed to conform to `ApiCreateDebtDto`. Use the thrown `DebtFormValidationError.errors` to surface field-level messages back to the form (e.g., map each `ValidationError` to its `constraints`).
