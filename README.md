@@ -91,7 +91,7 @@ Fields that must support exact-match queries (e.g., tax ID lookup, email uniquen
 | `Company.contact` | `Company.contactHash` | Contact search |
 | `BankTransaction.reference` | `BankTransaction.referenceHash` | Reference search and matching |
 
-For implementation details, see [`encryption-usage-guide.md`](/docs/encryption-usage-guide.md).
+For implementation details, see [`encryption-usage-guide.md`](docs/encryption-usage-guide.md).
 
 ## Available Entities
 
@@ -228,14 +228,6 @@ Import directly into your project:
 import { Client, Debt, DebtStatus, Currency } from '@cobranza-apps/entities';
 ```
 
-The library exports only TypeScript interfaces, types, and enums — no runtime code, no side effects.
-
-### Basic Import
-
-```typescript
-import { Client, Debt, DebtStatus, Currency } from '@cobranza-apps/entities';
-```
-
 ### Extending an Entity in NestJS
 
 Because the library exports plain interfaces, you can extend them with NestJS decorators in your consuming project without modifying the library:
@@ -332,5 +324,5 @@ For detailed, copy-paste-ready integration examples, see:
 - [`data-model-brief.md`](.agent/project-info/data-model-brief.md) — Detailed entity definitions and roles
 - [`entities-definition.csv`](.agent/project-info/entities-definition.csv) — Full property definitions for all entities
 - [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md) — Entity relationship diagrams
-- [`json-schema-usage.md`](/docs/json-schema-usage.md) — JSON Schema usage guide for Angular, NestJS, and tooling
-- [`encryption-usage-guide.md`](/docs/encryption-usage-guide.md) — Encrypting, decrypting, and hashing in microservices
+- [`json-schema-usage.md`](docs/json-schema-usage.md) — JSON Schema usage guide for Angular, NestJS, and tooling
+- [`encryption-usage-guide.md`](docs/encryption-usage-guide.md) — Encrypting, decrypting, and hashing in microservices
