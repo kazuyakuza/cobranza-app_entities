@@ -37,5 +37,5 @@ export interface BankStatement extends BaseEntity {
   totalTransactions?: number;
 
   /** Notes (useful for parsing errors). */
-  notes?: EncryptedValue | null;
+  notes?: EncryptedValue | string | null;
 }

@@ -14,22 +14,22 @@ export interface Company extends BaseEntity {
   name: string;
 
   /** Legal business name. */
-  businessName?: EncryptedValue | null;
+  businessName?: EncryptedValue | string | null;
 
   /** Tax ID (e.g., CUIT, RUC, etc.). */
-  taxId?: EncryptedValue | null;
+  taxId?: EncryptedValue | string | null;
 
   /** Hash of taxId for indexed search/lookup. */
   taxIdHash?: string | null;
 
   /** Email or contact information to be displayed to the end client. Optional. */
-  contact?: EncryptedValue | null;
+  contact?: EncryptedValue | string | null;
 
   /** Hash of contact for indexed search/lookup. */
   contactHash?: string | null;
 
   /** Contact phone. */
-  phone?: EncryptedValue | null;
+  phone?: EncryptedValue | string | null;
 
   /** Physical location of the company. */
   location?: Location;

@@ -28,10 +28,10 @@ export interface BankTransaction extends BaseEntity {
   currency: Currency;
 
   /** Full bank description. */
-  description: EncryptedValue;
+  description: EncryptedValue | string;
 
   /** Reference / operation / CBU / alias number. */
-  reference?: EncryptedValue | null;
+  reference?: EncryptedValue | string | null;
 
   /** Hash of reference for indexed search/lookup. */
   referenceHash?: string | null;

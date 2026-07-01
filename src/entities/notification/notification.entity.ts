@@ -22,19 +22,19 @@ export interface Notification extends BaseEntity {
   notificationTemplateId?: UUID;
 
   /** Destination email / phone / WhatsApp. */
-  to: EncryptedValue;
+  to: EncryptedValue | string;
 
   /** Sender (e.g., no-reply@conciliador.app). */
-  from?: EncryptedValue | null;
+  from?: EncryptedValue | string | null;
 
   /** Type of notification. */
   type: NotificationType;
 
   /** Final subject. */
-  subject: EncryptedValue;
+  subject: EncryptedValue | string;
 
   /** Final content (HTML or text). */
-  body: EncryptedValue;
+  body: EncryptedValue | string;
 
   /** Delivery channel. */
   channel: NotificationChannel;

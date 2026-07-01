@@ -22,5 +22,5 @@ export interface PaymentProof extends BaseEntity {
   fileType?: string;
 
   /** Additional notes entered by the client when uploading. */
-  notes?: EncryptedValue | null;
+  notes?: EncryptedValue | string | null;
 }

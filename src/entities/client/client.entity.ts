@@ -15,22 +15,22 @@ export interface Client extends BaseEntity {
   clientCode: string;
 
   /** Full name of the debtor. Optional; may be completed later. */
-  fullName?: EncryptedValue | null;
+  fullName?: EncryptedValue | string | null;
 
   /** Email. Highly recommended. */
-  email?: EncryptedValue | null;
+  email?: EncryptedValue | string | null;
 
   /** Hash of email for indexed search/lookup. */
   emailHash?: string | null;
 
   /** Phone number. */
-  phone?: EncryptedValue | null;
+  phone?: EncryptedValue | string | null;
 
   /** Physical location of the client. */
   location?: Location;
 
   /** National ID / Tax ID of the end client (e.g., DNI, CUIT). */
-  taxId?: EncryptedValue | null;
+  taxId?: EncryptedValue | string | null;
 
   /** Hash of taxId for indexed search/lookup. */
   taxIdHash?: string | null;

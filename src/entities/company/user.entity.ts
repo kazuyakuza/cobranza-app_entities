@@ -15,10 +15,10 @@ export interface User extends BaseEntity {
   passwordUpdatedAt?: Date;
 
   /** Optional full name (can be completed later). */
-  fullName?: EncryptedValue | null;
+  fullName?: EncryptedValue | string | null;
 
   /** Phone number. */
-  phone?: EncryptedValue | null;
+  phone?: EncryptedValue | string | null;
 
   /** Whether the user is active. Default: true. */
   active: boolean;
