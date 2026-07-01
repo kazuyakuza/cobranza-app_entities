@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import type { Debt } from '../../entities/debt/debt.entity';
 import type { Payment } from '../../entities/payment/payment.entity';
+import type { PaymentProof } from '../../entities/payment/payment-proof.entity';
 import { DebtStatus } from '../../enums/debt-status.enum';
 import { Currency } from '../../enums/currency.enum';
 import { PaymentStatus } from '../../enums/payment-status.enum';
@@ -65,5 +66,23 @@ describe('Payment entity', () => {
 
     expect(payment.amount).toBe('500.00');
     expect(payment.status).toBe(PaymentStatus.CONFIRMED);
+  });
+});
+
+describe('PaymentProof entity', () => {
+  it('accepts raw string in encrypted notes', () => {
+    const proof = {
+      id: 'proof-uuid',
+      companyId: 'comp-uuid',
+      clientId: 'client-uuid',
+      fileUrl: 'https://example.com/proof.jpg',
+      fileName: 'proof.jpg',
+      notes: 'pago parcial del mes',
+      createdAt: new Date(),
+      createdBy: 'client-uuid',
+      updatedAt: new Date(),
+    } satisfies PaymentProof;
+
+    expect(proof.notes).toBe('pago parcial del mes');
   });
 });

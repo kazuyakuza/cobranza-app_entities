@@ -3,6 +3,12 @@
 import { describe, it, expect } from 'vitest';
 import { Currency } from '../enums/currency.enum';
 import { BankTransactionStatus } from '../enums/bank-transaction-status.enum';
+import { Bank } from '../enums/bank.enum';
+import { BankStatementFormat } from '../enums/bank-statement-format.enum';
+import { BankStatementStatus } from '../enums/bank-statement-status.enum';
+import { NotificationType } from '../enums/notification-type.enum';
+import { NotificationChannel } from '../enums/notification-channel.enum';
+import { NotificationStatus } from '../enums/notification-status.enum';
 import type { CreateCompanyDto } from '../entities/company/company.dto';
 import type { CreateCompanyPlanDto } from '../entities/company/company-plan.dto';
 import type { CreateCompanyUserDto } from '../entities/company/company-user.dto';
@@ -80,5 +86,107 @@ describe('Create DTOs exclude BaseEntity audit fields (Option B)', () => {
       status: BankTransactionStatus.UNMATCHED,
     };
     expect(dto.currency).toBe('ARS');
+  });
+});
+
+describe('Reverted broad DTOs include previously-stripped fields (Task 1)', () => {
+  it('CreateBankStatementDto keeps totalTransactions', () => {
+    type _a = Assert<HasKey<CreateBankStatementDto, 'totalTransactions'>>;
+    expect(true).toBe(true);
+  });
+
+  it('CreatePaymentMatchDto keeps matchedAt (required)', () => {
+    type _a = Assert<HasKey<CreatePaymentMatchDto, 'matchedAt'>>;
+    expect(true).toBe(true);
+  });
+
+  it('CreateUserDto keeps passwordHash, passwordUpdatedAt, lastLoginAt', () => {
+    type _a = Assert<HasKey<CreateUserDto, 'passwordHash'>>;
+    type _b = Assert<HasKey<CreateUserDto, 'passwordUpdatedAt'>>;
+    type _c = Assert<HasKey<CreateUserDto, 'lastLoginAt'>>;
+    expect(true).toBe(true);
+  });
+
+  it('CreateDebtScheduleDto keeps lastGeneratedDate', () => {
+    type _a = Assert<HasKey<CreateDebtScheduleDto, 'lastGeneratedDate'>>;
+    expect(true).toBe(true);
+  });
+
+  it('CreatePaymentAttemptDto keeps reviewedBy, reviewedAt, amount, currency', () => {
+    type _a = Assert<HasKey<CreatePaymentAttemptDto, 'reviewedBy'>>;
+    type _b = Assert<HasKey<CreatePaymentAttemptDto, 'reviewedAt'>>;
+    type _c = Assert<HasKey<CreatePaymentAttemptDto, 'amount'>>;
+    type _d = Assert<HasKey<CreatePaymentAttemptDto, 'currency'>>;
+    expect(true).toBe(true);
+  });
+
+  it('CreateNotificationDto keeps sentAt', () => {
+    type _a = Assert<HasKey<CreateNotificationDto, 'sentAt'>>;
+    expect(true).toBe(true);
+  });
+
+  it('CreateClientDebtSummaryDto keeps lastPaymentId, lastDebtId, lastPaymentDate, lastDebtDate', () => {
+    type _a = Assert<HasKey<CreateClientDebtSummaryDto, 'lastPaymentId'>>;
+    type _b = Assert<HasKey<CreateClientDebtSummaryDto, 'lastDebtId'>>;
+    type _c = Assert<HasKey<CreateClientDebtSummaryDto, 'lastPaymentDate'>>;
+    type _d = Assert<HasKey<CreateClientDebtSummaryDto, 'lastDebtDate'>>;
+    expect(true).toBe(true);
+  });
+});
+
+describe('Encrypted fields accept raw strings at compile time (Task 2)', () => {
+  it('CreateCompanyDto accepts raw strings for businessName, contact, phone', () => {
+    const dto = {
+      friendlyUrl: 'acme-slug',
+      name: 'Acme',
+      active: true,
+      businessName: 'Acme Legal S.A.',
+      contact: 'no-reply@acme.com',
+      phone: '+541112345678',
+    } satisfies CreateCompanyDto;
+    expect(dto.businessName).toBe('Acme Legal S.A.');
+    expect(dto.contact).toBe('no-reply@acme.com');
+  });
+
+  it('CreateClientDto accepts raw strings for fullName, email, phone, taxId', () => {
+    const dto = {
+      companyId: 'comp-uuid',
+      clientCode: 'CLI-00042',
+      active: true,
+      fullName: 'Juan Perez',
+      email: 'juan@example.com',
+      phone: '+541112345678',
+      taxId: '20-12345678-9',
+    } satisfies CreateClientDto;
+    expect(dto.fullName).toBe('Juan Perez');
+    expect(dto.email).toBe('juan@example.com');
+  });
+
+  it('CreateNotificationDto accepts raw strings for to, from, subject, body', () => {
+    const dto = {
+      companyId: 'comp-uuid',
+      to: 'client@example.com',
+      from: 'no-reply@cobranza.app',
+      type: NotificationType.PAYMENT_UPLOADED,
+      subject: 'Your payment was uploaded',
+      body: 'We received your payment proof',
+      channel: NotificationChannel.EMAIL,
+      status: NotificationStatus.SENT,
+    } satisfies CreateNotificationDto;
+    expect(dto.to).toBe('client@example.com');
+    expect(dto.subject).toBe('Your payment was uploaded');
+  });
+
+  it('CreateBankStatementDto accepts raw string for notes', () => {
+    const dto = {
+      companyId: 'comp-uuid',
+      bank: Bank.GALICIA,
+      format: BankStatementFormat.CSV,
+      fileUrl: 'https://example.com/stmt.csv',
+      fileName: 'stmt.csv',
+      status: BankStatementStatus.UPLOADED,
+      notes: 'parser warning on line 42',
+    } satisfies CreateBankStatementDto;
+    expect(dto.notes).toBe('parser warning on line 42');
   });
 });

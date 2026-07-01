@@ -25,6 +25,27 @@ describe('Notification entity', () => {
     expect(notification.channel).toBe(NotificationChannel.EMAIL);
     expect(notification.status).toBe(NotificationStatus.SENT);
   });
+
+  it('accepts raw strings in encrypted to, from, subject, body', () => {
+    const notification = {
+      id: 'notif-uuid-2',
+      companyId: 'comp-uuid',
+      to: 'cliente@example.com',
+      from: 'no-reply@cobranza.app',
+      type: NotificationType.PAYMENT_UPLOADED,
+      subject: 'Comprobante de pago recibido',
+      body: 'Hemos recibido su comprobante de pago',
+      channel: NotificationChannel.EMAIL,
+      status: NotificationStatus.SENT,
+      createdAt: new Date(),
+      createdBy: 'user-uuid',
+    } satisfies Notification;
+
+    expect(notification.to).toBe('cliente@example.com');
+    expect(notification.from).toBe('no-reply@cobranza.app');
+    expect(notification.subject).toBe('Comprobante de pago recibido');
+    expect(notification.body).toBe('Hemos recibido su comprobante de pago');
+  });
 });
 
 describe('ClientDebtSummary entity', () => {
