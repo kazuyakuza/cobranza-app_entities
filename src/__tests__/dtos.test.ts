@@ -151,9 +151,11 @@ describe('Encrypted fields accept raw strings at compile time (Task 2)', () => {
       businessName: 'Acme Legal S.A.',
       contact: 'no-reply@acme.com',
       phone: '+541112345678',
+      taxId: '30-50012345-6',
     } satisfies CreateCompanyDto;
     expect(dto.businessName).toBe('Acme Legal S.A.');
     expect(dto.contact).toBe('no-reply@acme.com');
+    expect(dto.taxId).toBe('30-50012345-6');
   });
 
   it('CreateClientDto accepts raw strings for fullName, email, phone, taxId', () => {

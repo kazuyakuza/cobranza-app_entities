@@ -45,6 +45,7 @@ describe('Company entity', () => {
       businessName: 'Acme Servicios Legales S.A.',
       contact: 'no-reply@acme-legal.com',
       phone: '+541112345678',
+      taxId: '30-50012345-6',
       active: true,
       createdAt: new Date(),
       createdBy: 'user-uuid',
@@ -54,6 +55,7 @@ describe('Company entity', () => {
     expect(company.businessName).toBe('Acme Servicios Legales S.A.');
     expect(company.contact).toBe('no-reply@acme-legal.com');
     expect(company.phone).toBe('+541112345678');
+    expect(company.taxId).toBe('30-50012345-6');
   });
 });
 
