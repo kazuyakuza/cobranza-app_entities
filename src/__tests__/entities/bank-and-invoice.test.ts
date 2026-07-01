@@ -28,6 +28,9 @@ describe('BankStatement entity', () => {
     expect(statement.status).toBe(BankStatementStatus.UPLOADED);
   });
 
+  // Verifies that the encrypted `notes` field accepts a plain string
+  // at compile time, confirming the type union
+  // `EncryptedValue | string | null` is correctly exposed on the entity.
   it('accepts raw string in encrypted notes', () => {
     const statement = {
       id: 'stmt-uuid-2',
@@ -71,6 +74,9 @@ describe('Invoice entity', () => {
 });
 
 describe('BankTransaction entity', () => {
+  // Verifies that encrypted fields (description, reference) accept
+  // plain strings at compile time, confirming the type union
+  // `EncryptedValue | string | null` is correctly exposed on the entity.
   it('accepts raw strings in encrypted description and reference', () => {
     const transaction = {
       id: 'txn-uuid',

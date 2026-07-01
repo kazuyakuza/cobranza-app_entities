@@ -70,6 +70,9 @@ describe('Payment entity', () => {
 });
 
 describe('PaymentProof entity', () => {
+  // Verifies that the encrypted `notes` field accepts a plain string
+  // at compile time, confirming the type union
+  // `EncryptedValue | string | null` is correctly exposed on the entity.
   it('accepts raw string in encrypted notes', () => {
     const proof = {
       id: 'proof-uuid',

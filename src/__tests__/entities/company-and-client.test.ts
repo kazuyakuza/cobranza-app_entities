@@ -34,6 +34,9 @@ describe('Company entity', () => {
     expect(company.contact).toBeUndefined();
   });
 
+  // Verifies that encrypted fields (businessName, contact, phone) accept
+  // plain strings at compile time, confirming the type union
+  // `EncryptedValue | string | null` is correctly exposed on the entity.
   it('accepts raw strings in encrypted businessName, contact, phone', () => {
     const company = {
       id: 'comp-uuid-3',
@@ -85,6 +88,9 @@ describe('Client entity', () => {
     expect(client.fullName).toBeUndefined();
   });
 
+  // Verifies that encrypted fields (fullName, email, phone, taxId) accept
+  // plain strings at compile time, confirming the type union
+  // `EncryptedValue | string | null` is correctly exposed on the entity.
   it('accepts raw strings in encrypted fullName, email, phone, taxId', () => {
     const client = {
       id: 'client-uuid-3',
@@ -107,6 +113,9 @@ describe('Client entity', () => {
 });
 
 describe('User entity', () => {
+  // Verifies that encrypted fields (fullName, phone) on User accept
+  // plain strings at compile time, confirming the type union
+  // `EncryptedValue | string | null` is correctly exposed on the entity.
   it('accepts raw strings in encrypted fullName, phone', () => {
     const user = {
       id: 'user-uuid-raw',

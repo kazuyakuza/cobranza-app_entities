@@ -90,6 +90,10 @@ describe('Create DTOs exclude BaseEntity audit fields (Option B)', () => {
 });
 
 describe('Reverted broad DTOs include previously-stripped fields (Task 1)', () => {
+  // HasKey assertions verify that the reverted DTOs now include
+  // the business fields that were previously (and incorrectly) stripped.
+  // Each Assert<HasKey<Dto, 'field'>> resolves to `true` only when the
+  // field is present in the DTO type; a compile error would surface otherwise.
   it('CreateBankStatementDto keeps totalTransactions', () => {
     type _a = Assert<HasKey<CreateBankStatementDto, 'totalTransactions'>>;
     expect(true).toBe(true);
@@ -135,6 +139,10 @@ describe('Reverted broad DTOs include previously-stripped fields (Task 1)', () =
 });
 
 describe('Encrypted fields accept raw strings at compile time (Task 2)', () => {
+  // `satisfies` assertions verify that encrypted fields in Create DTOs
+  // accept plain `string` values (not only `EncryptedValue` objects),
+  // confirming the field type is `EncryptedValue | string | null`.
+  // A compile error would surface if the union were narrowed incorrectly.
   it('CreateCompanyDto accepts raw strings for businessName, contact, phone', () => {
     const dto = {
       friendlyUrl: 'acme-slug',

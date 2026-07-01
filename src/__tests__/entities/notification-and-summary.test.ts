@@ -26,6 +26,9 @@ describe('Notification entity', () => {
     expect(notification.status).toBe(NotificationStatus.SENT);
   });
 
+  // Verifies that encrypted fields (to, from, subject, body) accept
+  // plain strings at compile time, confirming the type union
+  // `EncryptedValue | string | null` is correctly exposed on the entity.
   it('accepts raw strings in encrypted to, from, subject, body', () => {
     const notification = {
       id: 'notif-uuid-2',
