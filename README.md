@@ -183,15 +183,6 @@ const updatePayload: UpdateClientDto = {
 };
 ```
 
-If your API surface must restrict client-writable fields, narrow the DTO with `Omit`:
-
-```typescript
-import { CreateDebtDto } from '@cobranza-apps/entities';
-
-// Accept all CreateDebtDto fields except debtCode and status
-type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
-```
-
 For full property definitions, see [`entities-definition.csv`](.agent/project-info/entities-definition.csv). For relationship diagrams, see [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md).
 
 ## JSON Schemas
