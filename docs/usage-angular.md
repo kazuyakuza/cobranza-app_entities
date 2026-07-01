@@ -44,6 +44,7 @@ Inject the typed service into a component and leverage `async` pipe for subscrip
 ```typescript
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
 import { DebtApiService } from './debt-api.service';
 
@@ -260,12 +261,12 @@ import 'reflect-metadata';
 `CreateDebtDto` is a type alias (a structural `Omit`), not a runtime class, so it cannot be passed directly to `plainToInstance`. Instead, declare a local class that both **implements** the narrowed DTO type (for compile-time shape safety) and carries validation decorators:
 
 ```typescript
-import { plainToInstance } from 'class-transformer';
+import { plainToInstance, Type } from 'class-transformer';
 import {
   IsUUID,
   IsEnum,
   IsNumber,
-  IsDateString,
+  IsDate,
   IsOptional,
   IsString,
   Min,
@@ -273,8 +274,6 @@ import {
 import {
   CreateDebtDto,
   Currency,
-  Debt,
-  DebtStatus,
   UUID,
   JsonData,
 } from '@cobranza-apps/entities';
@@ -303,10 +302,12 @@ export class CreateDebtForm implements ApiCreateDebtDto {
   @IsEnum(Currency)
   currency!: Currency;
 
-  @IsDateString()
+  @Type(() => Date)
+  @IsDate()
   dueDate!: Date;
 
-  @IsDateString()
+  @Type(() => Date)
+  @IsDate()
   issueDate!: Date;
 
   @IsNumber({ maxDecimalPlaces: 4 })
@@ -350,6 +351,7 @@ export class DebtSubmissionService {
   constructor(private http: HttpClient) {}
 
   async submitDebt(formValue: Record<string, unknown>): Promise<Observable<Debt>> {
+    // CreateDebtForm is the class defined in the snippet above
     const instance = plainToInstance(CreateDebtForm, formValue);
     const errors = await validate(instance);
     if (errors.length > 0) {
