@@ -197,7 +197,6 @@ export class DebtRepositoryService {
 
 The `DebtEntity` class (with TypeORM decorators) lives in the consuming project. The library only provides the `Debt` interface contract.
 
-
 ## 6. TypeORM Entity Example
 
 §5 referenced `DebtEntity` without showing it. Below is a complete, persistence-ready implementation that **implements** the library `Debt` interface — a compile-time guarantee that every field of the SSOT is mapped. Place this class in the consuming NestJS project (e.g., `src/debts/infrastructure/debt.entity.ts`); the library never ships persistence decorators.
@@ -287,7 +286,6 @@ Notes:
 - `decimal` columns keep the library `Decimal = string` alias; do **not** coerce to JS `number` — floating-point would corrupt monetary precision.
 - `@CreateDateColumn` / `@UpdateDateColumn` / `@DeleteDateColumn` are auto-managed by TypeORM; do not assign them in `repository.create(dto)`.
 - `createdBy` is required by `BaseEntity`, so the column is non-nullable. Resolve it from the authenticated user context before persisting.
-
 
 ## 7. NATS + JetStream Microservices
 
