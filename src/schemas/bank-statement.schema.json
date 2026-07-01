@@ -14,7 +14,7 @@
     "status": { "type": "string", "enum": ["UPLOADED", "PARSING", "PROCESSED", "FAILED", "MANUALLY_REVIEWED"] },
     "totalTransactions": { "type": "integer" },
     "notes": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },

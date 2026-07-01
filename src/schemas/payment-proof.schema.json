@@ -10,7 +10,7 @@
     "fileName": { "type": "string" },
     "fileType": { "type": "string" },
     "notes": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },

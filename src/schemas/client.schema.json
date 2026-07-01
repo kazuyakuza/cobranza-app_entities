@@ -7,7 +7,7 @@
     "companyId": { "type": "string", "format": "uuid" },
     "clientCode": { "type": "string" },
     "fullName": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -17,7 +17,7 @@
       "required": ["encryptedData", "keyName"]
     },
     "email": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -28,7 +28,7 @@
     },
     "emailHash": { "type": ["string", "null"] },
     "phone": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -56,7 +56,7 @@
       "required": ["address"]
     },
     "taxId": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },

@@ -11,7 +11,7 @@
     "amount": { "type": "string" },
     "currency": { "type": "string", "enum": ["ARS", "USD"] },
     "description": {
-      "type": "object",
+      "type": ["object", "string"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -21,7 +21,7 @@
       "required": ["encryptedData", "keyName"]
     },
     "reference": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },

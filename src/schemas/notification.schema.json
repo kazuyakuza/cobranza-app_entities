@@ -9,7 +9,7 @@
     "userId": { "type": "string", "format": "uuid" },
     "notificationTemplateId": { "type": "string", "format": "uuid" },
     "to": {
-      "type": "object",
+      "type": ["object", "string"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -19,7 +19,7 @@
       "required": ["encryptedData", "keyName"]
     },
     "from": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -30,7 +30,7 @@
     },
     "type": { "type": "string", "enum": ["PAYMENT_UPLOADED", "PAYMENT_APPROVED", "PAYMENT_REJECTED", "DEBT_OVERDUE"] },
     "subject": {
-      "type": "object",
+      "type": ["object", "string"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -40,7 +40,7 @@
       "required": ["encryptedData", "keyName"]
     },
     "body": {
-      "type": "object",
+      "type": ["object", "string"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },

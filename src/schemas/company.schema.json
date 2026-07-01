@@ -7,7 +7,7 @@
     "friendlyUrl": { "type": "string" },
     "name": { "type": "string" },
     "businessName": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -17,7 +17,7 @@
       "required": ["encryptedData", "keyName"]
     },
     "taxId": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -28,7 +28,7 @@
     },
     "taxIdHash": { "type": ["string", "null"] },
     "contact": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
@@ -39,7 +39,7 @@
     },
     "contactHash": { "type": ["string", "null"] },
     "phone": {
-      "type": ["object", "null"],
+      "type": ["object", "string", "null"],
       "properties": {
         "encryptedData": { "type": "string" },
         "keyName": { "type": "string" },
