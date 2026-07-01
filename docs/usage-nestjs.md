@@ -378,6 +378,7 @@ The consumer narrows exactly as in §0/§3: `Omit<CreateDebtDto, 'debtCode' | 's
 import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import {
+  IsEnum,
   IsUUID,
   IsString,
   IsOptional,
