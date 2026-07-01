@@ -329,7 +329,7 @@ Register a `ClientProxy` and emit the **broad** library DTO. The producer does n
 
 ```typescript
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientsModule, Transport, ClientProxy } from '@nestjs/microservices';
 
 export const NATS_CLIENT = 'NATS_CLIENT';
 
@@ -380,11 +380,11 @@ The consumer narrows exactly as in §0/§3: `Omit<CreateDebtDto, 'debtCode' | 's
 import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import {
-  IsEnum,
   IsUUID,
   IsString,
   IsOptional,
   IsDateString,
+  IsObject,
 } from 'class-validator';
 import { CreateDebtDto, Currency, DebtStatus } from '@cobranza-apps/entities';
 
@@ -426,7 +426,7 @@ export class DebtCreatedEvent implements ApiCreateDebtDto {
   notes?: string;
 
   @IsOptional()
-  @IsDateString()
+  @IsObject()
   extraData?: Record<string, unknown>;
 
   @IsOptional()
@@ -461,7 +461,7 @@ export class DebtConsumer {
 
 ```typescript
 import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
-import { connect, NatsConnection, JsMsg, JetStreamClient } from 'nats';
+import { connect, NatsConnection, JsMsg, JetStreamClient, Consumer } from 'nats';
 
 const JETSTREAM_STREAM = 'DEBT_EVENTS';
 const DURABLE_CONSUMER = 'debt-created-consumer';
@@ -486,7 +486,7 @@ export class DebtJetStreamConsumer implements OnModuleInit, OnModuleDestroy {
     void this.consume(consumer);
   }
 
-  private async consume(consumer: ReturnType<JetStreamClient['consumers']['get']>): Promise<void> {
+  private async consume(consumer: Consumer): Promise<void> {
     const messages = await consumer.consume();
     for await (const message of messages) {
       try {
