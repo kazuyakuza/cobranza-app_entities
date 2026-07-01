@@ -359,6 +359,52 @@ The JSON Schema type system maps from TypeScript as follows:
 | `string` | `{ "type": "string" }` |
 | Enums (e.g., `DebtStatus`) | `{ "type": "string", "enum": ["PENDING", "OVERDUE", ...] }` |
 | `DateString` | `{ "type": "string" }` (no format, or `format: date` for date-only) |
+| `EncryptedValue \| string \| null` (nullable) | `{ "type": ["object", "string", "null"] }` with `encryptedData`/`keyName` sub-properties |
+| `EncryptedValue \| string` (non-nullable) | `{ "type": ["object", "string"] }` with `encryptedData`/`keyName` sub-properties |
+
+### 6.1 Encrypted Field Types
+
+Encrypted fields (backed by `EncryptedValue`) accept a union of types in the JSON schemas to support multiple stages of the data lifecycle:
+
+- **`"object"`** — the canonical `EncryptedValue` shape (`{ encryptedData, keyName, algorithm?, version? }`) after encryption.
+- **`"string"`** — raw plain-text values that microservices may pass before encryption at the service layer.
+- **`"null"`** — for nullable encrypted fields, representing the absence of a value.
+
+**Nullable encrypted fields** (e.g., `Client.fullName`, `Client.email`):
+
+```json
+{
+  "fullName": {
+    "type": ["object", "string", "null"],
+    "properties": {
+      "encryptedData": { "type": "string" },
+      "keyName": { "type": "string" },
+      "algorithm": { "type": "string" },
+      "version": { "type": "integer" }
+    },
+    "required": ["encryptedData", "keyName"]
+  }
+}
+```
+
+**Non-nullable encrypted fields** (e.g., `Notification.to`, `BankTransaction.description`):
+
+```json
+{
+  "to": {
+    "type": ["object", "string"],
+    "properties": {
+      "encryptedData": { "type": "string" },
+      "keyName": { "type": "string" },
+      "algorithm": { "type": "string" },
+      "version": { "type": "integer" }
+    },
+    "required": ["encryptedData", "keyName"]
+  }
+}
+```
+
+This union type design allows schemas to validate payloads at any stage: raw API input (strings), post-encryption persistence (objects), or absent values (null for nullable fields).
 
 ---
 
