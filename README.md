@@ -2,6 +2,30 @@
 
 Central data model definitions (entities, enums, types) for the **Cobranza App** system — a multi-tenant SaaS for debt management and payment reconciliation. This package serves as the **Single Source of Truth (SSOT)** for all data models across the ecosystem.
 
+## Table of Contents
+
+- [About](#about)
+  - [Core Principles](#core-principles)
+- [Types and Interfaces](#types-and-interfaces)
+- [Data Encryption](#data-encryption)
+  - [EncryptedValue Type](#encryptedvalue-type)
+  - [Entities with Encrypted Fields](#entities-with-encrypted-fields)
+  - [Encryption Flow Across Microservices](#encryption-flow-across-microservices)
+  - [Searchable Encrypted Fields (Hash Columns)](#searchable-encrypted-fields-hash-columns)
+- [Available Entities](#available-entities)
+  - [Entity Audit & Optionality Notes](#entity-audit--optionality-notes)
+- [DTOs (Data Transfer Objects)](#dtos-data-transfer-objects)
+- [JSON Schemas](#json-schemas)
+  - [Domain Groups](#domain-groups)
+  - [Use Cases](#use-cases)
+- [Tech Stack](#tech-stack)
+- [Installation & Usage](#installation--usage)
+  - [Extending an Entity in NestJS](#extending-an-entity-in-nestjs)
+  - [Using Types in an Angular Service](#using-types-in-an-angular-service)
+  - [Working with Enums](#working-with-enums)
+- [Usage Examples](#usage-examples)
+- [Related Documentation](#related-documentation)
+
 ## About
 
 The primary goal of this repository is to provide a clean, structured, and authoritative source of truth for all data models in the Cobranza App platform.
