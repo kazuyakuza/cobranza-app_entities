@@ -42,6 +42,8 @@ The library provides shared type aliases and base interfaces used across all dom
 
 Sensitive fields in this library are stored as `EncryptedValue` objects rather than plain strings. Encryption is performed by the consuming microservice, not by this library.
 
+All encrypted fields accept `EncryptedValue | string | null` (or `EncryptedValue | string` for non-nullable fields). This allows microservices to pass raw strings before encryption, and the encryption layer will convert them to `EncryptedValue` objects at persistence time.
+
 ### EncryptedValue Type
 
 ```typescript

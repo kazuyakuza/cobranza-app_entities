@@ -14,22 +14,34 @@ export interface Client extends BaseEntity {
   /** Unique code per Company (e.g., `CLI-00042`). */
   clientCode: string;
 
-  /** Full name of the debtor. Optional; may be completed later. */
+  /**
+   * Full name of the debtor. Optional; may be completed later.
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   fullName?: EncryptedValue | string | null;
 
-  /** Email. Highly recommended. */
+  /**
+   * Email. Highly recommended.
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   email?: EncryptedValue | string | null;
 
   /** Hash of email for indexed search/lookup. */
   emailHash?: string | null;
 
-  /** Phone number. */
+  /**
+   * Phone number.
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   phone?: EncryptedValue | string | null;
 
   /** Physical location of the client. */
   location?: Location;
 
-  /** National ID / Tax ID of the end client (e.g., DNI, CUIT). */
+  /**
+   * National ID / Tax ID of the end client (e.g., DNI, CUIT).
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   taxId?: EncryptedValue | string | null;
 
   /** Hash of taxId for indexed search/lookup. */

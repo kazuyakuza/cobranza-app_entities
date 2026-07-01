@@ -21,6 +21,9 @@ export interface PaymentProof extends BaseEntity {
   /** MIME type (image/jpeg, application/pdf, etc.). */
   fileType?: string;
 
-  /** Additional notes entered by the client when uploading. */
+  /**
+   * Additional notes entered by the client when uploading.
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   notes?: EncryptedValue | string | null;
 }

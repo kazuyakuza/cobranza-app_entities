@@ -14,10 +14,16 @@ export interface User extends BaseEntity {
   /** Date of last password change. */
   passwordUpdatedAt?: Date;
 
-  /** Optional full name (can be completed later). */
+  /**
+   * Optional full name (can be completed later).
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   fullName?: EncryptedValue | string | null;
 
-  /** Phone number. */
+  /**
+   * Phone number.
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   phone?: EncryptedValue | string | null;
 
   /** Whether the user is active. Default: true. */

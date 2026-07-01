@@ -36,6 +36,9 @@ export interface BankStatement extends BaseEntity {
   /** Number of detected transactions. */
   totalTransactions?: number;
 
-  /** Notes (useful for parsing errors). */
+  /**
+   * Notes (useful for parsing errors).
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   notes?: EncryptedValue | string | null;
 }

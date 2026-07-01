@@ -21,19 +21,31 @@ export interface Notification extends BaseEntity {
   /** Template used (if applicable). */
   notificationTemplateId?: UUID;
 
-  /** Destination email / phone / WhatsApp. */
+  /**
+   * Destination email / phone / WhatsApp.
+   * Accepts `EncryptedValue | string`. Microservices may pass raw strings before encryption.
+   */
   to: EncryptedValue | string;
 
-  /** Sender (e.g., no-reply@conciliador.app). */
+  /**
+   * Sender (e.g., no-reply@conciliador.app).
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   from?: EncryptedValue | string | null;
 
   /** Type of notification. */
   type: NotificationType;
 
-  /** Final subject. */
+  /**
+   * Final subject.
+   * Accepts `EncryptedValue | string`. Microservices may pass raw strings before encryption.
+   */
   subject: EncryptedValue | string;
 
-  /** Final content (HTML or text). */
+  /**
+   * Final content (HTML or text).
+   * Accepts `EncryptedValue | string`. Microservices may pass raw strings before encryption.
+   */
   body: EncryptedValue | string;
 
   /** Delivery channel. */

@@ -27,10 +27,16 @@ export interface BankTransaction extends BaseEntity {
   /** `'ARS'` or `'USD'`. */
   currency: Currency;
 
-  /** Full bank description. */
+  /**
+   * Full bank description.
+   * Accepts `EncryptedValue | string`. Microservices may pass raw strings before encryption.
+   */
   description: EncryptedValue | string;
 
-  /** Reference / operation / CBU / alias number. */
+  /**
+   * Reference / operation / CBU / alias number.
+   * Accepts `EncryptedValue | string | null`. Microservices may pass raw strings before encryption.
+   */
   reference?: EncryptedValue | string | null;
 
   /** Hash of reference for indexed search/lookup. */
