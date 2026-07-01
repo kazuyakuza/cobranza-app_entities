@@ -1,6 +1,6 @@
 # Angular Usage Examples
 
-Integration patterns for consuming `@cobranza-apps/entities` in an Angular application. These examples go beyond the basic `fetch`-based service shown in the main README.
+Integration patterns for consuming `@cobranza-apps/entities` in an Angular application. These examples go beyond the basic `fetch`-based service shown in [the main README](../README.md).
 
 ## 1. Typed Angular Service with HttpClient
 
@@ -35,7 +35,7 @@ export class DebtApiService {
 }
 ```
 
-All method signatures use library DTOs (`CreateDebtDto`, `ApiCreateDebtDto`) and types (`Debt`, `UUID`) ensuring the frontend stays in sync with the SSOT. Server-reserved fields (`debtCode`, `status`) are narrowed out of the payload type, so the compiler rejects any attempt to send them.
+All method signatures use library DTOs (`CreateDebtDto`, `ApiCreateDebtDto`) and types (`Debt`, `UUID`) ensuring the frontend stays in sync with the Single Source of Truth (SSOT). Server-reserved fields (`debtCode`, `status`) are narrowed out of the payload type, so the compiler rejects any attempt to send them.
 
 ## 2. Using Entities in an Angular Component
 
@@ -265,15 +265,14 @@ import { plainToInstance, Type } from 'class-transformer';
 import {
   IsUUID,
   IsEnum,
-  IsNumber,
   IsDate,
   IsOptional,
   IsString,
-  Min,
 } from 'class-validator';
 import {
   CreateDebtDto,
   Currency,
+  Decimal,
   UUID,
   JsonData,
 } from '@cobranza-apps/entities';
@@ -295,9 +294,8 @@ export class CreateDebtForm implements ApiCreateDebtDto {
   @IsOptional()
   description?: string;
 
-  @IsNumber({ maxDecimalPlaces: 2 })
-  @Min(0)
-  totalAmount!: number;
+  @IsString()
+  totalAmount!: Decimal;
 
   @IsEnum(Currency)
   currency!: Currency;
@@ -310,9 +308,9 @@ export class CreateDebtForm implements ApiCreateDebtDto {
   @IsDate()
   issueDate!: Date;
 
-  @IsNumber({ maxDecimalPlaces: 4 })
+  @IsString()
   @IsOptional()
-  dailyInterestRate?: number;
+  dailyInterestRate?: Decimal;
 
   @IsString()
   @IsOptional()
