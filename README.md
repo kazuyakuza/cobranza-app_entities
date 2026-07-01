@@ -125,9 +125,18 @@ All entities are plain TypeScript interfaces. They contain no decorators or runt
 
 Each entity has companion DTOs for API layer communication. They are co-located with their entity files and exported through the same barrel exports.
 
+A `Create*Dto` acts as a **broad inter-service contract** — it omits only the 7 `BaseEntity` audit fields while intentionally keeping all domain-settable fields (such as `debtCode` or `status`). This allows any microservice in the event-driven architecture to accept the full creation payload. Individual API boundaries then **narrow** the contract via `Omit` to reject fields the endpoint should not set:
+
+```typescript
+import { CreateDebtDto } from '@cobranza-apps/entities';
+
+// Narrow at the API boundary
+type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
+```
+
 | DTO Type | Purpose |
 |----------|---------|
-| `CreateXxxDto` | Required fields for entity creation (omits all `BaseEntity` fields: `id`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`) |
+| `CreateXxxDto` | Required fields for entity creation (omits only the `BaseEntity` audit fields) |
 | `UpdateXxxDto` | Optional fields for entity updates (`Partial<CreateXxxDto>`) |
 | `XxxResponse` | Full entity shape returned by API responses (extends the entity interface) |
 
@@ -147,6 +156,15 @@ const payload: CreateClientDto = {
 const updatePayload: UpdateClientDto = {
   email: 'new-billing@acme.com',
 };
+```
+
+If your API surface must restrict client-writable fields, narrow the DTO with `Omit`:
+
+```typescript
+import { CreateDebtDto } from '@cobranza-apps/entities';
+
+// Accept all CreateDebtDto fields except debtCode and status
+type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
 ```
 
 For full property definitions, see [`entities-definition.csv`](.agent/project-info/entities-definition.csv). For relationship diagrams, see [`entities-relationship-diagram-overview.md`](.agent/project-info/entities-relationship-diagram-overview.md).

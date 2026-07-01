@@ -2,6 +2,21 @@
 
 Integration patterns for consuming `@cobranza-apps/entities` in a NestJS microservice. These examples go beyond the basic TypeORM entity extension shown in the main README.
 
+## 0. DTO Philosophy (Event-Driven Microservices)
+
+In an event-driven microservice architecture, a `Create*Dto` shipped with the entities library serves as a **broad inter-service contract**. It omits only the 7 `BaseEntity` audit fields — `id`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy` — while intentionally preserving every domain-settable field (e.g., `debtCode`, `status`, `clientCode`).
+
+This broad contract means any microservice can accept the full creation payload. Each API boundary then **narrows** the contract to only the fields relevant to its context:
+
+```typescript
+import { CreateDebtDto } from '@cobranza-apps/entities';
+
+// Narrow at the API boundary — reject fields the endpoint should not set
+type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
+```
+
+This pattern keeps the library contract stable while letting each service enforce its own constraints.
+
 ## 1. Importing Entities in a NestJS Controller
 
 Use library types directly in controller signatures for type-safe request handling:
@@ -9,6 +24,7 @@ Use library types directly in controller signatures for type-safe request handli
 ```typescript
 import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { Debt, DebtStatus, UUID } from '@cobranza-apps/entities';
+import { CreateDebtRequest } from './dto/create-debt.request';
 
 @Controller('debts')
 export class DebtController {
@@ -28,7 +44,7 @@ export class DebtController {
   }
 
   @Post()
-  create(@Body() dto: CreateDebtDto): Promise<Debt> {
+  create(@Body() dto: CreateDebtRequest): Promise<Debt> {
     return this.debtService.create(dto);
   }
 }
@@ -39,28 +55,27 @@ export class DebtController {
 Derive DTO types from library interfaces to stay in sync with the canonical model while excluding auto-generated or audit fields:
 
 ```typescript
-import { Debt, Client, UUID, Decimal, Currency } from '@cobranza-apps/entities';
+import { CreateDebtDto, CreateClientDto, BaseAuditFields } from '@cobranza-apps/entities';
 
-type AuditFields = 'id' | 'createdAt' | 'updatedAt' | 'createdBy' | 'updatedBy';
+type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
+export type UpdateDebtDto = Partial<ApiCreateDebtDto>;
 
-export type CreateDebtDto = Omit<Debt, AuditFields | 'debtCode'>;
-
-export type UpdateDebtDto = Partial<CreateDebtDto>;
-
-export type CreateClientDto = Omit<Client, 'id' | 'createdAt' | 'updatedAt' | 'clientCode' | 'updatedBy'>;
+type ApiCreateClientDto = Omit<CreateClientDto, 'clientCode'>;
 ```
 
 Using derived types ensures that when the library adds or removes fields, your DTOs reflect the change at compile time.
 
 ## 3. Validation Pipe Integration
 
-DTOs defined as TypeScript types have no runtime impact. In the consuming NestJS project, create **class-based DTOs** to enable `class-validator` and `class-transformer` decorators:
+DTOs defined as TypeScript types have no runtime impact. In the consuming NestJS project, create **class-based DTOs** that implement the narrowed type to enable `class-validator` and `class-transformer` decorators:
 
 ```typescript
 import { IsEnum, IsUUID, IsString, IsOptional, IsDateString } from 'class-validator';
-import { DebtStatus, Currency } from '@cobranza-apps/entities';
+import { CreateDebtDto } from '@cobranza-apps/entities';
 
-export class CreateDebtRequest {
+type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
+
+export class CreateDebtRequest implements ApiCreateDebtDto {
   @IsUUID()
   companyId!: string;
 

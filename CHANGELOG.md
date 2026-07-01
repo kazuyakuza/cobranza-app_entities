@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-06-30
+
+### Added
+
+- `BaseAuditFields` type alias for reusable audit-only omission in DTO `Omit` clauses.
+
+### Changed
+
+- Reverted 7 DTOs to broad audit-only omission; `Create*Dto` now preserves all domain-settable fields.
+- Encrypted fields now accept `EncryptedValue | string | null` (or `EncryptedValue | string`).
+- Regenerated JSON schemas to reflect broad DTOs and raw-string-accepting encrypted fields.
+- Added tests for broad-DTO field inclusion and raw-string acceptance.
+- Documented the broad-DTO philosophy and API-boundary narrowing pattern.
+
+### Migration Notes
+
+- If your microservice relied on the library stripping fields like `status` or `debtCode`, define your own narrowed alias:
+  ```typescript
+  type ApiCreateDebtDto = Omit<CreateDebtDto, 'debtCode' | 'status'>;
+  ```
+- Relying on `EncryptedValue` fields now also accepts plain `string`; existing `EncryptedValue` callers are unaffected.
+
 ## [0.4.0] - 2026-06-25
 
 ### Changed
@@ -65,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Strict TypeScript configuration (`strict: true`) with declaration file generation.
 - ESLint and Prettier setup for code quality.
 
+[0.5.0]: https://github.com/cobranza-apps/entities/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/cobranza-apps/entities/compare/v0.3.4...v0.4.0
 [0.3.4]: https://github.com/cobranza-apps/entities/compare/v0.1.0...v0.3.4
 [0.1.0]: https://github.com/cobranza-apps/entities/releases/tag/v0.1.0
